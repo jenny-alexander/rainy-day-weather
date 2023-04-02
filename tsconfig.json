@@ -11,6 +11,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    //"noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
+    //"noUnusedParameters": true,                       /* Raise an error when a function parameter isn't read. */
+    //"noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
