@@ -9,7 +9,7 @@
 
 ### Desktop
 
-# ![image of Mauzy Day Weather desktop app](./public/images/mauzy_day_desktop.png)
+# ![image of Mauzy Day Weather desktop app](./public/images/desktop_css_mockup.png)
 
 ## Mobile
 
