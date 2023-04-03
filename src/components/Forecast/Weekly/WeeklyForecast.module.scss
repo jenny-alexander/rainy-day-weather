@@ -1,6 +1,8 @@
 .weekly {
     grid-area: weekly;
     display: flex;
+    flex-direction: column;
+    row-gap: 2em;
     background-color: #fff;    
     margin: 0.5em 1em 1em 0em;
     // border-radius: 15px;
@@ -9,5 +11,37 @@
         font-size: 1.2em;
         font-weight: 600;
         padding: 0.5em;
+    }
+    & .weeklyForecast {
+        display: flex;
+        //border: 1px dotted blue;
+        column-gap: 0.5em;
+        margin: 0em 0.5em;
+        & .dayForecast {        
+            padding: 1em 0em;    
+            width: 100%;
+            border: 1px solid rgb(231, 231, 231);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 1em;
+            & .dayOfWeek {
+                //border: 1px dotted red;                
+            }
+            & .image {
+                max-height: 32px;
+                max-width: 32px;
+            }
+            & .highLowContainer {
+                display: flex;
+                font-size: 0.8em;
+                column-gap: 0.5em;
+                padding-top: 0.3em;
+                & .lowTemp {
+                    color: rgb(103, 103, 103);
+                }
+            }
+        }
     }
 }

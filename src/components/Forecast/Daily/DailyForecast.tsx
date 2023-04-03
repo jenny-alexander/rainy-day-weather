@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchBar from '../../SearchBar/SearchBar';
 import styles from  './DailyForecast.module.scss';
-//import cx from 'classnames';
+import classnames from 'classnames';
 
 const DailyForecast: React.FC = () => {
     return (
-        <div className={styles.daily}>
+        <div className={classnames(styles.daily, styles.card)}>
             <SearchBar />
             <div className={styles.dailyDetails}>
                 <img className={styles.dailyImage} src="/images/sun.png"/>
