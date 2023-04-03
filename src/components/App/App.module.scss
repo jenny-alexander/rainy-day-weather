@@ -1,6 +1,6 @@
 .appContainer {    
     height: 100%;
-        @media screen and (max-width: 905px) {
+    @media screen and (max-width: 905px) {
      min-height: 700px;
         }
     @media screen and (min-width:325px) {
@@ -16,15 +16,8 @@
     grid-template-areas: 
     "daily highlights"
     "daily weekly";
-    grid-template-columns: minmax(auto, 40%) 1fr;
-    // grid-template-rows: minmax(auto, 50%) 1fr;
+    grid-template-columns: minmax(auto, 40%) 1fr;    
     @media screen and (min-width: 1225px) {
       grid-template-columns: minmax(auto, 35%) 1fr;
     }
-    // @media screen and (max-width: 905px) {
-    //   grid-template-rows: minmax(auto, 60%) 1fr;
-    // }
-    // @media screen and (max-width: 775px) {
-    //   grid-template-rows: minmax(auto, 70%) 1fr;
-    // }
   }

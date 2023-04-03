@@ -13,15 +13,13 @@
         0 8px 8px hsl(0deg 0% 0% / 0.075),
         0 16px 16px hsl(0deg 0% 0% / 0.075);
     padding-bottom: 1em;
-    & .weeklyTitle {
-        //color: #04345c;
+    & .weeklyTitle {        
         font-size: 1.2em;
         font-weight: 600;
         padding: 0.5em;
     }
     & .weeklyForecast {
-        display: flex;
-        //border: 1px dotted blue;
+        display: flex;        
         column-gap: 0.5em;
         margin: 0em 0.8em;
         & .dayForecast {        
@@ -33,9 +31,6 @@
             flex-direction: column;
             align-items: center;
             row-gap: 1em;
-            & .dayOfWeek {
-                //border: 1px dotted red;                
-            }
             & .image {
                 max-height: 32px;
                 max-width: 32px;
