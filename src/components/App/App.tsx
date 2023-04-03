@@ -30,8 +30,7 @@ const App: React.FC = () => {
   // //let lotsOfPeople: Person[];
 
   return (
-    <div className={styles.appContainer}>
-      Hello Jennifer
+    <div className={styles.appContainer}>      
       <DailyForecast />
       <Highlights />
       <WeeklyForecast />

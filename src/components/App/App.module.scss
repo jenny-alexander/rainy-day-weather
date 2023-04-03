@@ -1,8 +1,17 @@
-.appContainer {
-    border: 1px solid black;
+.appContainer {    
     height: 100%;
-    //width: 100%;
-    max-width: 1280px;
+    @media screen and (min-width:775px) {
+      margin: 2em 5em;
+    }
+    @media screen and (min-width:1225px) {
+      margin: 2em 10em;
+    }
+    @media screen and (min-width:1525px) {
+      margin: 2em 15em;
+    }
     display: grid;
-    border: solid 1px red;
+    grid-template-areas: 
+    "daily highlights"
+    "daily weekly";
+    grid-template-columns: minmax(auto, 40%) 1fr;
   }

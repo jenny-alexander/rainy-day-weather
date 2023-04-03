@@ -1,0 +1,13 @@
+.highlights {
+    grid-area: highlights;
+    display: flex;
+    background-color: #fff;
+    margin: 1em 1em 1em 0em;
+    // border-radius: 15px;
+    & .highlightsTitle {
+        //color: #04345c;
+        padding: 0.5em;
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+}

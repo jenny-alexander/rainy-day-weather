@@ -1,0 +1,13 @@
+.weekly {
+    grid-area: weekly;
+    display: flex;
+    background-color: #fff;    
+    margin: 0.5em 1em 1em 0em;
+    // border-radius: 15px;
+    & .weeklyTitle {
+        //color: #04345c;
+        font-size: 1.2em;
+        font-weight: 600;
+        padding: 0.5em;
+    }
+}

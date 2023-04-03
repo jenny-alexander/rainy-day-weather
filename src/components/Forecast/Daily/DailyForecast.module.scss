@@ -1,0 +1,44 @@
+.daily {
+    grid-area: daily;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    background-color: #fff;
+    & .dailyDetails {
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        & .dailyImage {
+            max-width: 100%;
+            height: auto;
+            padding-left: 0.5em;
+            max-height: 225px;
+            max-width: 225px;
+        }
+        border-radius: 15px;
+        & .locationName {
+            //color: #04345c;
+            font-size: 1.5em;
+            font-weight:600;   
+            margin: 1em 0em;         
+        }
+        & .temperature {
+            font-size: 2.2em;
+            margin-bottom: 0.7em;
+        }
+        & .day {
+            padding-bottom:1em;
+            border-bottom: 1px solid lightgrey;
+        }
+        & .dailyForecast {
+            margin: 1em 0em;
+            display: flex;
+            align-items: center;
+            img {
+                height: 32px;
+                width: 32px;
+            }
+        }
+    }
+
+}

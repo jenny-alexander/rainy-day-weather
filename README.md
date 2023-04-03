@@ -15,7 +15,7 @@
 
 # ![image of Mauzy Day Weather mobile app](./public/images/mauzy_day_mobile.png)
 
-**Frontend:** Frontend is built using React, JavaScript, CSS and HTML.
+**Frontend:** Frontend is built using React, TypeScript, CSS and HTML.
 
 **Backend:** Backend is built using Node.js, Express, Axios
 
