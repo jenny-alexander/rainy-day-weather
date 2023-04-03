@@ -1,13 +1,58 @@
 .highlights {
     grid-area: highlights;
     display: flex;
+    flex-direction: column;
     background-color: #fff;
     margin: 1em 1em 1em 0em;
-    // border-radius: 15px;
+    border-radius: 5px;    
+    box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075);
+      padding: 0em 0.4em;
     & .highlightsTitle {
         //color: #04345c;
         padding: 0.5em;
         font-size: 1.2em;
         font-weight: 600;
     }
+    & .highlightsDetails {
+        display: flex;        
+        flex-wrap: wrap;
+        justify-content: center;        
+        row-gap: 1em;
+        column-gap: 0.5em;
+        width: 100%;            
+        & .sectionDetails {
+            row-gap: 1em;            
+            padding: 0.5em;
+            display: flex;            
+            flex-basis: 28%; 
+            @media screen and (max-width: 905px) {
+                flex-basis: 40%;
+            }                 
+            flex-direction: column;
+            border: 1px solid rgb(231, 231, 231);
+            border-radius: 5px;
+            width: 100%;
+            align-items: left;
+            & .sectionInfo {
+                
+                display: flex;
+                column-gap: 0.3em;
+                align-items: center;
+                & .image {
+                    max-height: 32px;
+                    max-width: 32px;
+                }
+                & .sectionReading{
+                    font-weight: 600;
+                }
+            }
+
+        }
+    }
+
 }

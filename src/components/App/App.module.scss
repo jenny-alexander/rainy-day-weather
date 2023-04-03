@@ -1,17 +1,30 @@
 .appContainer {    
     height: 100%;
-    @media screen and (min-width:775px) {
-      margin: 2em 5em;
+        @media screen and (max-width: 905px) {
+     min-height: 700px;
+        }
+    @media screen and (min-width:325px) {
+      margin: 2em 4em;
     }
     @media screen and (min-width:1225px) {
-      margin: 2em 10em;
+      margin: 2em 8em;
     }
     @media screen and (min-width:1525px) {
-      margin: 2em 15em;
+      margin: 2em 14em;
     }
     display: grid;
     grid-template-areas: 
     "daily highlights"
     "daily weekly";
     grid-template-columns: minmax(auto, 40%) 1fr;
+    // grid-template-rows: minmax(auto, 50%) 1fr;
+    @media screen and (min-width: 1225px) {
+      grid-template-columns: minmax(auto, 35%) 1fr;
+    }
+    // @media screen and (max-width: 905px) {
+    //   grid-template-rows: minmax(auto, 60%) 1fr;
+    // }
+    // @media screen and (max-width: 775px) {
+    //   grid-template-rows: minmax(auto, 70%) 1fr;
+    // }
   }
