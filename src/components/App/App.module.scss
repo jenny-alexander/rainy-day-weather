@@ -1,8 +1,8 @@
 .appContainer {    
     height: 100%;
     @media screen and (max-width: 905px) {
-     min-height: 700px;
-        }
+      min-height: 700px;
+      }
     @media screen and (min-width:325px) {
       margin: 2em 4em;
     }
@@ -14,10 +14,37 @@
     }
     display: grid;
     grid-template-areas: 
-    "daily highlights"
-    "daily weekly";
+    "daily weekly"
+    "daily highlights";
     grid-template-columns: minmax(auto, 40%) 1fr;    
     @media screen and (min-width: 1225px) {
       grid-template-columns: minmax(auto, 35%) 1fr;
     }
+  }
+
+  .smallAppContainer {   
+    
+    //display: flex;
+    //flex-direction: column;
+    margin: 1em;
+    //padding-left: 1em; //TODO: need this?
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075); 
+    height: 100%;
+
+    display: grid;
+    grid-template-areas: 
+    "search"
+    "daily"
+    "highlights"
+    "weekly";
+    // grid-template-rows: minmax(auto, 40%) 1fr;
+    padding: 0em 2em; 
+    row-gap: 1em;
   }

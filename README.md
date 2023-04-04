@@ -3,6 +3,7 @@
 ## Description
 
 * Mauzy Day Weather a responsive web application that displays weather information for a given location.
+* API: I will fetch info from OpenWeatherMap
 * Status: In Progress
 
 ## First Draft Design
