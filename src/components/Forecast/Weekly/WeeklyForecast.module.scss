@@ -47,3 +47,35 @@
         }
     }
 }
+.mobileWeekly {
+    //border: 1px dotted black;
+    grid-area: weekly;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    & .weeklyTitle {
+        font-size: 0.9em;
+        font-weight: 600;
+    }
+    & .weeklyForecast {
+        display: flex;
+        flex-direction: column;
+        & .dayForecast {
+            //border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+
+            align-items: center;
+            & .imageContainer {
+                img{
+                    width: 100%;
+                    max-width: 38px;
+                    height: auto;                    
+                }
+            }
+            & .highLowContainer {
+                display: flex;
+            }
+        }
+    }
+}

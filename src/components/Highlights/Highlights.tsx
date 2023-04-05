@@ -1,8 +1,10 @@
-import React from 'react';
 import styles from './Highlights.module.scss';
-//import cx from 'classnames';
 
-const Highlights: React.FC = () => {
+type DailyForecastProps = {
+    mobileView: boolean;
+}
+
+const Highlights = ({mobileView}: DailyForecastProps) => {
 
     interface IHighlights {
         section: string;
@@ -44,13 +46,15 @@ const Highlights: React.FC = () => {
                                 ]
 
     return (
-        <div className={styles.highlights}>
+        <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
             <div className={styles.highlightsTitle}>Today's Highlights</div>
             <div className={styles.highlightsDetails}>
             {highlights.map(highlights => {
                     return (
                         <div className={styles.sectionDetails}>
-                            <div className={styles.sectionTitle}>{highlights.section}</div>
+                            { mobileView ? null :
+                                <div className={styles.sectionTitle}>{highlights.section}</div>
+                            }
                             <div className={styles.sectionInfo}>
                                 <img className={styles.image} src={highlights.image}/>
                                 <div className={styles.sectionReading}>{highlights.reading}</div>

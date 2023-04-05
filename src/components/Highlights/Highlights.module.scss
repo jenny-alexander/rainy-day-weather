@@ -67,6 +67,12 @@
 .mobileHighlights {
     grid-area: highlights;
     display: flex;
+    flex-direction: column;
+    & .highlightsTitle {        
+        padding: 0.5em 0.5em 1em;
+        font-size: 0.9em;
+        font-weight: 600;
+    }
     & .highlightsDetails {
         display: flex;        
         flex-wrap: wrap;

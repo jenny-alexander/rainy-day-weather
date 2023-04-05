@@ -12,6 +12,12 @@
       0 4px 4px hsl(0deg 0% 0% / 0.075),
       0 8px 8px hsl(0deg 0% 0% / 0.075),
       0 16px 16px hsl(0deg 0% 0% / 0.075);
+      & .locationName {            
+        font-size: 1.5em;
+        font-weight:600;
+        margin: 1em 0em;
+        text-align: center;
+    }
     & .dailyDetails {
         display: flex;
         flex-direction: column;
@@ -24,18 +30,14 @@
             max-width: 225px;
         }
         border-radius: 15px;
-        & .locationName {            
-            font-size: 1.5em;
-            font-weight:600;   
-            margin: 1em 0em;         
-        }
+
         & .temperature {
             font-size: 2.2em;
             margin-bottom: 0.7em;
         }
-        & .day {
+        & .date {
             padding-bottom:1em;
-            border-bottom: 1px solid lightgrey;
+            //border-bottom: 1px solid lightgrey;
         }
         & .dailyForecast {
             margin: 1em 0em;
@@ -50,7 +52,8 @@
     }
 }
 .mobileDaily {
-    display: flex;    
+    display: flex;
+    grid-area: daily; 
     flex-direction: column;
     row-gap: 0.5em;
     & .locationName {
@@ -69,7 +72,7 @@
             display: flex;
             justify-content: right;
             align-items: center;
-            & .mobileDailyImage {
+            & .dailyImage {
                 grid-area: image;
                 max-width: 100%;
                 height: auto;                    
@@ -83,13 +86,12 @@
             justify-content: center;
             row-gap: 0.1em
         }
-        & .mobileTemperature {
+        & .temperature {
             font-size: 1.2em;
             font-weight: 600;                
         }
-        & .mobileDate {                
+        & .date {                
             font-size: 0.9em;
         }
     }
-
 }

@@ -1,8 +1,6 @@
-import React from 'react';
 import styles from './SearchBar.module.scss';
-//import cx from 'classnames';
 
-const SearchBar: React.FC = () => {
+const SearchBar = () => {
     return (
         <div className={styles.searchbar}>
             <input placeholder='Enter a location...' 

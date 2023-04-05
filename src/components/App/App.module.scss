@@ -23,10 +23,7 @@
   }
 
   .smallAppContainer {   
-    
-    //display: flex;
-    //flex-direction: column;
-    margin: 1em;
+    margin: 1em 3em;
     //padding-left: 1em; //TODO: need this?
     background-color: #fff;
     border-radius: 5px;
@@ -43,8 +40,7 @@
     "search"
     "daily"
     "highlights"
-    "weekly";
-    // grid-template-rows: minmax(auto, 40%) 1fr;
+    "weekly";    
     padding: 0em 2em; 
     row-gap: 1em;
   }

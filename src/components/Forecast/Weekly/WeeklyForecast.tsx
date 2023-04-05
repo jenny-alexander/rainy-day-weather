@@ -21,16 +21,21 @@ for(let i= 1; i < 8; i++) {
     week.push(dayNames[thisDay.getDay()]);
 }
 
-const WeeklyForecast: React.FC = () => {
+type WeeklyForecastProps = {
+    mobileView: boolean;
+}
+const WeeklyForecast = ({mobileView}: WeeklyForecastProps) => {
     return (
-        <div className={styles.weekly}>
+        <div className={`${mobileView ? styles.mobileWeekly : styles.weekly}`}> 
             <div className={styles.weeklyTitle}>Weekly Forecast</div>
             <div className={styles.weeklyForecast}>
                 {week.map(weekDay => {
                     return (
                         <div className={styles.dayForecast}>
-                            <div className={styles.dayOfWeek}>{weekDay}</div>                            
-                            <img className={styles.image} src="/images/cloudy-3.png"/>
+                            <div className={styles.dayOfWeek}>{weekDay}</div>
+                            <div className={styles.imageContainer}>                         
+                                <img className={styles.image} src="/images/cloudy-3.png"/>
+                            </div>
                             <div className={styles.highLowContainer}>
                                 <div className={styles.highTemp}>40°</div>
                                 <div className={styles.lowTemp}>32°</div>
