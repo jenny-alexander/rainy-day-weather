@@ -1,6 +1,4 @@
-import React from 'react';
 import styles from './WeeklyForecast.module.scss';
-//import cx from 'classnames';
 
 const dayNames: string[] = [
     'Sun',
@@ -38,6 +36,7 @@ const WeeklyForecast = ({mobileView}: WeeklyForecastProps) => {
                             </div>
                             <div className={styles.highLowContainer}>
                                 <div className={styles.highTemp}>40°</div>
+                                { mobileView ? <div>/</div> : null }
                                 <div className={styles.lowTemp}>32°</div>
                             </div>
                         </div>)

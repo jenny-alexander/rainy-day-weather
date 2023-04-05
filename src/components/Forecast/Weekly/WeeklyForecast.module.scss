@@ -6,6 +6,7 @@
     background-color: #fff;    
     margin: 1em 1em 1em 0em;
     border-radius: 5px;
+    padding-bottom: 1em;
     box-shadow: //TODO: put this somewhere else and reuse amongst cards
         0 1px 1px hsl(0deg 0% 0% / 0.075),
         0 2px 2px hsl(0deg 0% 0% / 0.075),
@@ -48,11 +49,11 @@
     }
 }
 .mobileWeekly {
-    //border: 1px dotted black;
     grid-area: weekly;
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-bottom: 1em;
     & .weeklyTitle {
         font-size: 0.9em;
         font-weight: 600;
@@ -60,12 +61,15 @@
     & .weeklyForecast {
         display: flex;
         flex-direction: column;
-        & .dayForecast {
-            //border: 1px solid red;
+        padding: 0em 1.5em;
+        & .dayForecast {            
             display: flex;
             justify-content: space-between;
-
             align-items: center;
+            font-size: calc(11px + 0.390625vw);
+            @media screen and (min-width: 757px) {
+                font-size: calc(12px + 0.390625vw);
+            }
             & .imageContainer {
                 img{
                     width: 100%;
@@ -75,6 +79,10 @@
             }
             & .highLowContainer {
                 display: flex;
+                column-gap: 0.1em;
+                & .lowTemp {
+                    color: rgb(103, 103, 103);
+                }
             }
         }
     }

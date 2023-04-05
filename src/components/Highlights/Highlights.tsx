@@ -1,10 +1,10 @@
 import styles from './Highlights.module.scss';
 
-type DailyForecastProps = {
+type DailyHighlightsProps = {
     mobileView: boolean;
 }
 
-const Highlights = ({mobileView}: DailyForecastProps) => {
+const Highlights = ({mobileView}: DailyHighlightsProps) => {
 
     interface IHighlights {
         section: string;
@@ -16,7 +16,7 @@ const Highlights = ({mobileView}: DailyForecastProps) => {
         {
             section: 'temperature',
             image: '/images/thermometer.png',
-            reading: '40°F | 33°F',
+            reading: '40°|33°',
         },
         {
             section: 'wind',
