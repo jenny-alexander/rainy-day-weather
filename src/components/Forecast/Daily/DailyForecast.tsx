@@ -11,13 +11,15 @@ const DailyForecast = ({mobileView}: DailyForecastProps) => {
     return (
         <div className={`${mobileView ? styles.mobileDaily : styles.daily}`}>
             <SearchBar />
-            <div className={styles.locationName}>Minneapolis, MN, USA</div>
+            { mobileView ? <div className={styles.locationName}>Minneapolis, MN, USA</div> : null}
+            {/* <div className={styles.locationName}>Minneapolis, MN, USA</div> */}
             <div className={styles.dailyDetails}>
             
                 <div className={styles.imageContainer}>
                     <img className={styles.dailyImage} src="/images/sun.png"/>
                 </div>                
                 <div className={styles.detailsContainer}>
+                    { mobileView ? null : <div className={styles.locationName}>Minneapolis, MN, USA</div> }
                     <div className={styles.temperature}>25°F</div>
                     <div className={styles.date}>Tuesday Mar 28</div>
                 </div>

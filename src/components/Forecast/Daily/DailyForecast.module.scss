@@ -16,38 +16,29 @@
         font-size: 1.5em;
         font-weight:600;
         margin: 1em 0em;
-        text-align: center;
+        //text-align: center;
     }
     & .dailyDetails {
         display: flex;
         flex-direction: column;
         padding: 1em;
-        & .dailyImage {
-            max-width: 100%;
-            height: auto;
-            padding-left: 0.5em;
-            max-height: 225px;
-            max-width: 225px;
-        }
         border-radius: 15px;
-
+        & .imageContainer {
+            display: flex;
+            height: auto;
+            max-width: 60%;
+            padding-left: 0.5em;
+            & .dailyImage {
+                max-width: 100%;
+                height: auto;
+            }
+        }
         & .temperature {
             font-size: 2.2em;
             margin-bottom: 0.7em;
         }
         & .date {
-            padding-bottom:1em;
-            //border-bottom: 1px solid lightgrey;
-        }
-        & .dailyForecast {
-            margin: 1em 0em;
-            display: flex;
-            column-gap: 0.5em;
-            align-items: center;
-            img {
-                height: 32px;
-                width: 32px;
-            }
+            padding-bottom:1em;            
         }
     }
 }
@@ -55,6 +46,7 @@
     display: flex;
     grid-area: daily; 
     flex-direction: column;
+    align-items: center;
     row-gap: 0.5em;
     & .locationName {
         font-weight: 600;

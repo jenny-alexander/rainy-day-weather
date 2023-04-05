@@ -1,17 +1,31 @@
-.searchbar {
-    //border: 1px dashed black;
-    grid-area: search;
+.searchbar {    
     display:flex;
     column-gap: 0.3em;
-   //width: 100%;
     padding:1em;
-    //flex-direction: column;
+    justify-content: center;
+    @media screen and (max-width: 905px) {
+        width: 100%;
+    }
+    // width: 100%;
+    @media screen and (max-width: 475px) {
+        flex-direction: column;
+        row-gap: 0.3em;
+        width: 80%;
+    }
     & .input {
         padding: 0.5em;
         border: 1px solid lightgrey;
         border-radius: 5px;
-        width: 70%;
-        margin-right: 0.3em;
+        
+        @media screen and (min-width: 726px) {
+            width: 70%;
+        }    
+        @media screen and (min-width: 526px) and (max-width: 725px) {
+            width: 85%;
+        }
+        @media screen and (min-width: 475px) and (max-width: 525px) {
+            width: 100%;
+        }        
     }
     & .searchButton {
         border-radius: 5px;
@@ -21,20 +35,14 @@
         padding-left: 0.8em;
         padding-right: 0.8em;
         letter-spacing: 0.07em;
-        //font-size: 1em;
+        @media screen and (max-width: 475px) {
+            width: 100%;
+            padding: 7px;
+        }
         &:hover {
             cursor: pointer;
-            //outline: 3px dotted #1379cb;
-            //transition: outline 0.1s ease-in-out;
-            //background-color: #1379cb;
-            //transition: 0.7s;
             background-color: #4c90af; /* Green */
             color: white;
         } 
     }
-    // .searchButton:hover {
-    //     background-color: #4CAF50; /* Green */
-    //     color: white;
-    // }
-
 }

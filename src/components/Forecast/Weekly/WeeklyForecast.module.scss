@@ -1,54 +1,70 @@
-.weekly {
-    grid-area: weekly;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-    background-color: #fff;    
-    margin: 1em 1em 1em 0em;
-    border-radius: 5px;
-    padding-bottom: 1em;
-    box-shadow: //TODO: put this somewhere else and reuse amongst cards
-        0 1px 1px hsl(0deg 0% 0% / 0.075),
-        0 2px 2px hsl(0deg 0% 0% / 0.075),
-        0 4px 4px hsl(0deg 0% 0% / 0.075),
-        0 8px 8px hsl(0deg 0% 0% / 0.075),
-        0 16px 16px hsl(0deg 0% 0% / 0.075);
-    padding-bottom: 1em;
-    & .weeklyTitle {        
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 0.5em;
-    }
-    & .weeklyForecast {
-        display: flex;        
-        column-gap: 0.5em;
-        margin: 0em 0.8em;
-        & .dayForecast {        
-            padding: 1em 0em;    
-            width: 100%;
-            border: 1px solid rgb(231, 231, 231);
+@media screen and (min-width: 675px) {
+    .weekly {
+        grid-area: weekly;
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5em;
+        @media screen and (min-width: 906px){
+            background-color: #fff;    
+            margin: 1em 1em 1em 0em;
             border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            row-gap: 1em;
-            & .image {
-                max-height: 32px;
-                max-width: 32px;
-            }
-            & .highLowContainer {
+            box-shadow: //TODO: put this somewhere else and reuse amongst cards
+            0 1px 1px hsl(0deg 0% 0% / 0.075),
+            0 2px 2px hsl(0deg 0% 0% / 0.075),
+            0 4px 4px hsl(0deg 0% 0% / 0.075),
+            0 8px 8px hsl(0deg 0% 0% / 0.075),
+            0 16px 16px hsl(0deg 0% 0% / 0.075);
+        }
+        padding-bottom: 1em;
+        & .weeklyTitle {        
+            font-size: 1em;
+            font-weight: 600;
+            padding: 0.5em;
+        }
+        & .weeklyForecast {
+            display: flex;        
+            column-gap: 0.5em;
+            margin: 0em 0.8em;
+            & .dayForecast {        
+                padding: 1em 0em;    
+                width: 100%;
+                border: 1px solid rgb(231, 231, 231);
+                border-radius: 5px;
                 display: flex;
-                font-size: 0.8em;
-                column-gap: 0.5em;
-                padding-top: 0.3em;
-                & .lowTemp {
-                    color: rgb(103, 103, 103);
+                flex-direction: column;
+                align-items: center;
+                row-gap: 1em;
+                font-size: 0.7em;
+                & .dayOfWeek {
+                    font-size: 1.1em;
+                    font-weight: 600;
+                }
+                & .imageContainer {
+                    display: flex;
+                    flex-direction :column;
+                    align-items: center;
+                    row-gap: 0.1em;
+                }
+                & .image {
+                    max-height: 32px;
+                    max-width: 32px;
+                    
+                }
+                & .highLowContainer {
+                    display: flex;
+                    font-size: 1.2em;
+                    column-gap: 0.2em;
+                    padding-top: 0.3em;
+                    & .lowTemp {
+                        color: rgb(103, 103, 103);
+                    }
                 }
             }
         }
     }
 }
-.mobileWeekly {
+@media screen and (max-width: 674px) {
+.weekly {
     grid-area: weekly;
     display: flex;
     flex-direction: column;
@@ -61,20 +77,29 @@
     & .weeklyForecast {
         display: flex;
         flex-direction: column;
-        padding: 0em 1.5em;
+        row-gap: 0.5em;
+        padding: 0.5em 1.5em 0em;
+        @media screen and (min-width: 625px) {
+            padding: 0em 2em;
+        }
         & .dayForecast {            
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: calc(11px + 0.390625vw);
+            font-size: calc(10px + 0.390625vw);
             @media screen and (min-width: 757px) {
-                font-size: calc(12px + 0.390625vw);
+                font-size: calc(11px + 0.390625vw);
             }
             & .imageContainer {
+                display: flex;
+                align-items: center;                
                 img{
                     width: 100%;
-                    max-width: 38px;
+                    max-width: 34px;
                     height: auto;                    
+                }
+                & .rainPrecip {
+                    padding-left: 0.3em;
                 }
             }
             & .highLowContainer {
@@ -86,4 +111,5 @@
             }
         }
     }
+}
 }
