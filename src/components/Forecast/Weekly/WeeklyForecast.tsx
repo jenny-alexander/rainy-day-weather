@@ -23,7 +23,7 @@ type WeeklyForecastProps = {
     mobileView: boolean;
 }
 
-const WeeklyForecast = ({mobileView}: WeeklyForecastProps) => {
+const WeeklyForecast = ({mobileView}: WeeklyForecastProps): JSX.Element => {
     return (
         <div className={styles.weekly}> 
             <div className={styles.weeklyTitle}>Weekly Forecast</div>

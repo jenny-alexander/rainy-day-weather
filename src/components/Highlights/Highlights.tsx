@@ -4,7 +4,7 @@ type DailyHighlightsProps = {
     mobileView: boolean;
 }
 
-const Highlights = ({mobileView}: DailyHighlightsProps) => {
+const Highlights = ({mobileView}: DailyHighlightsProps): JSX.Element => {
 
     interface IHighlights {
         section: string;

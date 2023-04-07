@@ -5,8 +5,7 @@
     justify-content: center;
     @media screen and (max-width: 905px) {
         width: 100%;
-    }
-    // width: 100%;
+    }    
     @media screen and (max-width: 475px) {
         flex-direction: column;
         row-gap: 0.3em;
@@ -16,7 +15,10 @@
         padding: 0.5em;
         border: 1px solid lightgrey;
         border-radius: 5px;
-        
+        font-size: 1em;
+        @media screen and (max-width: 675px) {
+            font-size: calc(12px + 0.390625vw);
+        }
         @media screen and (min-width: 726px) {
             width: 70%;
         }    

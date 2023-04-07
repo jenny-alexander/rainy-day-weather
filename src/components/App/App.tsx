@@ -4,7 +4,8 @@ import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
 
-const App = () => {
+
+const App = (): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
   const mql = window.matchMedia('(max-width: 905px)');  
 
@@ -19,7 +20,7 @@ const App = () => {
       <DailyForecast mobileView={mobileView}/>
       <Highlights mobileView={mobileView}/>
       <WeeklyForecast mobileView={mobileView}/>
-    </div>
+    </div>        
   );
 
 }

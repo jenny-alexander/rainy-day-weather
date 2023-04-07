@@ -14,7 +14,7 @@
 
 ## Mobile
 
-# ![image of Mauzy Day Weather mobile app](./public/images/mauzy_day_mobile.png)
+# ![image of Mauzy Day Weather mobile app](./public/images/mobile_css_mockup.png)
 
 **Frontend:** Frontend is built using React, TypeScript, CSS and HTML.
 
