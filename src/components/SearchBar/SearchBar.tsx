@@ -24,22 +24,30 @@ const SearchBar = (): JSX.Element => {
 
     return (
         <div className={styles.searchbar}>
-            <input placeholder='Enter a location...' 
-                   className={styles.input} 
-                   type="text"
-                   value={searchTerm}
-                   onChange={handleChange}
-            />     
-            <button className={styles.searchButton}>Search</button>
-            {/* Testing out results */}
-            <p>
-                {
-                    location.length > 0 ? 
-                        location.map((item: IWeatherResponseDTO)=> {
-                            return (<p>{item.name},{item.state},{item.country}</p>)
-                        }) : null
-                }
-            </p> 
+            <div className={styles.searchbarInput}>
+                <input placeholder='Enter a location...' 
+                    className={styles.input} 
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleChange}
+                />
+                {/* <div className={styles.listWrapper}></div> */}
+
+                <button className={styles.searchButton}>Search</button>
+
+
+            </div>
+            <div className={styles.listContainer}>
+                <li className={styles.locationList}>
+                    {
+                        location.length > 0 ? 
+                            location.map((item: IWeatherResponseDTO)=> {
+                                return (<button>{item.name},{item.state},{item.country}</button>)
+                            }) : null
+                    }
+                </li> 
+            </div>
+
 
         </div>
     )
