@@ -48,12 +48,13 @@ export async function fetchGeoLocation(searchTerm: string) {
       
     } catch (err) {
         const error = err as Error | AxiosError;
-        console.log(`Failed to fetch global stats: ${error.message}`, error);   
+        console.log(`Failed to fetch global stats: ${error.message}`, error);
+        return [];
         // if(!axios.isAxiosError(error)){
         //     // do whatever you want with native error
         // }
         // // do what you want with your axios error
         // console.log(`Failed to fetch global stats: ${error.message}`, error);
     
-    }
+    }    
 }
