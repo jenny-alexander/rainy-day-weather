@@ -25,30 +25,32 @@ const SearchBar = (): JSX.Element => {
     return (
         <div className={styles.searchbar}>
             <div className={styles.searchbarInput}>
-                <input placeholder='Enter a location...' 
-                    className={styles.input} 
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleChange}
-                />
-                {/* <div className={styles.listWrapper}></div> */}
-
+                {/* <div className={styles.inputWrapper}> */}
+                    <input placeholder='Enter a location...' 
+                        className={styles.input} 
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleChange}
+                    />
+                    {/* <button className={styles.inputClearButton}>X</button>             */}
+                {/* </div>             */}
                 <button className={styles.searchButton}>Search</button>
 
 
             </div>
-            <div className={styles.listContainer}>
-                <li className={styles.locationList}>
-                    {
-                        location.length > 0 ? 
-                            location.map((item: IWeatherResponseDTO)=> {
-                                return (<button>{item.name},{item.state},{item.country}</button>)
-                            }) : null
-                    }
-                </li> 
-            </div>
-
-
+            {
+                searchTerm === '' || location.length === 0 ? null :             
+                    <div className={styles.listContainer}>
+                        <li className={styles.locationList}>
+                            {
+                                location.length > 0 ? 
+                                    location.map((item: IWeatherResponseDTO)=> {
+                                        return (<button>{item.name}, {item.state}, {item.country}</button>)
+                                    }) : null
+                            }
+                        </li> 
+                    </div>
+            }
         </div>
     )
 }

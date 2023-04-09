@@ -16,7 +16,7 @@ const DailyForecast = ({mobileView}: DailyForecastProps): JSX.Element => {
             { mobileView ? <div className={styles.locationName}>Minneapolis, MN, USA</div> : null}
             <div className={styles.dailyDetails}>
                 <div className={styles.imageContainer}>
-                    <img className={styles.dailyImage} src="/images/sun.png"/>
+                    <img alt-text="Image of today's weather" className={styles.dailyImage} src="/images/sun.png"/>
                 </div>                
                 <div className={styles.detailsContainer}>
                     { mobileView ? null : <div className={styles.locationName}>Minneapolis, MN, USA</div> }
