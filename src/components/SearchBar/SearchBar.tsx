@@ -1,27 +1,50 @@
-import {useState, useEffect} from 'react';
-import { IWeatherResponseDTO, fetchGeoLocation } from '../../api/weatherApi';
+import {useState} from 'react';
+import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/weatherApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
 
 const SearchBar = (): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
-    //const[location, setLocation] = useState<IWeatherResponseDTO[] | undefined >([]);
-    const[location, setLocation] = useState<IWeatherResponseDTO[]>([]);
+    const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);
+    const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
+        ({
+            country: '',
+            lat: 0,
+            lon: 0,
+            name: '',
+            state: '',
+            key: '',
+        });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value.trim());
+        setSearchTerm(event.target.value);
+        getGeoLocation(event.target.value);
     }
-    const getGeoLocation = async(searchTerm: string) => {
-        // searchTerm = 'London';
-        console.log('going to search for location...', searchTerm)
-        const geoLocation: IWeatherResponseDTO[] = await fetchGeoLocation(searchTerm);
-        setLocation(geoLocation);
+    const getGeoLocation = async(searchTerm: string) => {        
+        const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
+        if ( geoLocation.length > 0 ) {
+            const geoLocationsWithKey = geoLocation.map(location => {
+                return {
+                    ...location,
+                    key: crypto.randomUUID(),
+                }
+            })
+            console.log('...with key:', geoLocationsWithKey)
+            setGeoLocation(geoLocationsWithKey);
+        }
     }
 
-    useEffect(() => {
-        if (searchTerm === '') return;
-        getGeoLocation(searchTerm);
-      }, [searchTerm])
+    const selectPlace = (location: IGeoLocationResponseDTO) => {
+        const place: string = [location.name, location.state, location.country]
+            .filter(element => Boolean(element)).join(', ');       
+        setSearchTerm(place);
+        setSearchLocation(location);
+        setGeoLocation([]); //clear out the list of values from geolocation API
+    }
+
+    const searchForWeather = () => {
+        console.log('i will search for this location:', searchLocation);
+    }
 
     return (
         <div className={styles.searchbar}>
@@ -33,29 +56,34 @@ const SearchBar = (): JSX.Element => {
                         value={searchTerm}
                         onChange={handleChange}                        
                     /> 
-                </div>
-                {/* {`${mobileView ? styles.mobileHighlights : styles.highlights}`} */}
+                </div>                
                 <button className={`${searchTerm === '' ? cx(styles.hideInputButton) : styles.clearInputButton}`}
                     onClick={()=>setSearchTerm('')}
                 >
                     <i className="fa-solid fa-x"/>
                 </button>
-                <button className={styles.searchButton}>Search</button>
+                <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
             </div>
+
             {
-                searchTerm === '' || location.length === 0 ? null :             
+                searchTerm === '' || geoLocation.length === 0 ? null :             
                     <div className={styles.listContainer}>
                         <li className={styles.locationList}>
                             {
-                                location.length > 0 ? 
-                                    location.map((item: IWeatherResponseDTO)=> {
-                                        return (<button>{item.name}, {item.state}, {item.country}</button>)
+                                geoLocation.length > 0 ? 
+                                    geoLocation.map((item: IGeoLocationResponseDTO)=> {
+                                        return (
+                                            <button key={item.key}
+                                                onClick={()=> selectPlace(item)}>
+                                                    {item.name}, {item.state}, {item.country}
+                                            </button>
+                                        )
                                     }) : null
                             }
                         </li> 
                     </div>
             }
-        </div>
+        </div>   
     )
 }
 

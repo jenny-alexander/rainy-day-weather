@@ -28,9 +28,9 @@ const WeeklyForecast = ({mobileView}: WeeklyForecastProps): JSX.Element => {
         <div className={styles.weekly}> 
             <div className={styles.weeklyTitle}>Weekly Forecast</div>
             <div className={styles.weeklyForecast}>
-                {week.map(weekDay => {
+                {week.map((weekDay, index: number) => {
                     return (
-                        <div className={styles.dayForecast}>
+                        <div className={styles.dayForecast} key={weekDay + '-' + index}>
                             <div className={styles.dayOfWeek}>{weekDay}</div>
                             <div className={styles.imageContainer}>                         
                                 <img className={styles.image} src="/images/cloudy-3.png"/>

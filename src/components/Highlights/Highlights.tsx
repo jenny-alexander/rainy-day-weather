@@ -9,39 +9,39 @@ const Highlights = ({mobileView}: DailyHighlightsProps): JSX.Element => {
     interface IHighlights {
         section: string;
         image: string;
-        reading: string;
+        reading: string;        
     }
 
     const highlights: IHighlights[] = [
         {
             section: 'temperature',
             image: '/images/thermometer.png',
-            reading: '40°|33°',
+            reading: '40°|33°',            
         },
         {
             section: 'wind',
             image: '/images/wind.png',
-            reading: '10.3 mi/h',
+            reading: '10.3 mi/h',            
         },
         {
             section: 'rain',
             image: '/images/rain.png',
-            reading: '45%',
+            reading: '45%',            
         },
         {
             section: 'humidity',
             image: '/images/humidity.png',
-            reading: '70%',
+            reading: '70%',            
         },
         {
             section: 'air quality',
             image: '/images/oxygen.png',
-            reading: 'Good',
+            reading: 'Good',            
         },
         {
             section: 'uv',
             image: '/images/rays.png',
-            reading: 'High',
+            reading: 'High',            
         },
                                 ]
 
@@ -49,9 +49,9 @@ const Highlights = ({mobileView}: DailyHighlightsProps): JSX.Element => {
         <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
             <div className={styles.highlightsTitle}>Today's Highlights</div>
             <div className={styles.highlightsDetails}>
-            {highlights.map(highlights => {
+            {highlights.map((highlights, index: number) => {
                     return (
-                        <div className={styles.sectionDetails}>
+                        <div className={styles.sectionDetails} key={highlights.section + '-' + index}>
                             { mobileView ? null :
                                 <div className={styles.sectionTitle}>{highlights.section}</div>
                             }

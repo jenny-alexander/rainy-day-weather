@@ -33,6 +33,8 @@
                 font-size: 1em;
                 &:hover {
                     cursor:pointer;
+                    //color: rgb(56, 55, 55);
+                    color: darkblue;
                 }                
             }
         }
@@ -79,8 +81,10 @@
                 font-size: 0.9em;
                 &:hover {
                     cursor: pointer;
-                    background-color: #0a406d; /* Green */
-                    color: white;
+                    // background-color: #0a406d;
+                    //color: white;
+                    background-color: rgb(226, 225, 225);
+                    color: black;
                 }
                 &:last-of-type {
                     border-radius: 0px 0px 10px 10px;
