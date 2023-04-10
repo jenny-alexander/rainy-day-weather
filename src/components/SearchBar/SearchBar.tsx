@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { IWeatherResponseDTO, fetchGeoLocation } from '../../api/weatherApi';
 import styles from './SearchBar.module.scss';
+import cx from 'classnames';
 
 const SearchBar = (): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
@@ -25,18 +26,21 @@ const SearchBar = (): JSX.Element => {
     return (
         <div className={styles.searchbar}>
             <div className={styles.searchbarInput}>
-                {/* <div className={styles.inputWrapper}> */}
+                <div className={styles.inputWrapper}>                    
                     <input placeholder='Enter a location...' 
                         className={styles.input} 
                         type="text"
                         value={searchTerm}
-                        onChange={handleChange}
-                    />
-                    {/* <button className={styles.inputClearButton}>X</button>             */}
-                {/* </div>             */}
+                        onChange={handleChange}                        
+                    /> 
+                </div>
+                {/* {`${mobileView ? styles.mobileHighlights : styles.highlights}`} */}
+                <button className={`${searchTerm === '' ? cx(styles.hideInputButton) : styles.clearInputButton}`}
+                    onClick={()=>setSearchTerm('')}
+                >
+                    <i className="fa-solid fa-x"/>
+                </button>
                 <button className={styles.searchButton}>Search</button>
-
-
             </div>
             {
                 searchTerm === '' || location.length === 0 ? null :             
