@@ -1,12 +1,15 @@
-import {useState} from 'react';
-import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/weatherApi';
+import {useState, useEffect} from 'react';
+import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
+import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
 
 const SearchBar = (): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
     const[activeSearch, setActiveSearch] = useState<boolean>(false);
+    const[userLocation, setUserLocation] = useState<GeolocationCoordinates>();
     const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);
+    const[weather, setWeather] = useState<IWeatherResponseDTO>({});
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
             country: '',
@@ -16,23 +19,48 @@ const SearchBar = (): JSX.Element => {
             state: '',
             key: '',
         });
+  
+    useEffect (() => {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    },[]);
+
+    //TODO: Search for user's location when loading the app & show the weather at that location
+
+    //Get location from user's browser:
+    const successCallback = (position: any) => {
+        console.log('Browser location is:', position);
+        setUserLocation(position);
+    };
+  
+    const errorCallback = (error: any) => {
+        console.log('Error retrieving browser gelocation:', error);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);        
         getGeoLocation(event.target.value);
     }
+
+    const getWeather = async(location: IGeoLocationResponseDTO) => {                            
+        const weather: IWeatherResponseDTO = await fetchWeather(location.lat, location.lon);
+        if ( Object.entries(weather).length > 0 ) {
+            console.log('weather from API is:', weather);
+            setWeather(weather);         
+        }
+    }
+
     const getGeoLocation = async(searchTerm: string) => {   
         setActiveSearch(true);     
         const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
         if ( geoLocation.length > 0 ) {
-            const geoLocationsWithKey = geoLocation.map(location => {
+            const geoLocationWithKey = geoLocation.map(location => {
                 return {
                     ...location,
                     key: crypto.randomUUID(),
                 }
             })
-            console.log('...with key:', geoLocationsWithKey)
-            setGeoLocation(geoLocationsWithKey);
+            console.log('...with key:', geoLocationWithKey)
+            setGeoLocation(geoLocationWithKey);
         }
     }
 
@@ -47,6 +75,7 @@ const SearchBar = (): JSX.Element => {
 
     const searchForWeather = () => {
         console.log('i will search for this location:', searchLocation);
+        getWeather(searchLocation);
     }
 
     const clearSearchTerm = () => {

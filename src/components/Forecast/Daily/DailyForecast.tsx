@@ -15,6 +15,7 @@ const DailyForecast = ({mobileView}: DailyForecastProps): JSX.Element => {
             console.log('no image found in map')
         }        
     }   
+    
     return (
         <div className={`${mobileView ? styles.mobileDaily : styles.daily}`}>
             <SearchBar />
