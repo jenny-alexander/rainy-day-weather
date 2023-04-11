@@ -10,9 +10,40 @@ export interface IGeoLocationResponseDTO {
         key: string,
 }
 
+export interface IWeatherResponseDTO {
+    lat: string,
+    lon: string,
+    timezone: string,
+    timezone_offset: number,
+    current: 
+        {
+            dt: number,
+            temp: number, //temperature
+            feels_like: number,
+            uvi: number, //uv
+            wind_speed: number, //wind speed
+            humidity: number, //humidity
+        },
+    data: [
+        {
+            dt: number,
+            temp: {
+                min: number,
+                max: number,
+            },
+            humidity: number,
+            wind_speed: number,
+            pop: number,
+            univ: number
+            weather: {
+                main: string,
+                description: string,
+            }
+        }
+    ]
+}
+
 export async function fetchGeoLocation(searchTerm: string) {
-    console.log('api key is:', config.weather.api.appId);
-    console.log('search term is:', searchTerm)
     try {
         const response = await axios.get<IGeoLocationResponseDTO[]>(
             `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=${config.weather.api.appId}`,

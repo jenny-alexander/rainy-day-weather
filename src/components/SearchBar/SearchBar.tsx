@@ -5,6 +5,7 @@ import cx from 'classnames';
 
 const SearchBar = (): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
+    const[activeSearch, setActiveSearch] = useState<boolean>(false);
     const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
@@ -17,10 +18,11 @@ const SearchBar = (): JSX.Element => {
         });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
+        setSearchTerm(event.target.value);        
         getGeoLocation(event.target.value);
     }
-    const getGeoLocation = async(searchTerm: string) => {        
+    const getGeoLocation = async(searchTerm: string) => {   
+        setActiveSearch(true);     
         const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
         if ( geoLocation.length > 0 ) {
             const geoLocationsWithKey = geoLocation.map(location => {
@@ -40,10 +42,16 @@ const SearchBar = (): JSX.Element => {
         setSearchTerm(place);
         setSearchLocation(location);
         setGeoLocation([]); //clear out the list of values from geolocation API
+        setActiveSearch(false);
     }
 
     const searchForWeather = () => {
         console.log('i will search for this location:', searchLocation);
+    }
+
+    const clearSearchTerm = () => {
+        setSearchTerm('');
+        setActiveSearch(false);
     }
 
     return (
@@ -58,13 +66,15 @@ const SearchBar = (): JSX.Element => {
                     /> 
                 </div>                
                 <button className={`${searchTerm === '' ? cx(styles.hideInputButton) : styles.clearInputButton}`}
-                    onClick={()=>setSearchTerm('')}
+                    onClick={()=>clearSearchTerm()}
                 >
                     <i className="fa-solid fa-x"/>
                 </button>
                 <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
             </div>
-
+            { geoLocation.length === 0 && activeSearch ?
+                <div className={styles.searchError}>Could not find location. Try again.</div> : null
+            }
             {
                 searchTerm === '' || geoLocation.length === 0 ? null :             
                     <div className={styles.listContainer}>

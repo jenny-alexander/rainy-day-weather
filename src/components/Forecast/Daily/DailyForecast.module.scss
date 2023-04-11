@@ -13,16 +13,13 @@
     & .dailyDetails {
         display: flex;
         flex-direction: column;
+        align-items: center;
         padding: 1em;        
         border-radius: 15px;
-        & .detailsContainer {
-            padding-left: 1em;
-        }
         & .imageContainer {
             display: flex;
             height: auto;
             max-width: 60%;
-            padding-left: 0.5em;
             & .dailyImage {
                 max-width: 100%;
                 height: auto;
@@ -53,7 +50,7 @@
             font-size: calc(18px + 0.390625vw);
         }  
         text-align: center;
-        margin: 0.5em 0em 0.7em 0em;
+        margin: 0.5em 0em 0em 0em;
     }
     & .dailyDetails {
         display: grid;

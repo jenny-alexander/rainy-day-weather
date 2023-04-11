@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    & .searchError {
+        padding: 3px 0px 0px 20px;
+        font-size: 0.8em;
+        color: rgb(197, 2, 2);
+        font-weight: 600;
+    }
     & .searchbarInput {        
         display:flex;
         column-gap: 0.3em;            
