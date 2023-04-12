@@ -22,18 +22,18 @@ export interface IWeatherResponseDTO {
         },
     daily?: [
         {
-            dt?: number,
-            temp?: {
-                day?: number,
-                night?: number,
+            dt: number,
+            temp: {
+                day: number,
+                night: number,
             },
             humidity?: number,
             wind_speed?: number,
-            pop?: number,
+            pop: number,
             univ?: number
-            weather?: [{
-                id?: number,
-                description?: string,
+            weather: [{
+                id: number,
+                description: string,
             }],
         },
     ],

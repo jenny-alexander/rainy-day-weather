@@ -17,49 +17,17 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         unit: string,      
     }
 
-    useEffect(() => {
-        console.log('weatherProp is:', weatherProp);
+    useEffect(() => {        
         setWeather(weatherProp);
     },[weatherProp])
 
     const highlights: IHighlights[] = [    
-        {
-            section: 'temperature',
-            imageCode: 1,
-            reading: weather?.current.temp,
-            unit: 'F°',            
-        },
-        {
-            section: 'wind',
-            imageCode: 2,
-            reading: weather?.current.wind_speed,
-            unit: 'mi/h',
-        },
-        {
-            section: 'rain',
-            imageCode: 3,
-            reading: 45,
-            unit: '%',
-        },
-        {
-            section: 'humidity',
-            imageCode: 4,
-            reading: weather?.current.humidity,
-            unit: '%',
-        },
-        {
-            section: 'air quality',
-            imageCode: 5,
-            reading: 2,
-            unit: 'AQI'
-        },
-        {
-            section: 'uv',
-            imageCode: 6,
-            reading: weather?.current.uvi,
-            unit: 'UV'
-        },
-                                ]
+        {section: 'temperature', imageCode: 1, reading: weather?.current.temp, unit: 'F°'},
+        {section: 'wind', imageCode: 2, reading: weather?.current.wind_speed, unit: 'mi/h'},
+        {section: 'rain', imageCode: 3, reading: 45, unit: '%'},
+        {section: 'humidity', imageCode: 4, reading: weather?.current.humidity, unit: '%'},
+        {section: 'air quality', imageCode: 5, reading: 2, unit: 'AQI'},
+        {section: 'uv', imageCode: 6, reading: weather?.current.uvi, unit: 'UV'}];
 
     return (
         <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
@@ -73,7 +41,10 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
                             }
                             <div className={styles.sectionInfo}>
                                 <img className={styles.image} src={highlightsImage.get(highlights.imageCode)}/>                                
-                                <div className={styles.sectionReading}>{highlights.reading} {highlights.unit}</div>
+                                <div className={styles.sectionReading}>
+                                    {highlights.reading !== undefined ? Math.round(highlights.reading) : ''
+                                    } {highlights.unit}
+                                </div>
                             </div>
                         </div>)
                 })}

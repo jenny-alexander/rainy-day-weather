@@ -1,9 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
 import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
-import { ForInitializer } from 'typescript';
 
 interface SearchBarProps {
     returnWeather: (weather: IWeatherResponseDTO) => void;
@@ -51,12 +50,8 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         try {
             const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
             if ( Object.entries(weather).length > 0 ) {
-                console.log('weather from API is:', weather);
                 setWeather(weather);
-                console.log('*** about to call returnWeather from parent comp');
                 returnWeather(weather);
-                console.log('*** about to call returnLocation from parent comp');
-                console.log('***search Term is:', searchTerm);
                 returnLocation(searchTerm);
             }
         }catch (e){
@@ -95,7 +90,6 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     }
 
     const searchForWeather = () => {
-        console.log('i will search for this location:', searchLocation);
         getWeather(searchLocation);
     }
 

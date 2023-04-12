@@ -12,37 +12,37 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
     const [location, setLocation] = useState<string>('');
     
-    // const getImage = (code: number) => {
-    //     if ( code === 200) {
-    //         console.log('image found:', weatherIconImages.has(code));
-    //         console.log('image path is:', weatherIconImages.get(code));
-    //         return weatherIconImages.get(code);
-    //     } else {
-    //         console.log('no image found in map')
-    //     }        
-    // }
     useEffect(()=> {
         setWeather(weatherProp);
     },[weatherProp]); 
     useEffect(()=> {
         setLocation(locationProp);
-    },[locationProp]); 
+    },[locationProp]);
+
+    //TODO: put this in a utility file to be resused across app
+    const convertDate = (date: number) => {
+        let formattedDate: Date = new Date(date*1000);
+        const outDate: string = formattedDate.toLocaleDateString('en-US');
+        const outTime: string = formattedDate.toLocaleTimeString('en-US');
+        return outDate + ' ' + outTime;
+    }
 
     return (
         <div className={`${mobileView ? styles.mobileDaily : styles.daily}`}>
             { mobileView ? <div className={styles.locationName}>{location}</div> : null}
             <div className={styles.dailyDetails}>
-                {/* { Object.keys(weather).length > 0 ?  */}
-                        <div className={styles.imageContainer}> 
-                        <img alt-text="Image of today's weather" className={styles.dailyImage} 
-                            src={weatherIconImages.get(weather?.current.weather[0].id)}/>
-                        </div>
-                     {/* : <div>Error getting today's weather image</div>
-                }               */}
+                <div className={styles.imageContainer}> 
+                <img alt-text="Image of today's weather" className={styles.dailyImage} 
+                    src={weatherIconImages.get(weather?.current.weather[0].id)}/>
+                </div>
                 <div className={styles.detailsContainer}>
                     { mobileView ? null : <div className={styles.locationName}>{location}</div> }
-                    <div className={styles.temperature}>{weather?.current.temp}°F</div>
-                    <div className={styles.date}>Tuesday Mar 28</div>
+                    <div className={styles.temperature}>
+                        {weather?.current.temp !== undefined ? Math.round(weather?.current.temp) : 'Temperature not found' }°F
+                    </div>
+                    <div className={styles.date}>Last Updated: {
+                        weather?.current.dt !== undefined ? convertDate(weather?.current.dt) : 'Date not found'}
+                    </div>
                 </div>
 
             </div>

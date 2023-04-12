@@ -1,5 +1,7 @@
+import {useEffect, useState} from 'react';
 import styles from './WeeklyForecast.module.scss';
 import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
+import { weatherIconImages } from '../../../utils/constants/images';
 
 const dayNames: string[] = [
     'Sun',
@@ -11,40 +13,52 @@ const dayNames: string[] = [
     'Sat',
 ];
 
-let week: string[] = [];
-
-let today:Date = new Date();
-for(let i= 1; i < 8; i++) {
-    let thisDay:Date = new Date(today);
-    thisDay.setDate(today.getDate() + i);    
-    week.push(dayNames[thisDay.getDay()]);
-}
-
 type WeeklyForecastProps = {
     mobileView: boolean;
-    weather: IWeatherResponseDTO;
+    weatherProp: IWeatherResponseDTO;
 }
 
-const WeeklyForecast = ({mobileView, weather}: WeeklyForecastProps): JSX.Element => {
+const WeeklyForecast = ({mobileView, weatherProp}: WeeklyForecastProps): JSX.Element => {
+    const [weather, setWeather] = useState<IWeatherResponseDTO>();
+    useEffect(() => {        
+        if ( weatherProp !== undefined ) {
+            setWeather(weatherProp)
+        }
+    },[weatherProp])
+
+    const getDayOfWeek = (date: number) => {
+        let formattedDate: Date = new Date(date*1000);
+        const day = dayNames[formattedDate.getDay()];
+        return day;
+    }
+
     return (
         <div className={styles.weekly}> 
             <div className={styles.weeklyTitle}>Weekly Forecast</div>
             <div className={styles.weeklyForecast}>
-                {week.map((weekDay, index: number) => {
-                    return (
-                        <div className={styles.dayForecast} key={weekDay + '-' + index}>
-                            <div className={styles.dayOfWeek}>{weekDay}</div>
-                            <div className={styles.imageContainer}>                         
-                                <img className={styles.image} src="/images/008-rain.png"/>
-                                <div className={styles.rainPrecip}>30% rain</div>
-                            </div>
-                            <div className={styles.highLowContainer}>
-                                <div className={styles.highTemp}>40°</div>
-                                <div>/</div>
-                                <div className={styles.lowTemp}>32°</div>
-                            </div>
-                        </div>)
-                })}
+                {
+                    weather?.daily !== undefined ? 
+                    (weather?.daily.map((weekDay, index: number) => {
+                        if ( index > 0 )
+                        return (
+                            <div className={styles.dayForecast} 
+                                //  key={weekDay + '-' + index}
+                            >
+                                <div className={styles.dayOfWeek}>{getDayOfWeek(weekDay.dt)}</div>
+                                <div className={styles.imageContainer}>                         
+                                     <img className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>
+                                     <div className={styles.rainPrecip}>{weekDay.pop * 100}% rain</div>
+                                 </div>
+                                 <div className={styles.highLowContainer}>
+                                     <div className={styles.highTemp}>{Math.round(weekDay.temp.day)}°</div>
+                                     <div>/</div>
+                                     <div className={styles.lowTemp}>{Math.round(weekDay.temp.night)}°</div>
+                                 </div> 
+                             </div>
+                            )
+                    }) )
+                    : <div>Error retrieving weekly forecast</div>
+                }
             </div>
         </div>
     )

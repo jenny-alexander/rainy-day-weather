@@ -20,12 +20,9 @@ const App = (): JSX.Element => {
   mql.addEventListener('change', (e) => { setMobileView(mql.matches)  });
 
   const handleGetWeather = (weather: IWeatherResponseDTO): void => {
-    console.log('*** in handleGetWeather in Daily Forecast!');
-    console.log('*** weather is:', weather);
     setWeather(weather);
   }
   const handleGetLocation = (location: string): void => {
-    console.log('*** in handleLocation and location is;', location)
     setLocation(location);
   }
 
@@ -47,7 +44,7 @@ const App = (): JSX.Element => {
                         weatherProp={weather}
             />
             <WeeklyForecast mobileView={mobileView}
-                            weather={weather}/> 
+                            weatherProp={weather}/> 
           </>: null
       }
 
