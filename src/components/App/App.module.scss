@@ -8,7 +8,6 @@
 }
 .appContainer {    
     height: 100%;
-    // border: 1px solid #225a6c;
     border: 1px solid #b5bdc7;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
     border-radius: 15px;
@@ -25,18 +24,18 @@
     }
     display: grid;
     grid-template-areas: 
+    "searchbar weekly"
     "daily weekly"
     "daily highlights";
     grid-template-columns: minmax(auto, 40%) 1fr;    
+    grid-template-rows:auto;
     @media screen and (min-width: 1225px) {
       grid-template-columns: minmax(auto, 35%) 1fr;
     }
   }
   .smallAppContainer {
-    // height: 100%;
     margin: 2em 3em;    
     background-color: #fff;
-    // border: 1px solid #225a6c;
     border: 1px solid #b5bdc7;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
     border-radius: 15px;

@@ -1,4 +1,5 @@
 import styles from './WeeklyForecast.module.scss';
+import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
 
 const dayNames: string[] = [
     'Sun',
@@ -21,9 +22,10 @@ for(let i= 1; i < 8; i++) {
 
 type WeeklyForecastProps = {
     mobileView: boolean;
+    weather: IWeatherResponseDTO;
 }
 
-const WeeklyForecast = ({mobileView}: WeeklyForecastProps): JSX.Element => {
+const WeeklyForecast = ({mobileView, weather}: WeeklyForecastProps): JSX.Element => {
     return (
         <div className={styles.weekly}> 
             <div className={styles.weeklyTitle}>Weekly Forecast</div>

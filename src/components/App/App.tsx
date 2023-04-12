@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import styles from './App.module.scss';
+import SearchBar from '../SearchBar/SearchBar';
 import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
@@ -29,14 +30,28 @@ const App = (): JSX.Element => {
   }
 
   return (
-    <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>      
-      <DailyForecast 
-        mobileView={mobileView}
+    <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>   
+      <SearchBar 
         returnWeather={handleGetWeather}
-        returnLocation={handleGetLocation}        
-        />
-      <Highlights mobileView={mobileView}/>
-      <WeeklyForecast mobileView={mobileView}/>
+        returnLocation={handleGetLocation}
+      />
+      {
+        weather !== undefined ? 
+          <>
+            <DailyForecast 
+              mobileView={mobileView}  
+              weatherProp={weather}
+              locationProp={location}     
+            /> 
+            <Highlights mobileView={mobileView} 
+                        weatherProp={weather}
+            />
+            <WeeklyForecast mobileView={mobileView}
+                            weather={weather}/> 
+          </>: null
+      }
+
+
     </div>        
   );
 

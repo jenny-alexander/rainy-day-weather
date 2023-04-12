@@ -1,47 +1,63 @@
+import {useEffect, useState} from 'react';
 import styles from './Highlights.module.scss';
+import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
+import { highlightsImage } from '../../utils/constants/images';
 
 type DailyHighlightsProps = {
     mobileView: boolean;
+    weatherProp: IWeatherResponseDTO;
 }
 
-const Highlights = ({mobileView}: DailyHighlightsProps): JSX.Element => {
-
+const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Element => {
+    const [weather, setWeather] = useState<IWeatherResponseDTO>();
     interface IHighlights {
         section: string;
-        image: string;
-        reading: string;        
+        imageCode: number;
+        reading: number| undefined;
+        unit: string,      
     }
 
-    const highlights: IHighlights[] = [
+    useEffect(() => {
+        console.log('weatherProp is:', weatherProp);
+        setWeather(weatherProp);
+    },[weatherProp])
+
+    const highlights: IHighlights[] = [    
         {
             section: 'temperature',
-            image: '/images/thermometer.png',
-            reading: '40°|33°',            
+            imageCode: 1,
+            reading: weather?.current.temp,
+            unit: 'F°',            
         },
         {
             section: 'wind',
-            image: '/images/wind.png',
-            reading: '10.3 mi/h',            
+            imageCode: 2,
+            reading: weather?.current.wind_speed,
+            unit: 'mi/h',
         },
         {
             section: 'rain',
-            image: '/images/rain.png',
-            reading: '45%',            
+            imageCode: 3,
+            reading: 45,
+            unit: '%',
         },
         {
             section: 'humidity',
-            image: '/images/humidity.png',
-            reading: '70%',            
+            imageCode: 4,
+            reading: weather?.current.humidity,
+            unit: '%',
         },
         {
             section: 'air quality',
-            image: '/images/oxygen.png',
-            reading: 'Good',            
+            imageCode: 5,
+            reading: 2,
+            unit: 'AQI'
         },
         {
             section: 'uv',
-            image: '/images/rays.png',
-            reading: 'High',            
+            imageCode: 6,
+            reading: weather?.current.uvi,
+            unit: 'UV'
         },
                                 ]
 
@@ -56,8 +72,8 @@ const Highlights = ({mobileView}: DailyHighlightsProps): JSX.Element => {
                                 <div className={styles.sectionTitle}>{highlights.section}</div>
                             }
                             <div className={styles.sectionInfo}>
-                                <img className={styles.image} src={highlights.image}/>
-                                <div className={styles.sectionReading}>{highlights.reading}</div>
+                                <img className={styles.image} src={highlightsImage.get(highlights.imageCode)}/>                                
+                                <div className={styles.sectionReading}>{highlights.reading} {highlights.unit}</div>
                             </div>
                         </div>)
                 })}
