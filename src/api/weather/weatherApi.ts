@@ -1,23 +1,22 @@
 import axios, { AxiosError } from 'axios';
 import { config } from '../../config/appConfig';
-
 export interface IWeatherResponseDTO {
-    lat?: number,
-    lon?: number,
-    timezone?: string,
-    timezone_offset?: number,
-    current?: 
+    lat: number,
+    lon: number,
+    timezone: string,
+    timezone_offset: number,
+    current: 
         {
             dt?: number, //date
-            temp?: number, //temperature
+            temp: number, //temperature
             feels_like?: number,
             uvi?: number, //uv
             wind_speed?: number, //wind speed
             humidity?: number, //humidity
-            weather?: [
+            weather: [
                 {
-                id?: number,
-                description?: string,
+                id: number,
+                description: string,
                 }
             ],
         },
@@ -40,10 +39,22 @@ export interface IWeatherResponseDTO {
     ],
 }
 
+// export const initialWeatherResponse: IWeatherResponseDTO = {
+//     current: {
+//         weather: [
+//             {
+//             id: 0,
+//             description: '',
+//             }
+//         ],
+//     }
+// };
+
 export async function fetchWeather(lat: number, lon: number) {
     console.log('in fetchWeather api and params are:', lat, lon);
     try {
-        const response = await axios.get<IWeatherResponseDTO>(
+        // const response = await axios.get<IWeatherResponseDTO>(
+            const response = await axios.get(
             `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${config.appId}&units=imperial`,
         );
         console.log('weather api response.data is:', response.data);

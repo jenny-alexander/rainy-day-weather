@@ -3,13 +3,19 @@ import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation
 import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
+import { ForInitializer } from 'typescript';
 
-const SearchBar = (): JSX.Element => {
+interface SearchBarProps {
+    returnWeather: (weather: IWeatherResponseDTO) => void;
+    returnLocation: (location: string) => void;
+}
+
+const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
     const[activeSearch, setActiveSearch] = useState<boolean>(false);
     const[userLocation, setUserLocation] = useState<GeolocationCoordinates>();
-    const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);
-    const[weather, setWeather] = useState<IWeatherResponseDTO>({});
+    const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);    
+    const[weather, setWeather] = useState<IWeatherResponseDTO>();
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
             country: '',
@@ -20,9 +26,9 @@ const SearchBar = (): JSX.Element => {
             key: '',
         });
   
-    useEffect (() => {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    },[]);
+    // useEffect (() => {
+    //     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    // },[]);
 
     //TODO: Search for user's location when loading the app & show the weather at that location
 
@@ -41,27 +47,40 @@ const SearchBar = (): JSX.Element => {
         getGeoLocation(event.target.value);
     }
 
-    const getWeather = async(location: IGeoLocationResponseDTO) => {                            
-        const weather: IWeatherResponseDTO = await fetchWeather(location.lat, location.lon);
-        if ( Object.entries(weather).length > 0 ) {
-            console.log('weather from API is:', weather);
-            setWeather(weather);         
-        }
+    const getWeather = async(location: IGeoLocationResponseDTO) => {
+        try {
+            const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
+            if ( Object.entries(weather).length > 0 ) {
+                console.log('weather from API is:', weather);
+                setWeather(weather);
+                console.log('*** about to call returnWeather from parent comp');
+                returnWeather(weather);
+                returnLocation(searchTerm); //TODO extend the weather response to include location
+            }
+        }catch (e){
+            console.log('error getting weather:', e);
+        }                       
+
     }
 
     const getGeoLocation = async(searchTerm: string) => {   
-        setActiveSearch(true);     
-        const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
-        if ( geoLocation.length > 0 ) {
-            const geoLocationWithKey = geoLocation.map(location => {
-                return {
-                    ...location,
-                    key: crypto.randomUUID(),
-                }
-            })
-            console.log('...with key:', geoLocationWithKey)
-            setGeoLocation(geoLocationWithKey);
-        }
+        setActiveSearch(true);
+        try {
+            const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
+            if ( geoLocation.length > 0 ) {
+                const geoLocationWithKey = geoLocation.map(location => {
+                    return {
+                        ...location,
+                        key: crypto.randomUUID(),
+                    }
+                })
+                console.log('...with key:', geoLocationWithKey)
+                setGeoLocation(geoLocationWithKey);
+            }
+        }catch (e) {
+            console.log('error fetching location:', e);
+        } 
+
     }
 
     const selectPlace = (location: IGeoLocationResponseDTO) => {
