@@ -6,9 +6,12 @@ import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
 import { IGeoLocationResponseDTO } from '../../../api/geolocation/geolocationApi';
 type DailyForecastProps = {
     mobileView: boolean;
+    returnWeather: (weather: IWeatherResponseDTO) => void;
+    returnLocation: (location: string) => void;
 }
 
-const DailyForecast = ({mobileView}: DailyForecastProps): JSX.Element => {
+const DailyForecast = (
+    {mobileView, returnWeather, returnLocation}: DailyForecastProps): JSX.Element => {
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
     const [location, setLocation] = useState<string>('');
     
@@ -25,10 +28,12 @@ const DailyForecast = ({mobileView}: DailyForecastProps): JSX.Element => {
         console.log('*** in handleGetWeather in Daily Forecast!');
         console.log('*** weather is:', weather);
         setWeather(weather);
+        returnWeather(weather);
     }
     const handleGetLocation = (location: string): void => {
         console.log('*** in handleLocation and location is;', location)
         setLocation(location);
+        returnLocation(location);
     }
     return (
         <div className={`${mobileView ? styles.mobileDaily : styles.daily}`}>

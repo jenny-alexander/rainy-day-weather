@@ -32,7 +32,8 @@ const App = (): JSX.Element => {
     <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>      
       <DailyForecast 
         mobileView={mobileView}
-        // weather={weather}
+        returnWeather={handleGetWeather}
+        returnLocation={handleGetLocation}        
         />
       <Highlights mobileView={mobileView}/>
       <WeeklyForecast mobileView={mobileView}/>

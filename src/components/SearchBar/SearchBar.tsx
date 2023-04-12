@@ -55,7 +55,9 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                 setWeather(weather);
                 console.log('*** about to call returnWeather from parent comp');
                 returnWeather(weather);
-                returnLocation(searchTerm); //TODO extend the weather response to include location
+                console.log('*** about to call returnLocation from parent comp');
+                console.log('***search Term is:', searchTerm);
+                returnLocation(searchTerm);
             }
         }catch (e){
             console.log('error getting weather:', e);
