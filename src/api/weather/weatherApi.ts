@@ -20,17 +20,17 @@ export interface IWeatherResponseDTO {
                 }
             ],
         },
-    daily?: [
+    daily: [
         {
             dt: number,
             temp: {
-                day: number,
-                night: number,
+                min: number,
+                max: number,
             },
-            humidity?: number,
-            wind_speed?: number,
+            humidity: number,
+            wind_speed: number,
             pop: number,
-            univ?: number
+            uvi: number
             weather: [{
                 id: number,
                 description: string,

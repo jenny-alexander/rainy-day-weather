@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
         returnLocation={handleGetLocation}
       />
       {
-        weather !== undefined ? 
+        weather !== undefined ?
           <>
             <DailyForecast 
               mobileView={mobileView}  

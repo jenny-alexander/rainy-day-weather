@@ -47,12 +47,12 @@ const WeeklyForecast = ({mobileView, weatherProp}: WeeklyForecastProps): JSX.Ele
                                 <div className={styles.dayOfWeek}>{getDayOfWeek(weekDay.dt)}</div>
                                 <div className={styles.imageContainer}>                         
                                      <img className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>
-                                     <div className={styles.rainPrecip}>{weekDay.pop * 100}% rain</div>
+                                     <div className={styles.rainPrecip}>{Math.round(weekDay.pop * 100)}% rain</div>
                                  </div>
                                  <div className={styles.highLowContainer}>
-                                     <div className={styles.highTemp}>{Math.round(weekDay.temp.day)}°</div>
+                                     <div className={styles.highTemp}>{Math.round(weekDay.temp.max)}°</div>
                                      <div>/</div>
-                                     <div className={styles.lowTemp}>{Math.round(weekDay.temp.night)}°</div>
+                                     <div className={styles.lowTemp}>{Math.round(weekDay.temp.min)}°</div>
                                  </div> 
                              </div>
                             )

@@ -78,12 +78,3 @@ highlightsImage.set(3,'/images/rain.png');
 highlightsImage.set(4,'/images/humidity.png');
 highlightsImage.set(5,'/images/oxygen.png');
 highlightsImage.set(6,'/images/uv.png');
-
-// export const highlightsImages: { imageType: string, imageSrc: string}[] = [
-//     { imageType: 'temperature', imageSrc: '/images/temperature.png'},
-//     { imageType: 'wind', imageSrc: '/images/wind.png'},
-//     { imageType: 'humidity', imageSrc: '/images/humidity.png'},
-//     { imageType: 'uv', imageSrc: '/images/uv.png'},
-//     { imageType: 'air quality', imageSrc: '/images/oxygen.png'},
-//     { imageType: 'rain', imageSrc: '/images/rain.png'},
-// ]

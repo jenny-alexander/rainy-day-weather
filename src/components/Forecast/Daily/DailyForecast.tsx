@@ -11,12 +11,15 @@ type DailyForecastProps = {
 const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastProps): JSX.Element => {
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
     const [location, setLocation] = useState<string>('');
+    const [night, setNight] = useState<boolean>(false);
     
     useEffect(()=> {
         setWeather(weatherProp);
     },[weatherProp]); 
+    
     useEffect(()=> {
         setLocation(locationProp);
+        // determineIfNight(locationProps.)
     },[locationProp]);
 
     //TODO: put this in a utility file to be resused across app
