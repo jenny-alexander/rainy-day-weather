@@ -10,7 +10,8 @@
     }
     & .hourlyContainer {
         overflow-x: hidden;
-        margin-right: 0.5em;
+        // margin-right: 0.25em;
+        margin: 0em 0.25em;
         padding: 0px 20px;
         display: flex;
         position: relative;       
@@ -41,6 +42,8 @@
             display: none;
         }
         & .scrollContainer {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
             display: flex;
             -webkit-overflow-scrolling: touch;
             flex-wrap: nowrap;
