@@ -6,10 +6,9 @@ import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
-
 const App = (): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
-  const mql = window.matchMedia('(max-width: 905px)');
+  const mql = window.matchMedia('(max-width: 1025px)');
   const [weather, setWeather] = useState<IWeatherResponseDTO>();
   const [location, setLocation] = useState<string>('');
 

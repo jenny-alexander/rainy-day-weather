@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import styles from './Highlights.module.scss';
+import { weatherIconImages } from '../../utils/constants/images';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 import { highlightsImage } from '../../utils/constants/images';
 
@@ -70,8 +71,9 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
 
     return (
         <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
-            <div className={styles.highlightsTitle}>Today's Forecast</div>
-            <div className={styles.highlightsDetails}>                
+            
+            <div className={styles.highlightsTitle}>Today's Highlights</div>
+            <div className={styles.highlightsDetails}>            
             {highlights.map((highlights, index: number) => {
                     return (
                         <div className={styles.sectionDetails} key={highlights.section + '-' + index}>

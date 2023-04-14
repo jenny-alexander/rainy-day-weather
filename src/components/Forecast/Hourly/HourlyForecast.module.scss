@@ -1,0 +1,72 @@
+.hourlyMainContainer {
+    display: flex;
+    flex-direction: column;
+    grid-area: hourly;
+    padding-bottom: 0.5em;    
+    & .hourlyTitle {
+        font-size: 14px;
+        font-weight: 550;
+        padding-left: 0.5em;
+    }
+    & .hourlyContainer {
+        overflow-x: hidden;
+        margin-right: 0.5em;
+        padding: 0px 20px;
+        display: flex;
+        position: relative;       
+         
+        & .leftArrow {
+            position: absolute;
+            background-color: inherit;
+            border: none;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        & .rightArrow {
+            position: absolute;
+            background-color: inherit;
+            border: none;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        & .scrollContainer::-webkit-scrollbar {
+            display: none;
+        }
+        & .scrollContainer {
+            display: flex;
+            -webkit-overflow-scrolling: touch;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;            
+            & .hourlyForecast {
+                padding: 0.2em 0.4em;                
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                & img{
+                    margin: 0.5em;
+                    max-height: 32px;
+                    max-width: 32px;
+                }
+                & .hourlyTime {
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+                & .hourlyPOP {
+                    font-size: 13px;
+                }
+                & .hourlyTemp {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}

@@ -3,13 +3,15 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;    
-    border-radius: 0 0 15px 0;    
-    padding: 0em 0.4em 1em;
+    border-radius: 0 15px 0 0;    
+    // justify-content: center;
+    padding: 0em 0.5em 0em;
     & .highlightsTitle {        
-        padding: 0.5em 0.5em 1em;
+        padding: 1.3em 0.5em 1em;
         font-size: 1em;
         font-weight: 600;
     }
+
     & .highlightsDetails {
         display: flex;        
         flex-wrap: wrap;

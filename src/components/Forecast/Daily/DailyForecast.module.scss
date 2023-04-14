@@ -3,30 +3,29 @@
     display: flex;
     flex-direction: column;    
     background-color: #fff;
-    border-radius: 0px 0px 0px 15px;
-    padding-right: 0.5em;    
+    border-radius: 0px 0px 0px 15px;     
       & .locationName {            
-        font-size: 1.5em;
+        font-size: 1.4em;
         font-weight:600;
-        margin: 1em 0em 0.5em 0em;
+        margin: 0em 0em 0.5em 0em;
     }
     & .dailyDetails {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1em;        
+        flex-direction: column;        
+        padding: 0em 1em;        
         border-radius: 15px;
         & .imageContainer {
             display: flex;
             height: auto;
-            max-width: 60%;
+            max-width: 40%;
+            align-self: center;
             & .dailyImage {
                 max-width: 100%;
                 height: auto;
             }
         }
         & .temperature {
-            font-size: 2.2em;
+            font-size: 1.9em;
             margin-bottom: 0.7em;
         }
         & .date {
