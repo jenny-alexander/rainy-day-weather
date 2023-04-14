@@ -5,6 +5,9 @@
     width: 100%;
     background-color: #fff;    
     border-radius: 15px 0px 0px 0px;
+    @media screen and (min-width: 905px) {
+        border-radius: 15px;
+    }
     & .searchError {
         padding: 3px 0px 0px 20px;
         font-size: 0.8em;
@@ -17,6 +20,10 @@
         padding: 1em 0em 0em 0em;        
         justify-content: center;
         width: 100%;
+        @media screen and (min-width: 905px) {
+            width: 60%;
+            align-self: center;
+        }
         @media screen and (min-width: 526px) and (max-width: 904px) {
             width: 85%;
         }
@@ -69,6 +76,11 @@
             position: relative;
             display:flex;
             margin-left: 1.2em;
+            @media screen and (min-width: 905px) {
+                margin-left: 2.2em;
+                width: 60%;
+                align-self: center;
+            }
             & .locationList {
                 display: flex;
                 flex-direction: column;           
