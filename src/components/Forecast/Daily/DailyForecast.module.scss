@@ -1,7 +1,8 @@
 .daily {
     grid-area: daily;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    justify-content: space-evenly;
     background-color: #fff;
     border-radius: 0px 0px 0px 15px;     
       & .locationName {            

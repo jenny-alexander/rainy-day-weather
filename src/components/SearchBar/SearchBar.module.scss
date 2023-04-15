@@ -20,9 +20,9 @@
         padding: 1em 0em 0em 0em;        
         justify-content: center;
         width: 100%;
+        align-self: center;
         @media screen and (min-width: 905px) {
-            width: 60%;
-            align-self: center;
+            width: 60%;            
         }
         @media screen and (min-width: 526px) and (max-width: 904px) {
             width: 85%;
@@ -76,10 +76,14 @@
             position: relative;
             display:flex;
             margin-left: 1.2em;
+            align-self: center;
+            width: 100%;
             @media screen and (min-width: 905px) {
                 margin-left: 2.2em;
-                width: 60%;
-                align-self: center;
+                width: 60%;   
+            }
+            @media screen and (min-width: 526px) and (max-width: 904px) {
+                width: 85%;
             }
             & .locationList {
                 display: flex;
