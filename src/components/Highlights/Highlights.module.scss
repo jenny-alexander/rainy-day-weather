@@ -22,11 +22,8 @@
             row-gap: 1em;            
             padding: 0.5em;
             display: flex;            
-            flex-basis: 30%; 
+            flex-basis: 29%; 
             @media screen and (max-width: 1575px) {
-                flex-basis: 29%;
-            }
-            @media screen and (max-width: 1075px) {
                 flex-basis: 28%;
             }
             @media screen and (max-width: 905px) {
@@ -54,7 +51,6 @@
                     font-size: 14px;
                 }
             }
-
         }
     }
 

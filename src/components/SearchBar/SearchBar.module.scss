@@ -3,8 +3,7 @@
     flex-direction: column;
     grid-area: searchbar;
     width: 100%;
-    background-color: #fff;    
-    border-radius: 15px 0px 0px 0px;
+    background-color: #fff;        
     @media screen and (min-width: 905px) {
         border-radius: 15px;
     }
@@ -17,7 +16,7 @@
     & .searchbarInput {        
         display:flex;
         column-gap: 0.3em;            
-        padding: 1em 0em 0em 0em;        
+        padding: 0em 0em 0.5em 0em;        
         justify-content: center;
         width: 100%;
         align-self: center;
@@ -48,8 +47,7 @@
             i {
                 font-size: 1em;
                 &:hover {
-                    cursor:pointer;
-                    //color: rgb(56, 55, 55);
+                    cursor:pointer;                    
                     color: darkblue;
                 }                
             }

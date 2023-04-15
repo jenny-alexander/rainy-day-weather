@@ -32,17 +32,18 @@ const App = (): JSX.Element => {
       <img alt-text="Image of today's weather" className={styles.dailyImage} 
                                   src='/images/sailboat.png'/>
     </div> */}
-    
+
     <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}> 
+    <SearchBar 
+        returnWeather={handleGetWeather}
+        returnLocation={handleGetLocation}
+      />
     <div className={styles.titleContainer}>
       <div className={styles.appTitle}>Mauzy Day Weather</div>
       {/* <img alt-text="Image of today's weather" className={styles.dailyImage} 
                                   src='/images/sailboat.png'/> */}
     </div>
-      <SearchBar 
-        returnWeather={handleGetWeather}
-        returnLocation={handleGetLocation}
-      />
+
       {
         weather !== undefined ?
           <>
