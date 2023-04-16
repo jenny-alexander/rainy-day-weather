@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
+// import Switch from '../Switch/Switch';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
 const App = (): JSX.Element => {
@@ -11,6 +12,7 @@ const App = (): JSX.Element => {
   const mql = window.matchMedia('(max-width: 1025px)');
   const [weather, setWeather] = useState<IWeatherResponseDTO>();
   const [location, setLocation] = useState<string>('');
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   useEffect(() => {
       setMobileView(mql.matches)
@@ -34,6 +36,13 @@ const App = (): JSX.Element => {
     </div> */}
 
     <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}> 
+    {/* <Switch isToggled={isToggled}
+            onToggle={()=> setIsToggled(!isToggled)}/> */}
+                                    <button className={styles.settings} 
+                          // onClick={() => leftScroll()}
+                          >
+                        <i className="fa-solid fa-gear"/>
+                    </button>
     <SearchBar 
         returnWeather={handleGetWeather}
         returnLocation={handleGetLocation}
@@ -55,9 +64,8 @@ const App = (): JSX.Element => {
             <Highlights mobileView={mobileView} 
                         weatherProp={weather}
             />
-            <WeeklyForecast mobileView={mobileView}
-                            weatherProp={weather}/> 
-          </>: null
+            <WeeklyForecast weatherProp={weather}/> 
+          </> : null
       }
 
 

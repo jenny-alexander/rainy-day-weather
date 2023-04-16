@@ -37,25 +37,28 @@ export interface IWeatherResponseDTO {
             }],
         },
     ],
+    hourly: [
+        {
+            dt: number,
+            temp: number,
+            humidity: number,
+            wind_speed: number,
+            pop: number,
+            uvi: number
+            weather: [{
+                id: number,
+                description: string,
+            }],
+        },
+    ],
 }
-
-// export const initialWeatherResponse: IWeatherResponseDTO = {
-//     current: {
-//         weather: [
-//             {
-//             id: 0,
-//             description: '',
-//             }
-//         ],
-//     }
-// };
 
 export async function fetchWeather(lat: number, lon: number) {
     console.log('in fetchWeather api and params are:', lat, lon);
     try {
         // const response = await axios.get<IWeatherResponseDTO>(
             const response = await axios.get(
-            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${config.appId}&units=imperial`,
+            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${config.appId}&units=imperial`,
         );
         console.log('weather api response.data is:', response.data);
         return response.data;

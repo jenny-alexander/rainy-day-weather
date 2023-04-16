@@ -14,11 +14,11 @@ const dayNames: string[] = [
 ];
 
 type WeeklyForecastProps = {
-    mobileView: boolean;
+    // mobileView: boolean;
     weatherProp: IWeatherResponseDTO;
 }
 
-const WeeklyForecast = ({mobileView, weatherProp}: WeeklyForecastProps): JSX.Element => {
+const WeeklyForecast = ({weatherProp}: WeeklyForecastProps): JSX.Element => {
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
     useEffect(() => {        
         if ( weatherProp !== undefined ) {

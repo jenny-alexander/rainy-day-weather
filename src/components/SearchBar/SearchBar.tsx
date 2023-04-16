@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
 import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import styles from './SearchBar.module.scss';
-import cx from 'classnames';
+// import cx from 'classnames';
 
 interface SearchBarProps {
     returnWeather: (weather: IWeatherResponseDTO) => void;
@@ -109,19 +109,22 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                         onChange={handleChange}                        
                     /> 
                 </div>                
-                <button className={`${searchTerm === '' ? cx(styles.hideInputButton) : styles.clearInputButton}`}
+                <button className={`${searchTerm === '' ? styles.hideInputButton : styles.clearInputButton}`}
                     onClick={()=>clearSearchTerm()}
                 >
                     <i className="fa-solid fa-x"/>
                 </button>
                 <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
             </div>
-            { geoLocation.length === 0 && activeSearch ?
+            {/* { geoLocation.length === 0 && activeSearch ?
                 <div className={styles.searchError}>Could not find location. Try again.</div> : null
-            }
+            } */}
             {
                 searchTerm === '' || geoLocation.length === 0 ? null :             
                     <div className={styles.listContainer}>
+                                    { geoLocation.length === 0 && activeSearch ?
+                <div className={styles.searchError}>Could not find location. Try again.</div> : null
+            }
                         <li className={styles.locationList}>
                             {
                                 geoLocation.length > 0 ? 

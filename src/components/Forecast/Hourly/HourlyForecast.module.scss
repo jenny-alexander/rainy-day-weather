@@ -3,7 +3,10 @@
     flex-direction: column;
     grid-area: hourly;
     width: 100%;
-    padding-bottom: 0.5em;    
+    padding-bottom: 0.5em;
+    &.mobile{
+        width: 75%;
+    }
     & .hourlyTitle {
         font-size: 14px;
         font-weight: 550;
@@ -50,21 +53,34 @@
             overflow-x: auto;
             overflow-y: hidden;            
             & .hourlyForecast {
-                padding: 0.2em 0.4em;                
+                padding: 0.2em 0.5em;                
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                & img{
+                & .hourlyImageContainer{
+                    & .hourlyImage {
                     margin: 0.5em;
                     max-height: 32px;
                     max-width: 32px;
+                    }
                 }
                 & .hourlyTime {
                     font-size: 12px;
                     font-weight: 600;
                 }
-                & .hourlyPOP {
-                    font-size: 13px;
+                & .precipContainer {
+                    display: flex;
+                    align-items: center;
+                    & .hourlyPOP {
+                        font-size: 11px;
+                        align-items: left;
+                    }
+                    & .precipImageContainer {
+                        & .precipImage {
+                            max-height: 12px;
+                            max-width: 12px;
+                        }
+                    }
                 }
                 & .hourlyTemp {
                     font-size: 13px;

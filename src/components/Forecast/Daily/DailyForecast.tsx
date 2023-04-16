@@ -63,7 +63,10 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
                 </div>
 
             </div>
-            <HourlyForecast />
+            { weather !== undefined ? 
+                <HourlyForecast weatherProp = {weather}
+                                 mobileView = {mobileView}/> 
+                : null }
         </div>
 
     )
