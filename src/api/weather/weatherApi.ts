@@ -51,6 +51,13 @@ export interface IWeatherResponseDTO {
             }],
         },
     ],
+    alerts: [{
+        description: string,
+        start: number,
+        end: number,
+        event: string,
+        sender_name: string,    
+    }],
 }
 
 export async function fetchWeather(lat: number, lon: number) {
@@ -58,7 +65,7 @@ export async function fetchWeather(lat: number, lon: number) {
     try {
         // const response = await axios.get<IWeatherResponseDTO>(
             const response = await axios.get(
-            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${config.appId}&units=imperial`,
+            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=minutely&appid=${config.appId}&units=imperial`,
         );
         console.log('weather api response.data is:', response.data);
         return response.data;

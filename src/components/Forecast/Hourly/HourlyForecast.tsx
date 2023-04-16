@@ -26,8 +26,7 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
 
     const getTime = (date: number) => {
         let formattedDate: Date = new Date(date*1000);        
-        const outTime: string = formattedDate.toLocaleTimeString('en-US', {hour: 'numeric', hour12:true});
-        console.log('in getTime and time is:', outTime);
+        const outTime: string = formattedDate.toLocaleTimeString('en-US', {hour: 'numeric', hour12:true});        
         return outTime;
     }
 

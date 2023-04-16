@@ -47,6 +47,9 @@
     .settings {
       position: absolute;
     }
+    & .alerts {
+      position: absolute;
+    }
     display: grid;
     grid-template-areas:    
     "searchbar searchbar"
@@ -75,18 +78,35 @@
     & .settings {
       position: absolute;
     }
+    & .alerts {
+      position: absolute;
+    }
   }
   .settings {    
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     margin-top: 0.2em;
     margin-right: 0.2em;
     background-color: inherit;      
     border: none;
-    padding:0.5em;
+    padding: 0.5em;
     font-size: 1.5em;      
     color: rgb(118, 117, 117);
     &:hover {
       cursor: pointer;
     }
   }
+.alerts {
+  top: 0;
+  left: 0;
+  margin-top: 0.2em;
+  margin-left: 0.5em;
+  background-color: inherit;      
+  border: none;
+  padding: 0.5em;
+  font-size: 1.5em;      
+  color:rgb(203, 24, 24);
+  &:hover {
+    cursor: pointer;
+  }
+}
