@@ -7,6 +7,9 @@
     @media screen and (min-width: 905px) {
         border-radius: 15px;
     }
+    @media screen and (max-width: 575px) {
+      margin-top: 1.5em;
+    }
     & .searchError {
         padding: 3px 0px 0px 20px;
         font-size: 0.8em;

@@ -50,8 +50,11 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         try {
             const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
             if ( Object.entries(weather).length > 0 ) {
+                console.log('about to setWeather', weather)
                 setWeather(weather);
+                console.log('about to returnWeather', weather);            
                 returnWeather(weather);
+                console.log('about to return searchTerm:', searchTerm)
                 returnLocation(searchTerm);
             }
         }catch (e){

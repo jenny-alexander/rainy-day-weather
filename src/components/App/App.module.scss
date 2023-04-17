@@ -27,7 +27,7 @@
   }
 }
 .appContainer {
-    height: 100%;
+    // height: 100%;
     background-color: #fff;
     border: 1px solid #b5bdc7;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
@@ -54,11 +54,12 @@
     grid-template-areas:    
     "searchbar searchbar"
     "title title"
+    "logo logo"
     "daily highlights"
     "daily weekly";
     grid-template-columns: minmax(auto, 40%) 1fr;    
     grid-template-rows:auto;
-    row-gap: 2em;
+    row-gap: 1em;
     @media screen and (min-width: 1225px) {
       grid-template-columns: minmax(auto, 35%) 1fr;
     }
@@ -73,7 +74,6 @@
     border: 1px solid #b5bdc7;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
     border-radius: 15px;
-    height: 100%;   
     position: relative;
     & .settings {
       position: absolute;
@@ -82,31 +82,43 @@
       position: absolute;
     }
   }
-  .settings {    
-    top: 0;
-    right: 0;
-    margin-top: 0.2em;
-    margin-right: 0.2em;
-    background-color: inherit;      
-    border: none;
-    padding: 0.5em;
-    font-size: 1.5em;      
-    color: rgb(118, 117, 117);
-    &:hover {
-      cursor: pointer;
+  .menuOptions {
+    button {
+      top: 0;
+      margin-top: 0.2em;
+      background-color: inherit;      
+      border: none;
+      padding: 0.5em;
+      font-size: 1.5em; 
+      &:hover {
+        cursor: pointer;
+      }
+      &.alerts {
+        left: 0;
+        margin-left: 0.5em;
+        color:rgb(203, 24, 24);
+      }
+      &.settings {
+        right: 0;
+        margin-right: 0.2em;
+        color: rgb(118, 117, 117);
+      }
+      @media screen and (max-width: 575px) {
+        font-size: 1.4em;
+      }
+      @media screen and (max-width: 475px) {
+        font-size: 1.25em;
+      }
     }
   }
-.alerts {
-  top: 0;
-  left: 0;
-  margin-top: 0.2em;
-  margin-left: 0.5em;
-  background-color: inherit;      
-  border: none;
-  padding: 0.5em;
-  font-size: 1.5em;      
-  color:rgb(203, 24, 24);
-  &:hover {
-    cursor: pointer;
+  .logoContainer {
+    grid-area: logo;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5em;
+    .logo {
+      max-width: 200px;
+      max-height: 200px;
+      display: flex;
+    }
   }
-}

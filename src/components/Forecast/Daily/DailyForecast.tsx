@@ -57,6 +57,13 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
                     <div className={styles.temperature}>
                         {weather?.current.temp !== undefined ? Math.round(weather?.current.temp) : 'Temperature not found' }°F
                     </div>
+                    <div className={styles.feelsLike}>
+                        { weather?.current.feels_like ? 
+                            Math.round(weather?.current.feels_like) !== Math.round(weather.current.temp) ?
+                                `Feels like: ${Math.round(weather.current.feels_like)}` : null 
+                            : null
+                        }
+                    </div>
                     {/* <div className={styles.date}>Last Updated: {
                         weather?.current.dt !== undefined ? convertDate(weather?.current.dt) : 'Date not found'}
                     </div> */}

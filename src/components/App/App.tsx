@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
 
   const handleGetWeather = (weather: IWeatherResponseDTO): void => {
     setWeather(weather);
-    if (weather.alerts.length > 0) {
+    if (alert && weather.alerts.length > 0) {
       setAlert(true);
     }
   }
@@ -31,15 +31,18 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}> 
-        <button className={styles.settings}>
-          <i className="fa-solid fa-gear"/>
-        </button>
-        { alert ?  
-          <button className={styles.alerts}>
-            <i className="fa-solid fa-triangle-exclamation"/>
-          </button> : null 
-        }
+      <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
+        <div className={styles.menuOptions}>
+          <button className={styles.settings}>
+            <i className="fa-solid fa-gear"/>
+          </button> 
+          { alert ?  
+            <button className={styles.alerts}>
+              <i className="fa-solid fa-triangle-exclamation"/>
+            </button> 
+            : null 
+          }
+        </div>
         <SearchBar 
             returnWeather={handleGetWeather}
             returnLocation={handleGetLocation}
@@ -59,7 +62,10 @@ const App = (): JSX.Element => {
                             weatherProp={weather}
                 />
                 <WeeklyForecast weatherProp={weather}/> 
-              </> : null
+              </> : 
+              <div className={styles.logoContainer}>
+                <img className={styles.logo} src='/images/mauzy_day_logo_large.png'></img>
+              </div>
           }
 
       </div>
