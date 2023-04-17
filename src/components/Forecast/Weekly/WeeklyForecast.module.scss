@@ -81,6 +81,10 @@
             @media screen and (min-width: 625px) {
                 padding: 0em 2em;
             }
+            @media screen and (max-width: 375px) {
+                margin:0;
+                padding: 0.5em;
+            }
             & .dayForecast {            
                 display: flex;
                 justify-content: space-between;

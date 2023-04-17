@@ -1,11 +1,21 @@
 .switchContainer {
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    top: 0;
+    @media screen and (max-width: 904px) {      
+      right: -1em;
+    }
     & .switch {
         position: relative;
         display: inline-block;
         width: 60px;
         height: 34px;
+        @media screen and (max-width: 550px) {
+          width: 45px;
+          height: 26px;
+        }
         & input {
             opacity: 0;
             width: 0;
@@ -25,6 +35,7 @@
         border-radius: 34px;
         background-color: #ccc;
     }
+    // This is the actual slider
     & .slider:before {
         position: absolute;
         content: "";
@@ -33,11 +44,20 @@
         left: 4px;
         bottom: 4px;
         background-color: #fff;
-        transition: 0.3s;
+        transition: 0.4s;
         border-radius: 50%;
+        @media screen and (max-width: 550px) {
+          height: 16px;
+          width: 16px;
+          bottom: 5px;
+        }
     }
+    // This is how far is moves after clicking it
     & input:checked + .slider:before{
         transform: translateX(26px);
+        @media screen and (max-width: 550px) {
+          transform: translateX(22px);
+        }
     }
     & .labels {
         position: absolute;
@@ -45,26 +65,40 @@
         left: 0;
         width: 100%;
         height: 100%;
-        font-size: 14px;
+        font-size: 16px;
         font-family: sans-serif;
         transition: all 0.1s ease-in-out;
       }
   
       & .labels::after {
-        content: attr(data-celcius);
+        // content: attr(data-celcius);
+        font-family: "Font Awesome 5 Free";        
+        content: "\f186";
         position: absolute;
         right: 8px;
+        @media screen and (max-width: 550px) {
+          right: 5px;
+          top: -4px;
+          // bottom:1px;
+        }
         color: black;
         opacity: 1;
-        transition: all 0.1s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
-  
+      //TODO: Make this dynamic (icons...)
       & .labels::before {
-        content: attr(data-farenheit);
+        font-family: "Font Awesome 5 Free";
+        // content: attr(data-farenheit);
+        content: "\f185";
         position: absolute;
         left: 8px;
+        @media screen and (max-width: 550px) {
+          left: 5px;
+          top: -4px;
+          // bottom:1px;
+        }
         opacity: 0;        
-        transition: all 0.1s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
   
       & input:checked~.labels::after {

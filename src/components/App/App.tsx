@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
+import Switch from '../Common/Switch/Switch';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
 const App = (): JSX.Element => {
@@ -12,6 +13,7 @@ const App = (): JSX.Element => {
   const [weather, setWeather] = useState<IWeatherResponseDTO>();
   const [location, setLocation] = useState<string>('');
   const [alert, setAlert] = useState<boolean>(false);
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   useEffect(() => {
       setMobileView(mql.matches)
@@ -21,7 +23,7 @@ const App = (): JSX.Element => {
 
   const handleGetWeather = (weather: IWeatherResponseDTO): void => {
     setWeather(weather);
-    if (alert && weather.alerts.length > 0) {
+    if ( weather?.alerts && weather.alerts.length > 0) {
       setAlert(true);
     }
   }
@@ -31,17 +33,16 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
-        <div className={styles.menuOptions}>
-          <button className={styles.settings}>
-            <i className="fa-solid fa-gear"/>
+      <div className={`${mobileView ? 
+          styles.smallAppContainer : styles.appContainer}`}>
+      <div className={styles.menuOptions}>
+        <Switch isToggled={isToggled} onToggle={()=> setIsToggled(!isToggled)} />
+        { alert ?  
+          <button className={styles.alerts}>
+            <i className="fa-solid fa-triangle-exclamation"/>
           </button> 
-          { alert ?  
-            <button className={styles.alerts}>
-              <i className="fa-solid fa-triangle-exclamation"/>
-            </button> 
-            : null 
-          }
+          : null 
+        }
         </div>
         <SearchBar 
             returnWeather={handleGetWeather}

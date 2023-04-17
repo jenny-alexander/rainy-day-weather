@@ -12,8 +12,10 @@ const Switch = ({isToggled, onToggle}: SwitchProps) : JSX.Element => {
                 onChange={onToggle}
                 />
                 <span className={styles.slider}></span>
-                <span className={styles.labels} data-farenheit="F°" data-celcius="C°"></span>              
+                <span className={styles.labels}></span>   
+                <span aria-hidden="true" data-icon="&#x25a8;"></span>    
             </label>
+            
         </div>
     )
 }
