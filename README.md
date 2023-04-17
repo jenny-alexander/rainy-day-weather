@@ -10,11 +10,11 @@
 
 ### Desktop
 
-# ![image of Mauzy Day Weather desktop app](./public/images/desktop_css_mockup.png)
+# ![image of Mauzy Day Weather desktop app](./public/images/mauzy_day_desktop.png)
 
 ## Mobile
 
-# ![image of Mauzy Day Weather mobile app](./public/images/mobile_css_mockup.png)
+# ![image of Mauzy Day Weather mobile app](./public/images/mauzy_day_mobile.png)
 
 **Frontend:** Frontend is built using React, TypeScript, CSS and HTML.
 
