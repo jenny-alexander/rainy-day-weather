@@ -2,13 +2,9 @@
     display: flex;
     flex-direction: column;
     grid-area: searchbar;
-    width: 100%;
-    background-color: #fff;        
+    width: 100%;   
     @media screen and (min-width: 905px) {
         border-radius: 15px;
-    }
-    @media screen and (max-width: 575px) {
-      margin-top: 1.5em;
     }
     & .searchError {
         padding: 3px 0px 0px 20px;

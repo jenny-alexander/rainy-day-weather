@@ -4,10 +4,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 0.5em;
-        background-color: #fff;
         padding-top: 0.5em;
-        border-radius: 0px 0px 15px 0px;
-        // padding-bottom: 1em;
         & .weeklyTitle {        
             font-size: 1em;
             @media screen and (max-width: 904px) {
@@ -60,53 +57,58 @@
     }
 }
 @media screen and (max-width: 674px) {
-.weekly {
-    grid-area: weekly;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1em;
-    padding-bottom: 1em;
-    & .weeklyTitle {
-        font-size: 0.9em;
-        font-weight: 600;
-    }
-    & .weeklyForecast {
+    .weekly {
+        grid-area: weekly;
         display: flex;
         flex-direction: column;
-        row-gap: 0.5em;
-        padding: 0.5em 1.5em 0em;
-        @media screen and (min-width: 625px) {
-            padding: 0em 2em;
+        width: 100%;
+        margin-top: 1em;
+        padding-bottom: 1em;
+        & .weeklyTitle {
+            font-size: 0.9em;
+            font-weight: 600;
+            padding: 0.5em 0.5em 1em;
         }
-        & .dayForecast {            
+        & .weeklyForecast {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: calc(10px + 0.390625vw);
-            @media screen and (min-width: 757px) {
-                font-size: calc(11px + 0.390625vw);
+            flex-direction: column;
+            row-gap: 0.5em;
+            padding: 0.5em 1.5em 0em;
+            background-color: #f6f4f8;
+            border: 1px solid rgb(231, 231, 231);
+            border-radius: 15px;
+            margin: 0em 1em;
+            @media screen and (min-width: 625px) {
+                padding: 0em 2em;
             }
-            & .imageContainer {
+            & .dayForecast {            
                 display: flex;
-                align-items: center;                
-                img{
-                    width: 100%;
-                    max-width: 34px;
-                    height: auto;                    
+                justify-content: space-between;
+                align-items: center;
+                font-size: calc(10px + 0.390625vw);
+                @media screen and (min-width: 757px) {
+                    font-size: calc(11px + 0.390625vw);
                 }
-                & .rainPrecip {
-                    padding-left: 0.3em;
+                & .imageContainer {
+                    display: flex;
+                    align-items: center;                
+                    img{
+                        width: 100%;
+                        max-width: 34px;
+                        height: auto;                    
+                    }
+                    & .rainPrecip {
+                        padding-left: 0.3em;
+                    }
                 }
-            }
-            & .highLowContainer {
-                display: flex;
-                column-gap: 0.1em;
-                & .lowTemp {
-                    color: rgb(103, 103, 103);
+                & .highLowContainer {
+                    display: flex;
+                    column-gap: 0.1em;
+                    & .lowTemp {
+                        color: rgb(103, 103, 103);
+                    }
                 }
             }
         }
     }
-}
 }

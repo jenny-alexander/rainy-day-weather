@@ -2,12 +2,7 @@
     grid-area: daily;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    // border: 1px solid rgb(231, 231, 231);
-    // border-radius: 15px;
-    // background-color: #f6f4f8;
-    // background-color: #fff;
-    // border-radius: 0px 0px 0px 15px;     
+    justify-content: space-between;   
       & .locationName {            
         font-size: 1.4em;
         font-weight:600;
@@ -33,7 +28,6 @@
         }
         & .temperature {
             font-size: 1.9em;
-            // margin-bottom: 0.7em;
         }
         & .date {
             padding-bottom:1em;
