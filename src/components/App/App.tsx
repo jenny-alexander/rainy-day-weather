@@ -49,7 +49,7 @@ const App = (): JSX.Element => {
             returnLocation={handleGetLocation}
           />
         <div className={styles.titleContainer}>
-          <div className={styles.appTitle}>Mauzy Day Weather</div>
+          <div className={styles.appTitle}>Rainy Day Weather</div>
         </div>
           {
             weather !== undefined ?
@@ -65,7 +65,7 @@ const App = (): JSX.Element => {
                 <WeeklyForecast weatherProp={weather}/> 
               </> : 
               <div className={styles.logoContainer}>
-                <img className={styles.logo} src='/images/mauzy_day_logo_large.png'></img>
+                <img className={styles.logo} src='/images/umbrella.png'></img>
               </div>
           }
 

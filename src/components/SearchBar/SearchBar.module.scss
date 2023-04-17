@@ -15,7 +15,7 @@
     & .searchbarInput {        
         display:flex;
         column-gap: 0.3em;            
-        padding: 0em 0em 0.5em 0em;        
+        // padding: 0em 0em 0.5em 0em;        
         justify-content: center;
         width: 100%;
         align-self: center;
@@ -33,7 +33,7 @@
                 border-radius: 5px;
                 font-size: 1rem;
                 width: 100%;
-                background-color: #f6f4f8;
+                background-color: #f6f4f8ad;
                 @media screen and (max-width: 675px) {
                     font-size: calc(12px + 0.390625vw);
                 }        
@@ -74,7 +74,7 @@
     & .listContainer {
             position: relative;
             display:flex;
-            margin-left: 1.2em;
+            margin-left: 25px;
             align-self: center;
             width: 100%;
             @media screen and (min-width: 905px) {
