@@ -37,6 +37,7 @@
                 border-radius: 5px;
                 font-size: 1rem;
                 width: 100%;
+                background-color: #f6f4f8;
                 @media screen and (max-width: 675px) {
                     font-size: calc(12px + 0.390625vw);
                 }        
@@ -66,6 +67,7 @@
             padding-left: 0.8em;
             padding-right: 0.8em;
             letter-spacing: 0.07em;
+            margin-left: 0.3em;
             &:hover {
                 cursor: pointer;
                 background-color: #4c90af; /* Green */
