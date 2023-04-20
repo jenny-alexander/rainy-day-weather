@@ -1,11 +1,12 @@
-// .mainContainer {
-//   display: flex;
-//   height: 100vh;
-//   flex-grow: 1;
-//   align-items: center;
-//   justify-content: center;;
-//   background-color: var(--background-color);
-// }
+.mainContainer {
+  display: flex;
+  width: 100%;
+  // height: 100vh;
+  // flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+}
 .titleContainer{
   grid-area: title;
   display: flex;
@@ -34,6 +35,7 @@
   margin-top: 8em;
 }
 .appContainer {
+    align-self: flex-start;
     margin: 0.5em 2em 2em 2em;
     padding: 1em 2em;
     position: relative;
@@ -70,19 +72,38 @@
     }
   }
   .smallAppContainer {
-    display: flex;
+    display: grid;
+        grid-template-areas:    
+    "searchbar searchbar"
+    "title title"
+    "logo logo"
+    "details details";
     flex-direction: column;
     row-gap: 1em;
-    padding: 1em 2em 1em 1em;
+    padding: 1em 2em 1em 2em;
+    // padding: 1em 0em 1em 0em;
     margin: 0.5em 2em 2em 2em;
+    // margin: 0.5em 0em 2em 0em;
     position: relative;
+    align-items: center;
+    & .detailsContainer {
+      margin-top: 4em;
+      grid-area: details;
+      display: grid;
+      grid-template-areas:
+      "daily daily"
+      "highlights highlights"
+      "weekly weekly";
+      grid-template-columns: minmax(auto, 40%) 1fr;    
+      grid-template-rows:auto;
+    }
   }
   .menuOptions {
     // position: relative;
     button {
       top: 0;
       margin-top: 0.2em;
-      background-color: var(--background-color);
+      background-color: inherit;
       border: none;
       font-size: 1.5em; 
       &:hover {
@@ -92,6 +113,7 @@
         position: absolute;
         left: 0;
         margin-left: 0.5em;
+        background-color: inherit;
         color: var(--alert-icon);
         @media screen and (max-width: 475px) {
           font-size: 1.25em;
