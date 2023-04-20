@@ -34,7 +34,7 @@
             font-size: 0.8em;       
         }
         & .feelsLike {
-            color: rgb(88, 100, 112);
+            color: var(--text-tertiary);
         }
     }
 }
@@ -93,7 +93,7 @@
             font-size: 0.9em;
         }
         & .feelsLike {
-            color: rgb(88, 100, 112);
+            color: var(--text-tertiary);
         }
     }
 }

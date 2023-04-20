@@ -1,9 +1,7 @@
 .highlights {
     grid-area: highlights;
     display: flex;
-    flex-direction: column;
-    // background-color: #fff;    
-    // border-radius: 0 15px 0 0;        
+    flex-direction: column;    
     padding: 0em 0.5em 0em;
     & .highlightsTitle {        
         padding: 1em 0.5em 1em;

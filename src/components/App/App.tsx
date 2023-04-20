@@ -6,6 +6,7 @@ import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
 import Switch from '../Common/Switch/Switch';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
+import cx from 'classnames';
 
 const App = (): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
@@ -13,11 +14,12 @@ const App = (): JSX.Element => {
   const [weather, setWeather] = useState<IWeatherResponseDTO>();
   const [location, setLocation] = useState<string>('');
   const [alert, setAlert] = useState<boolean>(false);
-  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const [isToggled, setIsToggled] = useState<boolean>(true);
+  const [theme, setTheme] = useState<string>('light');
 
   useEffect(() => {
       setMobileView(mql.matches)
-  },[mql.matches]);  
+  },[mql.matches]);
 
   mql.addEventListener('change', (e) => { setMobileView(mql.matches)  });
 
@@ -31,19 +33,27 @@ const App = (): JSX.Element => {
     setLocation(location);
   }
 
+  const toggleMode = () => {
+    console.log('in toggleMode!')
+    setIsToggled(!isToggled);
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  }
+
   return (
-    <>
-      <div className={`${mobileView ? 
-          styles.smallAppContainer : styles.appContainer}`}>
+    <div className={styles.mainContainer} data-theme={theme}>
       <div className={styles.menuOptions}>
-        <Switch isToggled={isToggled} onToggle={()=> setIsToggled(!isToggled)} />
+        <Switch isToggled={isToggled} onToggle={toggleMode} />
         { alert ?  
           <button className={styles.alerts}>
             <i className="fa-solid fa-triangle-exclamation"/>
           </button> 
           : null 
         }
-        </div>
+      </div>
+      { weather === undefined ? <div className={styles.centerAppContainer}></div> : null }
+      <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
+
         <SearchBar 
             returnWeather={handleGetWeather}
             returnLocation={handleGetLocation}
@@ -53,7 +63,7 @@ const App = (): JSX.Element => {
         </div>
           {
             weather !== undefined ?
-              <>
+              <div className={styles.detailsContainer}>
                 <DailyForecast 
                   mobileView={mobileView}  
                   weatherProp={weather}
@@ -63,14 +73,13 @@ const App = (): JSX.Element => {
                             weatherProp={weather}
                 />
                 <WeeklyForecast weatherProp={weather}/> 
-              </> : 
+              </div> : 
               <div className={styles.logoContainer}>
-                <img className={styles.logo} src='/images/umbrella.png'></img>
+                <img className={styles.logo} src='/images/umbrella_yellow.png'></img>
               </div>
           }
-
       </div>
-    </>
+    </div>
   );
 
 }

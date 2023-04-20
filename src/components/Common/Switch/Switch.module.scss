@@ -4,14 +4,17 @@
     position: absolute;
     right: 0;
     top: 0;
-    @media screen and (max-width: 904px) {      
-      right: -1em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    @media screen and (min-width: 1175px) {      
+      margin-right:3em;
     }
     & .switch {
         position: relative;
         display: inline-block;
         width: 60px;
         height: 34px;
+        z-index: 10;
         @media screen and (max-width: 550px) {
           width: 45px;
           height: 26px;
