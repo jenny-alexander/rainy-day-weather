@@ -2,6 +2,7 @@
     .weekly {
         grid-area: weekly;
         display: flex;
+        justify-content: flex-end;
         flex-direction: column;
         row-gap: 0.5em;
         padding-top: 0.5em;
@@ -15,7 +16,8 @@
             padding: 0.5em 0.5em 0.5em 0.8em;
         }
         & .weeklyForecast {
-            display: flex;        
+            display: flex;
+            // justify-content: flex-end;      
             column-gap: 0.5em;
             margin: 0em 0.8em;
             & .dayForecast {

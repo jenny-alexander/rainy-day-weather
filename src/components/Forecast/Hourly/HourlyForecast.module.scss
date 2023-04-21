@@ -1,9 +1,11 @@
 .hourlyMainContainer {
     display: flex;
     flex-direction: column;
+    padding-top: 1.5em;
+    row-gap: 0.3em;
     grid-area: hourly;
     width: 100%;
-    padding-bottom: 1em;
+    // padding-bottom: 1em;
     &.mobile{
         width: 75%;
         @media screen and (max-width: 575px) {
@@ -13,7 +15,8 @@
     & .hourlyTitle {
         font-size: 14px;
         font-weight: 550;
-        padding-left: 0.5em;
+        padding-left: 40px;
+        color:white;
     }
     & .hourlyContainer {
         overflow-x: hidden;        

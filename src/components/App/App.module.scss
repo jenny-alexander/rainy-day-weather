@@ -4,6 +4,9 @@
   // height: 100vh;
   // flex-grow: 1;
   align-items: center;
+  @media screen and (max-width: 1025px) {
+    align-items: start;
+  }
   justify-content: center;
   background-color: var(--background-color);
 }
@@ -36,6 +39,7 @@
 }
 .appContainer {
     align-self: flex-start;
+    width: 100%;
     margin: 0.5em 2em 2em 2em;
     padding: 1em 2em;
     position: relative;
@@ -73,11 +77,12 @@
   }
   .smallAppContainer {
     display: grid;
-        grid-template-areas:    
+    grid-template-areas:    
     "searchbar searchbar"
     "title title"
     "logo logo"
     "details details";
+    width: 100%;
     flex-direction: column;
     row-gap: 1em;
     padding: 1em 2em 1em 2em;

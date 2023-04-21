@@ -32,7 +32,7 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
 
     return (
         <div className={`${mobileView ? cx(styles.hourlyMainContainer, styles.mobile) : styles.hourlyMainContainer}`}>
-                {/* <div className={styles.hourlyTitle}>Hourly</div> */}
+                <div className={styles.hourlyTitle}>Hourly Forecast</div>
                 <div className={styles.hourlyContainer}>
                     <button className={styles.leftArrow} onClick={() => leftScroll()}>
                         <i className="fa-solid fa-angle-left"/>

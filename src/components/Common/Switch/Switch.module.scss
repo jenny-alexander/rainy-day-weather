@@ -36,7 +36,7 @@
         right: 0;
         bottom: 0;
         border-radius: 34px;
-        background-color: #ccc;
+        background-color: var(--toggle-background);
     }
     // This is the actual slider
     & .slider:before {
@@ -74,7 +74,6 @@
       }
   
       & .labels::after {
-        // content: attr(data-celcius);
         font-family: "Font Awesome 5 Free";        
         content: "\f186";
         position: absolute;
@@ -83,16 +82,13 @@
         @media screen and (max-width: 550px) {
           right: 5px;
           top: -4px;
-          // bottom:1px;
         }
-        // color: black;
         opacity: 1;
         transition: all 0.2s ease-in-out;
       }
       //TODO: Make this dynamic (icons...)
       & .labels::before {
         font-family: "Font Awesome 5 Free";
-        // content: attr(data-farenheit);
         content: "\f185";
         position: absolute;
         left: 8px;
@@ -100,7 +96,6 @@
         @media screen and (max-width: 550px) {
           left: 5px;
           top: -4px;
-          // bottom:1px;
         }
         opacity: 0;        
         transition: all 0.2s ease-in-out;
@@ -113,5 +108,4 @@
       & input:checked~.labels::before {
         opacity: 1;
       }
-
 }
