@@ -13,7 +13,7 @@ const Switch = ({isToggled, onToggle}: SwitchProps) : JSX.Element => {
                 />
                 <span className={styles.slider}></span>
                 <span className={styles.labels}></span>   
-                <span aria-hidden="true" data-icon="&#x25a8;"></span>    
+                <span aria-hidden="true"></span>    
             </label>
             
         </div>

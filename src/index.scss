@@ -12,7 +12,9 @@
   --button-primary: #0a406d;
   --button-primary-text: white;
   --button-primary-hover: #4c90af;
-  --border: #e7e7e7;
+  --border-color: #e7e7e7;
+  --border-style: solid;
+  --border-weight: 1px;
   --input-background:	#f2f5f7d4;
   --toggle-background: #ccc;
   --toggle-slider: white;
@@ -21,11 +23,18 @@
   --text-error: rgb(197, 2, 2);
 }
 [data-theme='dark'] {
-  --background-color: black;
-  --card-background: rgb(172, 169, 169);
+  --background-color: #32453e;
+  --card-background: #87a09b;
+  --border-style: solid;
+  --border-color: #87a09b;
   --text-primary: white;
   --text-secondary: grey;
+  --button-primary: ##5cb0d6;
+  --button-primary-text: black;
+  --button-primary-hover: lightblue;
   --accent: darkred;
+  --input-background: #f5f5f5;
+  --alert-icon: rgb(237 52 52);
 }
 #root {
   min-height: 100vh;

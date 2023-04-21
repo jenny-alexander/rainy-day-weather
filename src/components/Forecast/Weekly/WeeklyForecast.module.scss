@@ -7,6 +7,7 @@
         padding-top: 0.5em;
         & .weeklyTitle {        
             font-size: 1em;
+            color: var(--text-primary);
             @media screen and (max-width: 904px) {
                 font-size: 0.9em;
             }
@@ -18,10 +19,10 @@
             column-gap: 0.5em;
             margin: 0em 0.8em;
             & .dayForecast {
-                background-color: #f6f4f8;
+                background-color: var(--card-background);
                 padding: 1em 0em;    
                 width: 100%;
-                border: 1px solid rgb(231, 231, 231);
+                border: var(--border-weight) var(--border-style) var(--border-color);
                 border-radius: 15px;
                 display: flex;
                 flex-direction: column;
@@ -68,14 +69,15 @@
             font-size: 0.9em;
             font-weight: 600;
             padding: 0.5em 0.5em 1em;
+            color: var(--text-primary);
         }
         & .weeklyForecast {
             display: flex;
             flex-direction: column;
             row-gap: 0.5em;
             padding: 0.5em 1.5em 0em;
-            background-color: #f6f4f8;
-            border: 1px solid rgb(231, 231, 231);
+            background-color: var(--card-background);
+            border: var(--border-weight) var(--border-style) var(--border-color);
             border-radius: 15px;
             margin: 0em 1em;
             @media screen and (min-width: 625px) {

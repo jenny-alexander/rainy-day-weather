@@ -79,12 +79,13 @@
         content: "\f186";
         position: absolute;
         right: 8px;
+        color: rgb(255, 238, 0);
         @media screen and (max-width: 550px) {
           right: 5px;
           top: -4px;
           // bottom:1px;
         }
-        color: black;
+        // color: black;
         opacity: 1;
         transition: all 0.2s ease-in-out;
       }
@@ -95,6 +96,7 @@
         content: "\f185";
         position: absolute;
         left: 8px;
+        color: rgb(255, 238, 0);
         @media screen and (max-width: 550px) {
           left: 5px;
           top: -4px;

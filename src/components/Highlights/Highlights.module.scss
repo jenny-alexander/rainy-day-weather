@@ -7,6 +7,7 @@
         padding: 1em 0.5em 1em;
         font-size: 1em;
         font-weight: 600;
+        color: var(--text-primary);
     }
 
     & .highlightsDetails {
@@ -21,7 +22,7 @@
             padding: 0.5em;
             display: flex;            
             flex-basis: 29%;
-            background-color: #f6f4f8;
+            background-color: var(--card-background);
             @media screen and (max-width: 1575px) {
                 flex-basis: 28%;
             }
@@ -29,13 +30,12 @@
                 flex-basis: 40%;
             }                 
             flex-direction: column;
-            border: 1px solid rgb(231, 231, 231);
+            border: var(--border-weight) var(--border-style) var(--border-color);
             border-radius: 15px;
             width: 100%;
             align-items: left;
             & .sectionTitle {
                 font-size: 0.9em;
-
             }
             & .sectionInfo {                
                 display: flex;
@@ -63,6 +63,7 @@
         padding: 0.5em 0.5em 1em;
         font-size: 0.9em;
         font-weight: 600;
+        color: var(--text-primary);
     }
     & .highlightsDetails {
         display: flex;        
@@ -79,8 +80,8 @@
         column-gap: 0.5em;
         width: 100%;        
         & .sectionDetails {
-            border: 1px solid rgb(231, 231, 231);
-            background-color: #f6f4f8;
+            border: var(--border-weight) var(--border-style) var(--border-color);
+            background-color: var(--card-background);
             border-radius: 15px;
             row-gap: 1em;            
             padding: 0.5em;  
