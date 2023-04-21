@@ -47,7 +47,7 @@ const WeeklyForecast = ({weatherProp}: WeeklyForecastProps): JSX.Element => {
                                 <div className={styles.dayOfWeek}>{getDayOfWeek(weekDay.dt)}</div>
                                 <div className={styles.imageContainer}>                         
                                      <img className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>
-                                     <div className={styles.rainPrecip}>{Math.round(weekDay.pop * 100)}% rain</div>
+                                     <div className={styles.rainPrecip}>{Math.round(weekDay.pop * 100)}% PoP</div>
                                  </div>
                                  <div className={styles.highLowContainer}>
                                      <div className={styles.highTemp}>{Math.round(weekDay.temp.max)}°</div>

@@ -63,7 +63,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
     const highlights: IHighlights[] = [    
         {section: 'temperature', imageCode: 1, reading: maxTemp + ' / ' + minTemp, unit: 'F°'},
         {section: 'wind', imageCode: 2, reading: wind, unit: 'mi/h'},
-        {section: 'rain', imageCode: 3, reading: rain, unit: '%'},
+        {section: 'PoP', imageCode: 3, reading: rain, unit: '%'},
         {section: 'humidity', imageCode: 4, reading: humidity, unit: '%'},
         {section: 'air quality', imageCode: 5, reading: airQuality, unit: 'AQI'},
         {section: 'uv', imageCode: 6, reading: uv, unit: 'UV'}
