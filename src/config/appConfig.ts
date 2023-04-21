@@ -2,7 +2,7 @@ export const config = {
     appId: process.env.REACT_APP_WEATHER_KEY,
     geolocation: {
         api: {
-            baseUrl: 'http://api.openweathermap.org/geo/1.0/direct',
+            baseUrl: 'https://api.openweathermap.org/geo/1.0/direct',
         }
     },
     weather: {
