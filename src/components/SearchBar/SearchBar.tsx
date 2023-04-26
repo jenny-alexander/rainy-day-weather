@@ -15,6 +15,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     const[userLocation, setUserLocation] = useState<GeolocationCoordinates>();
     const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);    
     const[weather, setWeather] = useState<IWeatherResponseDTO>();
+    const[error, setError] = useState<string>("");
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
             country: '',
@@ -47,20 +48,24 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     }
 
     const getWeather = async(location: IGeoLocationResponseDTO) => {
-        try {
-            const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
-            if ( Object.entries(weather).length > 0 ) {
-                console.log('about to setWeather', weather)
-                setWeather(weather);
-                console.log('about to returnWeather', weather);            
-                returnWeather(weather);
-                console.log('about to return searchTerm:', searchTerm)
-                returnLocation(searchTerm);
+        console.log('*** my location is:', location);
+        if (searchLocation.key !== "") {            
+            try {
+                const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
+                if ( Object.entries(weather).length > 0 ) {
+                    console.log('about to setWeather', weather)
+                    setWeather(weather);
+                    console.log('about to returnWeather', weather);            
+                    returnWeather(weather);
+                    console.log('about to return searchTerm:', searchTerm)
+                    returnLocation(searchTerm);
+                }
+            }catch (e){
+                console.log('error getting weather:', e);
             }
-        }catch (e){
-            console.log('error getting weather:', e);
-        }                       
-
+        }else {
+            setError('Choose a location from the list');
+        }
     }
 
     const getGeoLocation = async(searchTerm: string) => {   
@@ -87,6 +92,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         const place: string = [location.name, location.state, location.country]
             .filter(element => Boolean(element)).join(', ');       
         setSearchTerm(place);
+        setError('');
         setSearchLocation(location);
         setGeoLocation([]); //clear out the list of values from geolocation API
         setActiveSearch(false);
@@ -98,12 +104,29 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
 
     const clearSearchTerm = () => {
         setSearchTerm('');
+        setError('');
         setActiveSearch(false);
+        setSearchLocation({
+            country: '',
+            lat: 0,
+            lon: 0,
+            name: '',
+            state: '',
+            key: '',
+        });
     }
 
     return (
         <div className={styles.searchbar}>
+            {/* <FontAwesomeIcon icon="fa-solid fa-location-dot" />         */}
+            {error && (
+                <div className={styles.searchError} role="alert">{error}</div>
+            )}
             <div className={styles.searchbarInput}>
+                {/* <button className={styles.location}>
+                    <i className="fa-solid fa-location-dot"></i>
+                </button> */}
+                
                 <div className={styles.inputWrapper}>                    
                     <input placeholder='Enter a location...' 
                         className={styles.input} 

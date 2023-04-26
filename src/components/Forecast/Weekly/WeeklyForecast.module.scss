@@ -52,7 +52,7 @@
                     column-gap: 0.2em;
                     padding-top: 0.3em;
                     & .lowTemp {
-                        color: rgb(103, 103, 103);
+                        color: var(--text-tertiary);
                     }
                 }
             }
@@ -113,7 +113,7 @@
                     display: flex;
                     column-gap: 0.1em;
                     & .lowTemp {
-                        color: rgb(103, 103, 103);
+                        color: var(--text-tertiary);
                     }
                 }
             }
