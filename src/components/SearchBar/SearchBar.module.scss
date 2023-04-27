@@ -52,7 +52,6 @@
             position:relative;
         }
         & .location {
-            // align-self: center;
             font-size: 1.2em;
             border-radius: 50%;
             &:hover {
@@ -68,12 +67,9 @@
                 padding: 7px;
                 border: 1px solid lightgrey;
                 border-radius: 5px;
-                font-size: 1rem;
+                font-size: 16px;
                 width: 102%;
-                background-color: var(--input-background);
-                @media screen and (max-width: 675px) {
-                    font-size: calc(12px + 0.390625vw);
-                }       
+                background-color: var(--input-background);  
             }
         }
         & .clearInputButton {
@@ -101,7 +97,7 @@
             border: none;
             background-color: var(--button-primary);
             color: var(--button-primary-text);
-            padding: 0.5em 0.8em;
+            padding: 0.8em;
             letter-spacing: 0.07em;
             @media screen and (max-width: 525px) {
                 width: 101%;
