@@ -4,7 +4,7 @@ interface SwitchProps {
     onToggle: () => void;
 }
 const Switch = ({isToggled, onToggle}: SwitchProps) : JSX.Element => {
-
+    
     return (
         <div className={styles.switchContainer}>
             <label className={styles.switch}>

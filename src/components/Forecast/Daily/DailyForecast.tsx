@@ -64,9 +64,9 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
                             : null
                         }
                     </div>
-                    {/* <div className={styles.date}>Last Updated: {
+                    <div className={styles.date}>Last Updated: {
                         weather?.current.dt !== undefined ? convertDate(weather?.current.dt) : 'Date not found'}
-                    </div> */}
+                    </div>
                 </div>
 
             </div>
