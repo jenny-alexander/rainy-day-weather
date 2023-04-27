@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
 import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import styles from './SearchBar.module.scss';
-// import cx from 'classnames';
+import cx from 'classnames';
 
 interface SearchBarProps {
     returnWeather: (weather: IWeatherResponseDTO) => void;
@@ -25,12 +25,16 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
             state: '',
             key: '',
         });
+    const inputRef = useRef<HTMLInputElement>(null);
   
     // useEffect (() => {
     //     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     // },[]);
 
     //TODO: Search for user's location when loading the app & show the weather at that location
+    useEffect (() => {
+            inputRef.current?.focus();
+    },[]);
 
     //Get location from user's browser:
     const successCallback = (position: any) => {
@@ -103,6 +107,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     }
 
     const clearSearchTerm = () => {
+        inputRef.current?.focus();
         setSearchTerm('');
         setError('');
         setActiveSearch(false);
@@ -119,27 +124,32 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     return (
         <div className={styles.searchbar}>
             {/* <FontAwesomeIcon icon="fa-solid fa-location-dot" />         */}
-            {error && (
-                <div className={styles.searchError} role="alert">{error}</div>
-            )}
+            {/* <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}> */}
+            {/* <div className={cx(styles.searchError)}> */}
+            <div className={`${error ? cx(styles.searchError, styles.showError) : styles.searchError}`}>
+                <div><i className="fa-solid fa-circle-exclamation"></i></div>
+                <div>{error}</div>
+            </div>
             <div className={styles.searchbarInput}>
                 {/* <button className={styles.location}>
                     <i className="fa-solid fa-location-dot"></i>
                 </button> */}
-                
-                <div className={styles.inputWrapper}>                    
-                    <input placeholder='Enter a location...' 
-                        className={styles.input} 
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleChange}                        
-                    /> 
-                </div>                
-                <button className={`${searchTerm === '' ? styles.hideInputButton : styles.clearInputButton}`}
-                    onClick={()=>clearSearchTerm()}
-                >
-                    <i className="fa-solid fa-x"/>
-                </button>
+                <div className={styles.test}>
+                    <div className={styles.inputWrapper}>            
+                        <input placeholder='Enter a location...' 
+                            className={styles.input}
+                            ref={inputRef}
+                            type="text"
+                            value={searchTerm}
+                            onChange={handleChange}                        
+                        /> 
+                    </div>                                    
+                    <button className={`${searchTerm === '' ? cx(styles.clearInputButton, styles.hideInputButton) : styles.clearInputButton}`}
+                        onClick={()=>clearSearchTerm()}
+                    >
+                        <i className="fa-solid fa-x"/>
+                    </button>
+                </div>
                 <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
             </div>
             {/* { geoLocation.length === 0 && activeSearch ?

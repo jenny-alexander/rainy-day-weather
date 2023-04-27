@@ -46,6 +46,14 @@
                     max-width: 32px;
                     
                 }
+                & .rainPrecip {
+                    padding-left: 0.3em;
+                    display:flex;
+                    & img {
+                        width: 16px;
+                        height: auto;
+                    }
+                }
                 & .highLowContainer {
                     display: flex;
                     font-size: 1.2em;
@@ -105,8 +113,13 @@
                         max-width: 34px;
                         height: auto;                    
                     }
-                    & .rainPrecip {
-                        padding-left: 0.3em;
+                }
+                & .rainPrecip {
+                    padding-left: 0.3em;
+                    display:flex;
+                    & img {
+                        width: 16px;
+                        height: auto;
                     }
                 }
                 & .highLowContainer {

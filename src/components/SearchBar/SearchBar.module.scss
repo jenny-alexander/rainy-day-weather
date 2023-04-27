@@ -8,17 +8,25 @@
         border-radius: 15px;
     }
     & .searchError {
+        display: flex;
+        column-gap: 0.3em;
         font-size: 0.8em;
         color: var(--text-error);
         font-weight: 600;
         display: flex;
         align-self:center;
         width: 100%;
+        height: 20px;
+        padding: 2px;
+        visibility: hidden;
         @media screen and (min-width: 905px) {
             width: 60%;            
         }
         @media screen and (min-width: 526px) and (max-width: 904px) {
             width: 85%;
+        }
+        &.showError {
+            visibility: visible;
         }
     }
     & .searchbarInput {                        
@@ -33,6 +41,16 @@
         @media screen and (min-width: 526px) and (max-width: 904px) {
             width: 85%;
         }
+        @media screen and (max-width: 525px) {
+            // background-color: pink;
+            flex-direction: column;
+            row-gap: 0.4em;
+        }
+        & .test {
+            display: flex;
+            width: 100%;
+            position:relative;
+        }
         & .location {
             // align-self: center;
             font-size: 1.2em;
@@ -45,23 +63,28 @@
         }
         & .inputWrapper{
             width: 100%;
+            display: flex;
             & .input {
                 padding: 7px;
                 border: 1px solid lightgrey;
                 border-radius: 5px;
                 font-size: 1rem;
-                width: 105%;
+                width: 102%;
                 background-color: var(--input-background);
                 @media screen and (max-width: 675px) {
                     font-size: calc(12px + 0.390625vw);
-                }        
-                // margin-left: 1em;         
+                }       
             }
         }
         & .clearInputButton {
             border: none;
             background-color: inherit;
             color: rgb(154, 153, 153);
+            position: absolute;
+            right: 0;
+            display: grid;
+            align-self: center;
+
             i {
                 font-size: 1em;
                 &:hover {
@@ -78,17 +101,17 @@
             border: none;
             background-color: var(--button-primary);
             color: var(--button-primary-text);
-            padding-left: 0.8em;
-            padding-right: 0.8em;
+            padding: 0.5em 0.8em;
             letter-spacing: 0.07em;
-            margin-left: 0.3em;
+            @media screen and (max-width: 525px) {
+                width: 101%;
+            }            
             &:hover {
                 cursor: pointer;
                 background-color: var(--button-primary-hover); /* Green */                
             } 
         }
     }
-
     & .listContainer {
             position: relative;
             display:flex;
