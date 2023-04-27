@@ -96,9 +96,6 @@
             @media screen and (max-width: 475px) {
                 flex-basis: 35%;                
             }
-            @media screen and (max-width: 375px) {
-                flex-basis: 100%;
-            }
             & .sectionInfo {
                 display: flex;
                 column-gap: 0.5em;                

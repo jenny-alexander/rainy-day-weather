@@ -43,8 +43,11 @@
     margin: 0.5em 2em 2em 2em;
     padding: 1em 2em;
     position: relative;
+
     @media screen and (max-width: 905px) {
       min-height: 700px;
+      // margin: 0.5em 1em 2em 1em;
+      // padding: 1em;
     }
     @media screen and (min-width:1225px) {
       margin: 0.5em 8em 2em 8em;
@@ -91,6 +94,10 @@
     // margin: 0.5em 0em 2em 0em;
     position: relative;
     align-items: center;
+    @media screen and (max-width: 525px) {
+      padding: 1em 0em;
+      margin: 0.5em 1em 2em 1em;
+    }
     & .detailsContainer {
       // margin-top: 4em;
       grid-area: details;
