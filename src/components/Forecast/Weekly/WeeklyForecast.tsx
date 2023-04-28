@@ -14,15 +14,16 @@ const dayNames: string[] = [
 ];
 
 type WeeklyForecastProps = {
-    // mobileView: boolean;
     weatherProp: IWeatherResponseDTO;
 }
 
 const WeeklyForecast = ({weatherProp}: WeeklyForecastProps): JSX.Element => {
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
+
+
     useEffect(() => {        
-        if ( weatherProp !== undefined ) {
-            setWeather(weatherProp)
+        if ( weatherProp !== undefined ) {    
+            setWeather(weatherProp);
         }
     },[weatherProp])
 
@@ -41,9 +42,7 @@ const WeeklyForecast = ({weatherProp}: WeeklyForecastProps): JSX.Element => {
                     (weather?.daily.map((weekDay, index: number) => {
                         if ( index > 0 )
                         return (
-                            <div className={styles.dayForecast} 
-                                //  key={weekDay + '-' + index}
-                            >
+                            <div className={styles.dayForecast} key={weekDay + '-' + index}>
                                 <div className={styles.dayOfWeek}>{getDayOfWeek(weekDay.dt)}</div>
                                 <div className={styles.imageContainer}>                         
                                      <img className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>

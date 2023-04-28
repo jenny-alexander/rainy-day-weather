@@ -39,8 +39,7 @@ const App = (): JSX.Element => {
     setLocation(location);
   }
 
-  const toggleMode = () => {
-    console.log('in toggleMode!')
+  const toggleMode = () => {    
     setIsToggled(!isToggled);
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);

@@ -36,36 +36,31 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
             inputRef.current?.focus();
     },[]);
 
-    //Get location from user's browser:
-    const successCallback = (position: any) => {
-        console.log('Browser location is:', position);
-        setUserLocation(position);
-    };
+    // //Get location from user's browser:
+    // const successCallback = (position: any) => {        
+    //     setUserLocation(position);
+    // };
   
-    const errorCallback = (error: any) => {
-        console.log('Error retrieving browser gelocation:', error);
-    };
+    // const errorCallback = (error: any) => {
+    //     console.log('Error retrieving browser gelocation:', error);
+    // };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);        
         getGeoLocation(event.target.value);
     }
 
-    const getWeather = async(location: IGeoLocationResponseDTO) => {
-        console.log('*** my location is:', location);
+    const getWeather = async(location: IGeoLocationResponseDTO) => {        
         if (searchLocation.key !== "") {            
             try {
                 const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
-                if ( Object.entries(weather).length > 0 ) {
-                    console.log('about to setWeather', weather)
-                    setWeather(weather);
-                    console.log('about to returnWeather', weather);            
-                    returnWeather(weather);
-                    console.log('about to return searchTerm:', searchTerm)
+                if ( Object.entries(weather).length > 0 ) {               
+                    setWeather(weather);                          
+                    returnWeather(weather);                    
                     returnLocation(searchTerm);
                 }
-            }catch (e){
-                console.log('error getting weather:', e);
+            }catch (e) {                
+                setError(`Error getting weather. Please try again.`);
             }
         }else {
             setError('Choose a location from the list');
@@ -82,12 +77,11 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                         ...location,
                         key: crypto.randomUUID(),
                     }
-                })
-                console.log('...with key:', geoLocationWithKey)
+                })                
                 setGeoLocation(geoLocationWithKey);
             }
         }catch (e) {
-            console.log('error fetching location:', e);
+            setError(`Error getting location. Please try again.`);
         } 
 
     }

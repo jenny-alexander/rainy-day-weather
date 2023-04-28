@@ -60,18 +60,14 @@ export interface IWeatherResponseDTO {
     }],
 }
 
-export async function fetchWeather(lat: number, lon: number) {
-    console.log('in fetchWeather api and params are:', lat, lon);
-    try {
-        // const response = await axios.get<IWeatherResponseDTO>(
+export async function fetchWeather(lat: number, lon: number) {    
+    try {        
             const response = await axios.get(
-            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=minutely&appid=${config.appId}&units=imperial`,
-        );
-        console.log('weather api response.data is:', response.data);
+            `${config.weather.api.baseUrl}?lat=${lat}&lon=${lon}&exclude=minutely&appid=${config.appId}&units=imperial`,            
+        );        
         return response.data;
-    } catch (err) {
-        const error = err as Error | AxiosError;
-        console.log(`Failed to fetch weather: ${error.message}`, error);
-        return {};
+    } catch (err) {        
+        const error = err as Error | AxiosError;        
+        throw {error};
     }    
 }

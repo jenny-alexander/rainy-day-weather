@@ -13,8 +13,7 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
     const [mobile, setMobile] = useState<boolean>(mobileView);
     const scrollToRef  = useRef<HTMLInputElement>(null);
 
-    useEffect(() =>{
-        console.log('in useEffect of hourly and weather is:', weather);
+    useEffect(() =>{        
         setWeather(weatherProp);
     },[weatherProp])
     const leftScroll = ()  => {
@@ -43,9 +42,7 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
                     (weather?.hourly.map((hour, index: number) => {
                         if ( index < 12 )
                         return (
-                            <div className={styles.hourlyForecast} 
-                                //  key={weekDay + '-' + index}
-                            >
+                            <div className={styles.hourlyForecast} key={hour + '-' + index}>
                                 <div className={styles.hourlyTime}>{getTime(hour.dt)}</div>
                                 <div className={styles.hourlyImageContainer}>                         
                                      <img className={styles.hourlyImage} src={weatherIconImages.get(hour.weather[0].id)}/>
