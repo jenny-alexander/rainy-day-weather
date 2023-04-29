@@ -6,6 +6,11 @@ interface ModalProps {
 }
 
 const Modal = ({show, title, actions} : ModalProps) : JSX.Element => {
+    const closeModal = () => {
+        
+    }
+
+
     // if (show) {
         return (
             <div className={styles.modalContainer}>

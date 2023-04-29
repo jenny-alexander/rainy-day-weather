@@ -16,6 +16,7 @@ const App = (): JSX.Element => {
   const [isToggled, setIsToggled] = useState<boolean>(true);
   const [theme, setTheme] = useState<string>('light');
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
       setMobileView(mql.matches)
@@ -44,6 +45,15 @@ const App = (): JSX.Element => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   }
+
+  const showAlarmModal = () => {
+
+  }
+
+  const hideAlarmModal = () => {
+
+  }
+
   if (!fontLoaded) {
     return(
       <></>
@@ -54,12 +64,15 @@ const App = (): JSX.Element => {
           <div className={styles.menuOptions}>
             <Switch isToggled={isToggled} onToggle={toggleMode} />
             { alert ?  
-              <button className={styles.alerts}>
+              <button className={styles.alerts} onClick={() => setShowModal(true)}>
                 <i className="fa-solid fa-triangle-exclamation"/>
               </button> 
               : null 
             }
           </div>
+          {/* {
+            showModal ? <p>I will show modal</p> : <p>Modal is not shown</p>
+          } */}
           { weather === undefined ? <div className={styles.centerAppContainer}></div> : null }
           <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
 
