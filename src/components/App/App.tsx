@@ -5,6 +5,8 @@ import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
 import Switch from '../Common/Switch/Switch';
+import Modal from '../Common/Modal/Modal';
+import Alert from '../Alert/Alert';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
 const App = (): JSX.Element => {
@@ -34,6 +36,8 @@ const App = (): JSX.Element => {
     setWeather(weather);
     if ( weather?.alerts && weather.alerts.length > 0) {
       setAlert(true);
+      console.log('weather info is:', weather);
+      console.log('alert info is:', weather?.alerts);
     }
   }
   const handleGetLocation = (location: string): void => {
@@ -47,11 +51,13 @@ const App = (): JSX.Element => {
   }
 
   const showAlarmModal = () => {
-
+    console.log('about to show the alarm modal')
+    setShowModal(!showModal);
   }
 
   const hideAlarmModal = () => {
-
+    console.log('in hideAlarmModal')
+    setShowModal(false);
   }
 
   if (!fontLoaded) {
@@ -64,15 +70,20 @@ const App = (): JSX.Element => {
           <div className={styles.menuOptions}>
             <Switch isToggled={isToggled} onToggle={toggleMode} />
             { alert ?  
-              <button className={styles.alerts} onClick={() => setShowModal(true)}>
+              <button className={styles.alerts} onClick={() => showAlarmModal()}>
                 <i className="fa-solid fa-triangle-exclamation"/>
               </button> 
               : null 
             }
           </div>
-          {/* {
-            showModal ? <p>I will show modal</p> : <p>Modal is not shown</p>
-          } */}
+          {
+            showModal && weather?.alerts !== undefined ? 
+              <Modal
+                    title="Alerts"
+                    content={weather?.alerts}
+                    actions={[{name: 'Close', action: hideAlarmModal}]}/> 
+              : null
+          }
           { weather === undefined ? <div className={styles.centerAppContainer}></div> : null }
           <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
 

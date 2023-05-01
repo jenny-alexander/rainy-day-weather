@@ -3,6 +3,8 @@ import HourlyForecast from '../Hourly/HourlyForecast';
 import styles from  './DailyForecast.module.scss';
 import { weatherIconImages, nightIconImages } from '../../../utils/constants/images';
 import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
+import Formatter from '../../../utils/formatter/formatter';
+// import 
 type DailyForecastProps = {
     mobileView: boolean;
     weatherProp: IWeatherResponseDTO;
@@ -31,14 +33,6 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
         setLocation(locationProp);                
     },[locationProp]);
 
-    //TODO: put this in a utility file to be resused across app
-    const convertDate = (date: number) => {
-        let formattedDate: Date = new Date(date*1000);
-        const outDate: string = formattedDate.toLocaleDateString('en-US');
-        const outTime: string = formattedDate.toLocaleTimeString('en-US');
-        return outDate + ' ' + outTime;
-    }
-
     return (
         <div className={`${mobileView ? styles.mobileDaily : styles.daily}`}>
             { mobileView ? <div className={styles.locationName}>{location}</div> : null}
@@ -65,7 +59,7 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
                         }
                     </div>
                     <div className={styles.date}>Last Updated: {
-                        weather?.current.dt !== undefined ? convertDate(weather?.current.dt) : 'Date not found'}
+                        weather?.current.dt !== undefined ? Formatter.convertDate(weather?.current.dt) : 'Date not found'}
                     </div>
                 </div>
 

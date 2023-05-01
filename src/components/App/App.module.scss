@@ -6,8 +6,7 @@
     align-items: start;
   }
   justify-content: center;
-  background-color: var(--background-color);
-  background-color: rgb(192, 205, 222);
+  background-color: var(--background-color);  
 }
 .titleContainer{
   grid-area: title;
@@ -120,6 +119,9 @@
         color: var(--alert-icon);
         @media screen and (max-width: 475px) {
           font-size: 1.25em;
+        }
+        &:hover {
+          cursor: pointer;
         }
       }
     }
