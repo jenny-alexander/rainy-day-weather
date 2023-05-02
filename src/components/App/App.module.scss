@@ -141,3 +141,96 @@
       }
     }
   }
+  .modalContainer {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(23, 23, 23, 0.8);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 40px;
+    
+    .modal {
+      width: 80%;
+      border-radius: 12px;
+      background: var(--modal-background);
+      border: 1px solid rgb(16, 16, 16);    
+      transition: opacity 3s ease-in-out;
+      box-shadow: -2rem 2rem 2rem rgba(black, 0.2);    
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+      /* To make the modal window center */
+      position: fixed;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+
+      & .modalTitle {                  
+          display: flex;
+          justify-content: center;
+          font-size: 1.7em;
+          font-family: inherit;
+          padding-top: 0.5em;
+          @media(max-width: 425px) {
+            font-size: 1.5em;
+          }
+          width: 95%;
+          align-items: center;
+          @media(max-width: 375px) {
+            font-size: 1.5em;
+          }
+      }
+        & .modalBody {
+          display: flex;
+          flex-direction: column;
+          border-top: 1px solid lightgrey;
+          padding: 0.5em;       
+          & .modalContentContainer {
+            max-height: 300px;
+            overflow-y: scroll;
+            & .modalContent {
+              padding: 1em;
+              font-size: 14px;
+              border-bottom: 1px solid lightgrey;
+            }
+          }
+          & .modalActions {
+              display: flex;
+              justify-content: center;
+              .actionButtons {
+                display:flex;
+                padding-top: 1em 0.5em;
+                border: 0;
+                border-radius: 5px; 
+                font-size: 0.8rem;
+                line-height: 1;
+                & button {
+                  border-radius: 5px;
+                  background-color: var(--button-primary);
+                  border: var(--button-primary);
+                  color: white;
+                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                  0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+                  padding: 0.75em 1.5em;
+                  margin: 1em;
+                  letter-spacing: 0.2em;            
+                  &:hover {
+                      cursor: pointer;          
+                        outline: 4px solid var(--button-primary-hover);
+                        transition: outline 0.1s ease-in-out;
+                    }              
+                } 
+              }
+            }
+          }
+      }
+    }
+#modalPortal {
+  box-sizing: border-box;
+}

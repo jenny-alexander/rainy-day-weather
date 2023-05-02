@@ -1,3 +1,5 @@
+import { ModalConfig, ModalPositionX, ModalPositionY } from "../ts/interfaces/modal.interface";
+
 export const config = {
     appId: process.env.REACT_APP_WEATHER_KEY,
     geolocation: {
@@ -10,5 +12,12 @@ export const config = {
             baseUrl: 'https://api.openweathermap.org/data/3.0/onecall',
             
         }
+    },
+    alertModal: {
+        title: "Alerts",
+        showOverlay: true,
+        positionX: ModalPositionX.center,
+        positionY: ModalPositionY.center,
+        padding: "20px",
     }
 } as const;

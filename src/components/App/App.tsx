@@ -7,6 +7,7 @@ import Highlights from '../Highlights/Highlights';
 import Switch from '../Common/Switch/Switch';
 import Modal from '../Common/Modal/Modal';
 import Alert from '../Alert/Alert';
+import { config } from '../../config/appConfig';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
 const App = (): JSX.Element => {
@@ -28,7 +29,7 @@ const App = (): JSX.Element => {
     document.fonts.ready.then(() => {
       setFontLoaded(true);
     })
-  })
+  },[])
 
   mql.addEventListener('change', (e) => { setMobileView(mql.matches)  });
 
@@ -36,8 +37,6 @@ const App = (): JSX.Element => {
     setWeather(weather);
     if ( weather?.alerts && weather.alerts.length > 0) {
       setAlert(true);
-      console.log('weather info is:', weather);
-      console.log('alert info is:', weather?.alerts);
     }
   }
   const handleGetLocation = (location: string): void => {
@@ -70,23 +69,50 @@ const App = (): JSX.Element => {
           <div className={styles.menuOptions}>
             <Switch isToggled={isToggled} onToggle={toggleMode} />
             { alert ?  
-              <button className={styles.alerts} onClick={() => showAlarmModal()}>
+              <button className={styles.alerts} onClick={() => setShowModal(true)}>
                 <i className="fa-solid fa-triangle-exclamation"/>
               </button> 
               : null 
             }
           </div>
-          {
-            showModal && weather?.alerts !== undefined ? 
-              <Modal
-                    title="Alerts"
-                    content={weather?.alerts}
-                    actions={[{name: 'Close', action: hideAlarmModal}]}/> 
-              : null
-          }
+          <Modal show={showModal} 
+                 setShow={setShowModal} 
+                 config={config.alertModal}
+                 wrapperId='modal-portal'
+                >
+              <div className={styles.modalContainer}>
+                <div className={styles.modal}>
+                  <div className={styles.modalTitle}>{config.alertModal.title}</div>                  
+                    <div className={styles.modalBody}>
+                      <div className={styles.modalContentContainer}>
+                          { weather?.alerts && weather.alerts.length > 0 && (
+                              weather.alerts.map((alert) => {
+                                return(
+                                  <div className={styles.modalContent}>{alert.description}</div>
+                                )
+                              })
+                            ) 
+                          }
+                          { weather?.alerts && weather.alerts.length > 0 && (
+                              weather.alerts.map((alert) => {
+                                return(
+                                  <div className={styles.modalContent}>{alert.description}</div>
+                                )
+                              })
+                            ) 
+                          }
+                          </div>
+                    <div className={styles.modalActions}>
+                      <div className={styles.actionButtons}>
+                        <button onClick={()=> setShowModal(false)}>Close</button>
+                      </div>
+                    </div>                    
+                  </div>
+              </div>
+            </div>
+					</Modal>
           { weather === undefined ? <div className={styles.centerAppContainer}></div> : null }
           <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
-
             <SearchBar 
                 returnWeather={handleGetWeather}
                 returnLocation={handleGetLocation}

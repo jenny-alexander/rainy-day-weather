@@ -1,55 +1,75 @@
-import styles from './Modal.module.scss';
-import {useEffect} from 'react';
+import {useState, useLayoutEffect, useCallback, useRef, useEffect} from 'react';
+import { createPortal } from "react-dom";
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import { ModalConfig } from "../../../ts/interfaces/modal.interface";
 interface ModalProps {
-    title: string,
-    content: [{
-        description: string,
-        start: number,
-        end: number,
-        event: string,
-        sender_name: string
-    }],
-    actions: [{name: string, action: ()=>void}],
+    show: boolean
+    setShow: (value: boolean) => void
+    children: JSX.Element | JSX.Element[]
+    config: ModalConfig,
+    wrapperId: string,
 }
 
-const Modal = ({title, actions, content} : ModalProps) : JSX.Element => {
-    useEffect(() => {
-        console.log('content is:', content)
-    })
-        return (
-            <div className={styles.modalContainer}>
-                <div className={styles.modal}>
-                    <div className={styles.modalHeader}>
-                        <div className={styles.modalTitle}>{title}</div>
-                    </div>
-    
-                    <div className={styles.modalBodyContainer}>
-                        <div className={styles.modalBody}>
-                        {
-                                    content.length > 0 ? 
-                                        // <p>I see {content.length} alerts</p>
-                                        content.map((content) => {
-                                            return(
-                                                <div className={styles.modalContent}>{content.description}</div>
-                                            )
-                                        })
-                                        : null
-                                }
-                            <div className={styles.modalActions}>
-                                {
-                                    actions.length > 0 ?
-                                    actions.map((action) => {
-                                        return(
-                                            <button onClick={()=> action.action()}>{action.name}</button>
-                                        )
-                                    }) : null
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>    
-            </div>
-        )
+const Modal = ({show, setShow, config, children, wrapperId} : ModalProps) : JSX.Element => {
+    const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null)
+
+	// handle what happens on click outside of modal
+	const handleClickOutside = () => setShow(false)
+
+	// handle what happens on key press
+	const handleKeyPress = useCallback((event: KeyboardEvent) => {
+		if (event.key === "Escape") setShow(false)
+	}, [])
+
+	useOnClickOutside(modalRef, handleClickOutside)
+
+	useEffect(() => {
+		if (show) {
+			// attach the event listener if the modal is shown
+			document.addEventListener("keydown", handleKeyPress)
+			// remove the event listener
+			return () => {
+				document.removeEventListener("keydown", handleKeyPress)
+			}
+		}
+	}, [handleKeyPress, show])
+
+    useLayoutEffect(() => {
+		let element = document.getElementById(wrapperId) as HTMLElement
+		let portalCreated = false;
+		// if element is not found with wrapperId or wrapperId is not provided,
+		// create and append to body
+		if (!element) {
+			element = createWrapperAndAppendToBody(wrapperId);
+			portalCreated = true;
+		}
+
+		setPortalElement(element);
+
+		// cleaning up the portal element
+		return () => {
+			// delete the programatically created element
+			if (portalCreated && element.parentNode) {
+				element.parentNode.removeChild(element);
+			}
+		}
+	}, [wrapperId])
+
+    const createWrapperAndAppendToBody = (elementId: string) => {
+		const element = document.createElement("div");
+		element.setAttribute("id", elementId);
+        // element.style.boxSizing = "border-box";
+		document.body.appendChild(element);
+		return element
+	}
+    if (!portalElement) return null as any;
+    return (
+        <>
+        { show  && (             
+                createPortal(children, portalElement)                                                    
+            )}
+        </>)
 }
 
 export default Modal;
