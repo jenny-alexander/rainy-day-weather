@@ -5,6 +5,7 @@
   --text-secondary: rgb(93 95 96);
   --text-tertiary: rgb(93 95 96);
   --modal-background: white;
+  --modal-border: black;
   // --button-primary: #0a406d;
   // --button-primary-text: white;
   // --button-primary-hover: #4c90af;
@@ -23,16 +24,20 @@
   --text-error: rgb(197, 2, 2);
 }
 [data-theme='dark'] {
-  --background-color: rgb(45, 45, 45);
-  --card-background: grey;
+  // --background-color: rgb(45, 45, 45);
+  --background-color: #0B2447;
+  // --card-background: grey;
+  --card-background: #6877ad;
   --border-style: solid;
   --border-color: #2c2d2d;
   --text-primary: white;
   --text-secondary: grey;
-  --text-tertiary: rgb(201, 135, 135);
-  --modal-background: #cecdcd;
+  --text-tertiary: rgb(224, 221, 221);
+  --modal-background: #bfcedf;
+  --modal-border: white;
   // --button-primary: #5cb0d6;
   // --button-primary-text: black;
+  --button-primary: rgb(72 83 167);
   --button-primary-hover: rgb(178, 178, 223);
   --accent: darkred;
   --toggle-icon: rgb(255, 238, 0);

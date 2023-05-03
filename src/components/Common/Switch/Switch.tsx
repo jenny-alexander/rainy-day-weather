@@ -1,14 +1,15 @@
 import styles from './Switch.module.scss';
 interface SwitchProps {
     isToggled: boolean;
+    title: string,
     onToggle: () => void;
 }
-const Switch = ({isToggled, onToggle}: SwitchProps) : JSX.Element => {
+const Switch = ({isToggled, onToggle, title}: SwitchProps) : JSX.Element => {
     
     return (
         <div className={styles.switchContainer}>
             <label className={styles.switch}>
-                <input type="checkbox" checked={isToggled} 
+                <input title={title} type="checkbox" checked={isToggled} 
                     onChange={onToggle}
                 />
                 <span className={styles.slider}></span>

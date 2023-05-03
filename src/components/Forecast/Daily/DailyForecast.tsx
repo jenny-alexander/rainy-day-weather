@@ -39,7 +39,7 @@ const DailyForecast = ({mobileView, weatherProp, locationProp}: DailyForecastPro
             <div className={styles.dailyDetails}>
                 <div className={styles.imageContainer}> 
                 
-                <img alt-text="Image of today's weather" className={styles.dailyImage} 
+                <img alt="Image of today's weather" className={styles.dailyImage} 
                     src={ 
                         night ? nightIconImages.get(weather?.current.weather[0].id) : 
                                  weatherIconImages.get(weather?.current.weather[0].id)

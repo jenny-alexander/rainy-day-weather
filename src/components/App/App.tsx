@@ -45,7 +45,7 @@ const App = (): JSX.Element => {
 
   const toggleMode = () => {    
     setIsToggled(!isToggled);
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'light' ? 'dark' : 'light';    
     setTheme(newTheme);
   }
 
@@ -67,9 +67,9 @@ const App = (): JSX.Element => {
       return (
         <div className={styles.mainContainer} data-theme={theme}>
           <div className={styles.menuOptions}>
-            <Switch isToggled={isToggled} onToggle={toggleMode} />
+            <Switch title="Dark Theme Toggle" isToggled={isToggled} onToggle={toggleMode} />
             { alert ?  
-              <button className={styles.alerts} onClick={() => setShowModal(true)}>
+              <button id='alerts' title="Alerts" className={styles.alerts} onClick={() => setShowModal(true)}>
                 <i className="fa-solid fa-triangle-exclamation"/>
               </button> 
               : null 
@@ -79,12 +79,13 @@ const App = (): JSX.Element => {
                  setShow={setShowModal} 
                  config={config.alertModal}
                  wrapperId='modal-portal'
+                 theme={theme}
                 >
               <div className={styles.modalContainer}>
                 <div className={styles.modal}>
                   <div className={styles.modalTitle}>{config.alertModal.title}</div>                  
                     <div className={styles.modalBody}>
-                      <div className={styles.modalContentContainer}>
+                      <div className={styles.modalContentContainer} tabIndex={0} >
                           { weather?.alerts && weather.alerts.length > 0 && (
                               weather.alerts.map((alert) => {
                                 return(
@@ -134,7 +135,7 @@ const App = (): JSX.Element => {
                     <WeeklyForecast weatherProp={weather}/> 
                   </div> : 
                   <div className={styles.logoContainer}>
-                    <img className={styles.logo} src='/images/umbrella_yellow.png'></img>
+                    <img className={styles.logo} alt="Umbrella logo of app" src='/images/umbrella_yellow.png'></img>
                   </div>
               }
           </div>

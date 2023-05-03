@@ -33,10 +33,10 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
         <div className={`${mobileView ? cx(styles.hourlyMainContainer, styles.mobile) : styles.hourlyMainContainer}`}>
                 <div className={styles.hourlyTitle}>Hourly Forecast</div>
                 <div className={styles.hourlyContainer}>
-                    <button className={styles.leftArrow} onClick={() => leftScroll()}>
+                    <button title="Scroll hourly weather left" className={styles.leftArrow} onClick={() => leftScroll()}>
                         <i className="fa-solid fa-angle-left"/>
                     </button>
-                    <div ref={scrollToRef} className={styles.scrollContainer}>
+                    <div ref={scrollToRef} className={styles.scrollContainer} tabIndex={0}>
                 {
                     weather?.hourly !== undefined ? 
                     (weather?.hourly.map((hour, index: number) => {
@@ -45,12 +45,12 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
                             <div className={styles.hourlyForecast} key={hour + '-' + index}>
                                 <div className={styles.hourlyTime}>{getTime(hour.dt)}</div>
                                 <div className={styles.hourlyImageContainer}>                         
-                                     <img className={styles.hourlyImage} src={weatherIconImages.get(hour.weather[0].id)}/>
+                                     <img alt="Image of hourly weather" className={styles.hourlyImage} src={weatherIconImages.get(hour.weather[0].id)}/>
                                 </div>
                                 <div className={styles.hourlyTemp}>{Math.round(hour.temp)}°</div>
                                 <div className={styles.precipContainer}>
                                     <div className={styles.precipImageContainer}>
-                                        <img className={styles.precipImage} src='/images/rain.png'></img>
+                                        <img alt="raindrop image depicting precipitation" className={styles.precipImage} src='/images/rain.png'></img>
                                     </div>
                                     <div className={styles.hourlyPOP}>{Math.round(hour.pop * 100)}%</div> 
                                 </div>                               
@@ -60,7 +60,7 @@ const HourlyForecast = ({mobileView, weatherProp}:HourlyForecastProps) : JSX.Ele
                     : <div>Error retrieving weekly forecast</div>
                 }
                     </div>
-                    <button className={styles.rightArrow} onClick={() => rightScroll()}>
+                    <button title="Scroll hourly weather right" className={styles.rightArrow} onClick={() => rightScroll()}>
                         <i className="fa-solid fa-angle-right"/>
                     </button>
                 </div>

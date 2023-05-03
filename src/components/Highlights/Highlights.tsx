@@ -81,7 +81,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
                                 <div className={styles.sectionTitle}>{highlights.section}</div>
                             }
                             <div className={styles.sectionInfo}>
-                                <img className={styles.image} src={highlightsImage.get(highlights.imageCode)}/>                                
+                                <img alt="weather highlight icon" className={styles.image} src={highlightsImage.get(highlights.imageCode)}/>                                
                                 <div className={styles.sectionReading}>
                                     {highlights.reading !== undefined ? highlights.reading : ''
                                     } {highlights.unit}

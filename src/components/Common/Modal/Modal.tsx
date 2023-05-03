@@ -8,10 +8,12 @@ interface ModalProps {
     children: JSX.Element | JSX.Element[]
     config: ModalConfig,
     wrapperId: string,
+    theme: string,
 }
 
-const Modal = ({show, setShow, config, children, wrapperId} : ModalProps) : JSX.Element => {
+const Modal = ({show, setShow, config, children, wrapperId, theme} : ModalProps) : JSX.Element => {
     const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+    // const [theme, setTheme] = useState<string>(theme);
     const modalRef = useRef<HTMLDivElement>(null)
 
 	// handle what happens on click outside of modal
@@ -21,6 +23,12 @@ const Modal = ({show, setShow, config, children, wrapperId} : ModalProps) : JSX.
 	const handleKeyPress = useCallback((event: KeyboardEvent) => {
 		if (event.key === "Escape") setShow(false)
 	}, [])
+
+    useEffect(() => {        
+        if (portalElement) {
+            portalElement.setAttribute('data-theme', theme);
+        }
+    },[theme]);
 
 	useOnClickOutside(modalRef, handleClickOutside)
 
@@ -43,7 +51,9 @@ const Modal = ({show, setShow, config, children, wrapperId} : ModalProps) : JSX.
 		if (!element) {
 			element = createWrapperAndAppendToBody(wrapperId);
 			portalCreated = true;
-		}
+		} else {
+            element.setAttribute("data-theme", theme);
+        }
 
 		setPortalElement(element);
 
@@ -59,7 +69,6 @@ const Modal = ({show, setShow, config, children, wrapperId} : ModalProps) : JSX.
     const createWrapperAndAppendToBody = (elementId: string) => {
 		const element = document.createElement("div");
 		element.setAttribute("id", elementId);
-        // element.style.boxSizing = "border-box";
 		document.body.appendChild(element);
 		return element
 	}

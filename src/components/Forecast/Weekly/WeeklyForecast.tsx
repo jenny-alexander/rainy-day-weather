@@ -45,10 +45,10 @@ const WeeklyForecast = ({weatherProp}: WeeklyForecastProps): JSX.Element => {
                             <div className={styles.dayForecast} key={weekDay + '-' + index}>
                                 <div className={styles.dayOfWeek}>{getDayOfWeek(weekDay.dt)}</div>
                                 <div className={styles.imageContainer}>                         
-                                     <img className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>
+                                     <img alt="icon depicting weather for day of week" className={styles.image} src={weatherIconImages.get(weekDay.weather[0].id)}/>
                                  </div>
                                  <div className={styles.rainPrecip}>
-                                        <img className={styles.precipImage} src='/images/rain.png'></img>
+                                        <img alt="raindrop image depicting change of precipitation" className={styles.precipImage} src='/images/rain.png'></img>
                                         {Math.round(weekDay.pop * 100)}%
                                     </div>
                                  <div className={styles.highLowContainer}>

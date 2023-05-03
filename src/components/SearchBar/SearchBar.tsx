@@ -138,7 +138,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                             onChange={handleChange}                        
                         /> 
                     </div>                                    
-                    <button className={`${searchTerm === '' ? cx(styles.clearInputButton, styles.hideInputButton) : styles.clearInputButton}`}
+                    <button title="Clear Search" className={`${searchTerm === '' ? cx(styles.clearInputButton, styles.hideInputButton) : styles.clearInputButton}`}
                         onClick={()=>clearSearchTerm()}
                     >
                         <i className="fa-solid fa-x"/>
