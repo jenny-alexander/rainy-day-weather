@@ -157,6 +157,10 @@
     
     .modal {
       width: 80%;
+      @media screen and (min-width: 1025px) {
+        width: 50%;
+      }
+      // @media screen and (min-width: )
       border-radius: 12px;
       background: var(--modal-background);
       border: 1px solid rgb(16, 16, 16);    
