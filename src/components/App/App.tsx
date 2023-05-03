@@ -48,15 +48,9 @@ const App = (): JSX.Element => {
     const newTheme = theme === 'light' ? 'dark' : 'light';    
     setTheme(newTheme);
   }
-
-  const showAlarmModal = () => {
-    console.log('about to show the alarm modal')
-    setShowModal(!showModal);
-  }
-
-  const hideAlarmModal = () => {
-    console.log('in hideAlarmModal')
-    setShowModal(false);
+  const alertClick = () => {
+    console.log('clicked on alert')
+    setShowModal(!showModal)
   }
 
   if (!fontLoaded) {
@@ -69,49 +63,12 @@ const App = (): JSX.Element => {
           <div className={styles.menuOptions}>
             <Switch title="Dark Theme Toggle" isToggled={isToggled} onToggle={toggleMode} />
             { alert ?  
-              <button id='alerts' title="Alerts" className={styles.alerts} onClick={() => setShowModal(true)}>
+              <button id='alerts' title="Alerts" className={styles.alerts} onClick={() => alertClick()}>
                 <i className="fa-solid fa-triangle-exclamation"/>
               </button> 
               : null 
             }
           </div>
-          <Modal show={showModal} 
-                 setShow={setShowModal} 
-                 config={config.alertModal}
-                 wrapperId='modal-portal'
-                 theme={theme}
-                >
-              <div className={styles.modalContainer}>
-                <div className={styles.modal}>
-                  <div className={styles.modalTitle}>{config.alertModal.title}</div>                  
-                    <div className={styles.modalBody}>
-                      <div className={styles.modalContentContainer} tabIndex={0} >
-                          { weather?.alerts && weather.alerts.length > 0 && (
-                              weather.alerts.map((alert) => {
-                                return(
-                                  <div className={styles.modalContent}>{alert.description}</div>
-                                )
-                              })
-                            ) 
-                          }
-                          { weather?.alerts && weather.alerts.length > 0 && (
-                              weather.alerts.map((alert) => {
-                                return(
-                                  <div className={styles.modalContent}>{alert.description}</div>
-                                )
-                              })
-                            ) 
-                          }
-                          </div>
-                    <div className={styles.modalActions}>
-                      <div className={styles.actionButtons}>
-                        <button onClick={()=> setShowModal(false)}>Close</button>
-                      </div>
-                    </div>                    
-                  </div>
-              </div>
-            </div>
-					</Modal>
           { weather === undefined ? <div className={styles.centerAppContainer}></div> : null }
           <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}>
             <SearchBar 
@@ -123,6 +80,12 @@ const App = (): JSX.Element => {
             </div>
               {
                 weather !== undefined ?
+                <>
+                  <Alert show = {showModal}
+                    weatherProp = {weather}
+                    themeProp = {theme}
+                    setShow={setShowModal}
+                  /> 
                   <div className={styles.detailsContainer}>
                     <DailyForecast 
                       mobileView={mobileView}  
@@ -133,10 +96,10 @@ const App = (): JSX.Element => {
                                 weatherProp={weather}
                     />
                     <WeeklyForecast weatherProp={weather}/> 
-                  </div> : 
+                  </div></> : 
                   <div className={styles.logoContainer}>
                     <img className={styles.logo} alt="Umbrella logo of app" src='/images/umbrella_yellow.png'></img>
-                  </div>
+                  </div>         
               }
           </div>
         </div>

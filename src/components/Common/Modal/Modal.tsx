@@ -1,6 +1,5 @@
-import {useState, useLayoutEffect, useCallback, useRef, useEffect} from 'react';
+import {useState, useLayoutEffect, useEffect} from 'react';
 import { createPortal } from "react-dom";
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { ModalConfig } from "../../../ts/interfaces/modal.interface";
 interface ModalProps {
     show: boolean
@@ -10,38 +9,14 @@ interface ModalProps {
     wrapperId: string,
     theme: string,
 }
-
 const Modal = ({show, setShow, config, children, wrapperId, theme} : ModalProps) : JSX.Element => {
     const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
-    // const [theme, setTheme] = useState<string>(theme);
-    const modalRef = useRef<HTMLDivElement>(null)
-
-	// handle what happens on click outside of modal
-	const handleClickOutside = () => setShow(false)
-
-	// handle what happens on key press
-	const handleKeyPress = useCallback((event: KeyboardEvent) => {
-		if (event.key === "Escape") setShow(false)
-	}, [])
 
     useEffect(() => {        
         if (portalElement) {
             portalElement.setAttribute('data-theme', theme);
         }
-    },[theme]);
-
-	useOnClickOutside(modalRef, handleClickOutside)
-
-	useEffect(() => {
-		if (show) {
-			// attach the event listener if the modal is shown
-			document.addEventListener("keydown", handleKeyPress)
-			// remove the event listener
-			return () => {
-				document.removeEventListener("keydown", handleKeyPress)
-			}
-		}
-	}, [handleKeyPress, show])
+    },[theme]);	
 
     useLayoutEffect(() => {
 		let element = document.getElementById(wrapperId) as HTMLElement
