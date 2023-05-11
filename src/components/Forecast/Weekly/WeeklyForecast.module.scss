@@ -85,7 +85,7 @@
             display: flex;
             flex-direction: column;
             row-gap: 0.5em;
-            padding: 0.5em 1.5em 0em;
+            // padding: 0.5em 1.5em 0em;
             background-color: var(--card-background);
             border: var(--border-weight) var(--border-style) var(--border-color);
             border-radius: 15px;
@@ -104,10 +104,19 @@
                 font-size: calc(10px + 0.390625vw);
                 @media screen and (min-width: 757px) {
                     font-size: calc(11px + 0.390625vw);
+                }                
+                & .dayOfWeek {
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    width: 100%;
+                    display:flex;
+                    justify-content: center;
                 }
                 & .imageContainer {
                     display: flex;
-                    align-items: center;                
+                    align-items: center;    
+                    width: 100%;
+                    justify-content: center;
                     img{
                         width: 100%;
                         max-width: 34px;
@@ -117,17 +126,19 @@
                 & .rainPrecip {
                     padding-left: 0.3em;
                     display:flex;
+                    width: 100%;
+                    justify-content: center;
+
                     & img {
                         width: 16px;
                         height: auto;
                     }
                 }
                 & .highLowContainer {
+                    width: 100%;
+                    justify-content: center;
                     display: flex;
                     column-gap: 0.1em;
-                    // & .lowTemp {
-                    //     color: var(--text-primary);
-                    // }
                 }
             }
         }
