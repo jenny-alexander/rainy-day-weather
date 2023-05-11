@@ -109,29 +109,22 @@
                 width: 101%;
             }            
             &:hover {
-                cursor: pointer;
-                // background-color: var(--button-primary-hover); /* Green */                
+                cursor: pointer;         
                 outline: 4px solid var(--button-primary-hover);
                 transition: outline 0.1s ease-in-out;
             } 
             &:focus {
-            //  color: var(--button-primary);
-            //  background-color: var(--button-primary-text); 
-            //  font-weight:600;
-            outline: none;
-            box-shadow: 0 0 0 3px hsla(220, 86%, 11%, 0.8);
-            //  outline: 2px dotted var(--button-primary-hover);
+                outline: none;
+                box-shadow: 0 0 0 3px hsla(220, 86%, 11%, 0.8);
             }
         }
     }
     & .listContainer {
             position: relative;
             display:flex;
-            // margin-left: 25px;
             align-self: center;
             width: 100%;
             @media screen and (min-width: 905px) {
-                // margin-left: 2.2em;
                 width: 60%;   
             }
             @media screen and (min-width: 526px) and (max-width: 904px) {
