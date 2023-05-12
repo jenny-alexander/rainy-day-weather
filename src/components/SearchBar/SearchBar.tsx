@@ -1,6 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
-import {IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
+import { IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
+import { IReverseGeoLocationResponseDTO, fetchReverseGeoLocation } from '../../api/geolocation/reverseGeolocationApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
 
@@ -12,9 +13,9 @@ interface SearchBarProps {
 const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
     const[activeSearch, setActiveSearch] = useState<boolean>(false);
-    const[userLocation, setUserLocation] = useState<GeolocationCoordinates>();
     const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);    
     const[weather, setWeather] = useState<IWeatherResponseDTO>();
+    const[userLocationSearch, setUserLocationSearch] = useState<boolean>(false);
     const[error, setError] = useState<string>("");
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
@@ -27,30 +28,36 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         });
     const inputRef = useRef<HTMLInputElement>(null);
   
-    // useEffect (() => {
-    //     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    // },[]);
-
-    //TODO: Search for user's location when loading the app & show the weather at that location
+    //put the cursor in the search field
     useEffect (() => {
             inputRef.current?.focus();
     },[]);
 
-    // //Get location from user's browser:
-    // const successCallback = (position: any) => {        
-    //     setUserLocation(position);
-    // };
-  
-    // const errorCallback = (error: any) => {
-    //     console.log('Error retrieving browser gelocation:', error);
-    // };
+    useEffect(() => {
+        if (userLocationSearch) {
+            getWeather(searchLocation);
+            setUserLocationSearch(false);
+        }
+    },[userLocationSearch]);
+
+    //Get location from user's browser:
+    const locationClick = () => {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    }
+    const successCallback = (position: any) => {  
+        getReverseGeoLocation(position.coords.latitude,position.coords.longitude);        
+    };
+    //TODO: SHOW ERROR HERE
+    const errorCallback = (error: any) => {
+        console.log('Error retrieving browser gelocation:', error);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);        
         getGeoLocation(event.target.value);
     }
 
-    const getWeather = async(location: IGeoLocationResponseDTO) => {        
+    const getWeather = async(location: IGeoLocationResponseDTO) => {
         if (searchLocation.key !== "") {            
             try {
                 const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
@@ -83,7 +90,24 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         }catch (e) {
             setError(`Error getting location. Please try again.`);
         } 
+    }
 
+    const getReverseGeoLocation = async(lat: number, lon: number) => {   
+        try {
+            const reverseGeoLocation: IReverseGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
+            if ( reverseGeoLocation.length > 0 ) {
+                const reverseGeoLocationWithKey = reverseGeoLocation.map(location => {
+                    return {
+                        ...location,
+                        key: crypto.randomUUID(),
+                    }
+                })
+                selectPlace(reverseGeoLocationWithKey[0]);
+                setUserLocationSearch(true);
+            }
+        }catch (e) {
+            setError(`Error getting location. Please try again.`);
+        } 
     }
 
     const selectPlace = (location: IGeoLocationResponseDTO) => {
@@ -117,17 +141,14 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
 
     return (
         <div className={styles.searchbar}>
-            {/* <FontAwesomeIcon icon="fa-solid fa-location-dot" />         */}
-            {/* <div className={`${mobileView ? styles.smallAppContainer : styles.appContainer}`}> */}
-            {/* <div className={cx(styles.searchError)}> */}
             <div className={`${error ? cx(styles.searchError, styles.showError) : styles.searchError}`}>
                 <div><i className="fa-solid fa-circle-exclamation"></i></div>
                 <div>{error}</div>
             </div>
             <div className={styles.searchbarInput}>
-                {/* <button className={styles.location}>
-                    <i className="fa-solid fa-location-dot"></i>
-                </button> */}
+                <button className={styles.location} id='location' onClick={() => locationClick()}>
+                    <i className="fa-solid fa-location-crosshairs"></i>
+                </button> 
                 <div className={styles.test}>
                     <div className={styles.inputWrapper}>            
                         <input placeholder='Enter a location...' 
@@ -146,6 +167,11 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                 </div>
                 <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
             </div>
+            {/* <div>
+                <button className={styles.location} id='location' onClick={() => locationClick()}>
+                    <div>Detect User Location</div>
+                </button> 
+            </div> */}
             {/* { geoLocation.length === 0 && activeSearch ?
                 <div className={styles.searchError}>Could not find location. Try again.</div> : null
             } */}

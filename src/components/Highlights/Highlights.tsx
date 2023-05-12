@@ -26,6 +26,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
     const [minTemp, setMinTemp] = useState<string>('');
     const [rain, setRain] = useState<string>('');
     const [humidity, setHumidity] = useState<string>('');
+    const [clouds, setClouds] = useState<string>('');
     const [airQuality, setAirQuality] = useState<string>('2');
 
     interface IHighlights {
@@ -35,7 +36,8 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         unit: string,      
     }
 
-    useEffect(() => {                
+    useEffect(() => {       
+        console.log('weatherProps.daily is:', weatherProp.daily[0]);         
         if (weatherProp.daily[0].wind_speed !== undefined) {
             setWind(Math.round(weatherProp.daily[0].wind_speed).toString());            
         }
@@ -48,10 +50,10 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         if (weatherProp.daily[0].pop !== undefined) {
             setRain(Math.round(weatherProp.daily[0].pop * 100).toString())
         }
-        //TODO: Get air quality
-        // if (weatherProp.daily[0].wind !== undefined) {
-        //     setUv(Math.round(weatherProp.daily[0].uvi).toString())
-        // }
+        if (weatherProp.daily[0].clouds !== undefined) {
+            console.log('clouds were:', weatherProp.daily[0].clouds);
+            setClouds(Math.round(weatherProp.daily[0].clouds).toString())
+        }
         if (weatherProp.daily[0].temp.max !== undefined) {
             setMaxTemp(Math.round(weatherProp.daily[0].temp.max).toString())
         }
@@ -65,16 +67,15 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         {section: 'wind', imageCode: 2, reading: wind, unit: 'mi/h'},
         {section: 'PoP', imageCode: 3, reading: rain, unit: '%'},
         {section: 'humidity', imageCode: 4, reading: humidity, unit: '%'},
-        {section: 'air quality', imageCode: 5, reading: airQuality, unit: 'AQI'},
-        {section: 'uv', imageCode: 6, reading: uv, unit: 'UV'}
+        {section: 'cloud cover', imageCode: 5, reading: clouds, unit: '%'},
+        {section: 'uv', imageCode: 6, reading: uv, unit: 'UV'},
     ];
 
     return (
         <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
-            
             <div className={styles.highlightsTitle}>Today's Highlights</div>
             <div className={styles.highlightsDetails}>            
-            {highlights.map((highlights, index: number) => {
+            {highlights.map((highlights, index: number) => {                
                     return (
                         <div className={styles.sectionDetails} key={highlights.section + '-' + index}>
                             { mobileView ? null :

@@ -7,6 +7,11 @@ export const config = {
             baseUrl: 'https://api.openweathermap.org/geo/1.0/direct',
         }
     },
+    reverseGeolocation: {
+        api: {
+            baseUrl: 'http://api.openweathermap.org/geo/1.0/reverse',
+        }
+    },
     weather: {
         api: {
             baseUrl: 'https://api.openweathermap.org/data/3.0/onecall',

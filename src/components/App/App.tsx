@@ -5,9 +5,7 @@ import DailyForecast from '../Forecast/Daily/DailyForecast';
 import WeeklyForecast from '../Forecast/Weekly/WeeklyForecast';
 import Highlights from '../Highlights/Highlights';
 import Switch from '../Common/Switch/Switch';
-import Modal from '../Common/Modal/Modal';
 import Alert from '../Alert/Alert';
-import { config } from '../../config/appConfig';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 
 const App = (): JSX.Element => {

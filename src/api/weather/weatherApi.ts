@@ -29,6 +29,7 @@ export interface IWeatherResponseDTO {
             },
             humidity: number,
             wind_speed: number,
+            clouds: number, //cloudiness
             pop: number,
             uvi: number
             weather: [{

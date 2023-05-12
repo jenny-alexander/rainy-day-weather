@@ -144,5 +144,5 @@ highlightsImage.set(1,'/images/temperature.png');
 highlightsImage.set(2,'/images/wind.png');
 highlightsImage.set(3,'/images/rain.png');
 highlightsImage.set(4,'/images/humidity.png');
-highlightsImage.set(5,'/images/oxygen.png');
+highlightsImage.set(5,'/images/cloud_cover.png');
 highlightsImage.set(6,'/images/uv.png');
