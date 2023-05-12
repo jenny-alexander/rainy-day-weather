@@ -146,9 +146,6 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                 <div>{error}</div>
             </div>
             <div className={styles.searchbarInput}>
-                <button className={styles.location} id='location' onClick={() => locationClick()}>
-                    <i className="fa-solid fa-location-crosshairs"></i>
-                </button> 
                 <div className={styles.test}>
                     <div className={styles.inputWrapper}>            
                         <input placeholder='Enter a location...' 
@@ -165,16 +162,16 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                         <i className="fa-solid fa-x"/>
                     </button>
                 </div>
-                <button onClick={() => searchForWeather()} className={styles.searchButton}>Search</button>
+                <button title="Search for Weather" className={`${searchTerm === '' || (searchTerm !== '' && !activeSearch) ? styles.searchButton : cx(styles.searchButton, styles.hide)}`}
+                        onClick={() => searchForWeather()}><i className="fa-solid fa-magnifying-glass"></i></button>
             </div>
-            {/* <div>
-                <button className={styles.location} id='location' onClick={() => locationClick()}>
-                    <div>Detect User Location</div>
-                </button> 
-            </div> */}
-            {/* { geoLocation.length === 0 && activeSearch ?
-                <div className={styles.searchError}>Could not find location. Try again.</div> : null
-            } */}
+            {
+                <div className={`${searchTerm === '' || (searchTerm !== '' && !activeSearch) ? styles.userLocation : cx(styles.userLocation, styles.hide)}`}>
+                    <button className={styles.location} id='location' onClick={() => locationClick()}>
+                        <div>Detect User Location</div>
+                    </button> 
+                </div> 
+            }
             {
                 searchTerm === '' || geoLocation.length === 0 ? null :             
                     <div className={styles.listContainer}>

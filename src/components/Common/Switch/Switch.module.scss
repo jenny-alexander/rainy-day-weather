@@ -6,9 +6,16 @@
     top: 0;
     margin-right: 0.5em;
     margin-top: 0.5em;
+    padding: 3px;
+    border: 2px dotted transparent;
+    border-radius: 5px;
     @media screen and (min-width: 1175px) {      
       margin-right:3em;
     }
+    &:hover{
+      cursor: pointer;
+      border: 2px dotted lightgrey;
+  }
     & .switch {
         position: relative;
         display: inline-block;
@@ -25,7 +32,7 @@
             height: 0;
         }
         &:hover{
-            cursor: pointer;
+            cursor: pointer;            
         }
     }
     & .slider {
