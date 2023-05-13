@@ -46,10 +46,9 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
     }
     const successCallback = (position: any) => {  
         getReverseGeoLocation(position.coords.latitude,position.coords.longitude);        
-    };
-    //TODO: SHOW ERROR HERE
-    const errorCallback = (error: any) => {
-        console.log('Error retrieving browser gelocation:', error);
+    };    
+    const errorCallback = (error: any) => {        
+        setError('Could not retrieve your location. Check your location permissions.');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +91,8 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         } 
     }
 
-    const getReverseGeoLocation = async(lat: number, lon: number) => {   
+    const getReverseGeoLocation = async(lat: number, lon: number) => {
+        console.log('in getReverseGeoLocation with lat and lon:', lat, lon);
         try {
             const reverseGeoLocation: IReverseGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
             if ( reverseGeoLocation.length > 0 ) {
