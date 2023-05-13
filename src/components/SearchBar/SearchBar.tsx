@@ -8,15 +8,16 @@ import cx from 'classnames';
 interface SearchBarProps {
     returnWeather: (weather: IWeatherResponseDTO) => void;
     returnLocation: (location: string) => void;
+    showSpinner: (on: boolean) => void;
 }
 
-const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element => {
+const SearchBar = ({returnWeather, returnLocation, showSpinner}: SearchBarProps): JSX.Element => {
     const[searchTerm, setSearchTerm] = useState<string>('');
     const[activeSearch, setActiveSearch] = useState<boolean>(false);
     const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);    
-    const[weather, setWeather] = useState<IWeatherResponseDTO>();
     const[userLocationSearch, setUserLocationSearch] = useState<boolean>(false);
     const[error, setError] = useState<string>("");
+    const[disableSearchButton, setHideSearchButton] = useState<boolean>(false);
     const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
             country: '',
@@ -42,9 +43,11 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
 
     //Get location from user's browser:
     const locationClick = () => {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        showSpinner(true);
+        setHideSearchButton(true);
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);        
     }
-    const successCallback = (position: any) => {  
+    const successCallback = (position: any) => {
         getReverseGeoLocation(position.coords.latitude,position.coords.longitude);        
     };    
     const errorCallback = (error: any) => {        
@@ -60,8 +63,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         if (searchLocation.key !== "") {            
             try {
                 const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
-                if ( Object.entries(weather).length > 0 ) {               
-                    setWeather(weather);                          
+                if ( Object.entries(weather).length > 0 ) {                                     
                     returnWeather(weather);                    
                     returnLocation(searchTerm);
                 }
@@ -71,6 +73,8 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         }else {
             setError('Choose a location from the list');
         }
+        showSpinner(false);
+        setHideSearchButton(false);
     }
 
     const getGeoLocation = async(searchTerm: string) => {   
@@ -91,8 +95,7 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
         } 
     }
 
-    const getReverseGeoLocation = async(lat: number, lon: number) => {
-        console.log('in getReverseGeoLocation with lat and lon:', lat, lon);
+    const getReverseGeoLocation = async(lat: number, lon: number) => {    
         try {
             const reverseGeoLocation: IReverseGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
             if ( reverseGeoLocation.length > 0 ) {
@@ -162,8 +165,12 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                         <i className="fa-solid fa-x"/>
                     </button>
                 </div>
-                <button title="Search for Weather" className={`${searchTerm === '' || (searchTerm !== '' && !activeSearch) ? styles.searchButton : cx(styles.searchButton, styles.hide)}`}
-                        onClick={() => searchForWeather()}><i className="fa-solid fa-magnifying-glass"></i></button>
+                <button title="Search for Weather"
+                        disabled={disableSearchButton}                        
+                        className={`${disableSearchButton ? cx(styles.searchButton, styles.hide) : styles.searchButton}`}
+                        onClick={() => searchForWeather()}>
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
             {
                 <div className={`${searchTerm === '' || (searchTerm !== '' && !activeSearch) ? styles.userLocation : cx(styles.userLocation, styles.hide)}`}>
@@ -178,22 +185,22 @@ const SearchBar = ({returnWeather, returnLocation}: SearchBarProps): JSX.Element
                                     { geoLocation.length === 0 && activeSearch ?
                 <div className={styles.searchError}>Could not find location. Try again.</div> : null
             }
-                        <li className={styles.locationList}>
-                            {
-                                geoLocation.length > 0 ? 
-                                    geoLocation.map((item: IGeoLocationResponseDTO)=> {
-                                        return (
-                                            <button key={item.key}
-                                                onClick={()=> selectPlace(item)}>
-                                                    {item.name}, {item.state}, {item.country}
-                                            </button>
-                                        )
-                                    }) : null
-                            }
-                        </li> 
-                    </div>
+                <li className={styles.locationList}>
+                    {
+                        geoLocation.length > 0 ? 
+                            geoLocation.map((item: IGeoLocationResponseDTO)=> {
+                                return (
+                                    <button key={item.key}
+                                        onClick={()=> selectPlace(item)}>
+                                            {item.name}, {item.state}, {item.country}
+                                    </button>
+                                )
+                            }) : null
+                    }
+                </li> 
+            </div>
             }
-        </div>   
+        </div> 
     )
 }
 

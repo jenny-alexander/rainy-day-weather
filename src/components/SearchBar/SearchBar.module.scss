@@ -7,9 +7,6 @@
     @media screen and (min-width: 905px) {
         border-radius: 15px;
     }
-    // @media screen and (max-width: 525px) {
-    //     width: 90%;
-    // }
     & .searchError {
         display: flex;
         column-gap: 0.3em;
@@ -44,7 +41,6 @@
             width: 85%;
         }
         @media screen and (max-width: 525px) {            
-            // flex-direction: column;
             row-gap: 0.4em;
         }
         & .test {
@@ -92,13 +88,7 @@
             background-color: var(--button-primary);
             color: var(--button-primary-text);
             padding: 0.8em;
-            letter-spacing: 0.07em;
-            @media screen and (max-width: 525px) {
-                // width: 101%;
-                // &.hide {
-                //     display: none;
-                // }
-            }            
+            letter-spacing: 0.07em;          
             &:hover {
                 cursor: pointer;         
                 outline: 4px solid var(--button-primary-hover);
@@ -107,6 +97,11 @@
             &:focus {
                 outline: none;
                 box-shadow: 0 0 0 3px hsla(220, 86%, 11%, 0.8);
+            }
+            &.hide {
+                opacity: 0.5;
+                cursor: default;
+                outline: none;
             }
         }
 
@@ -134,7 +129,6 @@
             text-decoration: underline var(--button-secondary-text);    
             &:hover {
                 cursor:pointer;                    
-                // color: var(--button-secondary-text-hover);
                 outline: 2px dotted var(--button-secondary-text-hover);
                 border-radius: 5px;                      
             }    
@@ -175,7 +169,6 @@
                     background-color: rgb(226, 225, 225);
                     color: black;
                 }
-                
                 &:last-of-type {
                     border-radius: 0px 0px 10px 10px;
                 }

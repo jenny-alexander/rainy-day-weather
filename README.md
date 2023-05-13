@@ -8,11 +8,11 @@
 
 * Rainy Day Weather a responsive web application that displays weather information for a given location.
 * API: Fetch info from OpenWeatherMap
-* Status: In Progress (80% completed - Alerts Modal portion in progress)
+* Status: Completed
 
-## First Draft Design
+## Screenshot of app
 
-# ![image of Rainy Day Weather desktop app](./public/images/rainy_day_weather_desktop.png)
+# ![image of Rainy Day Weather desktop app](./public/images/rainy_day_screenshot.png)
 
 **Frontend:** Frontend is built using React, TypeScript, CSS and HTML.
 

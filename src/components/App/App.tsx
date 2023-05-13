@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, CSSProperties} from 'react';
 import styles from './App.module.scss';
 import SearchBar from '../SearchBar/SearchBar';
 import DailyForecast from '../Forecast/Daily/DailyForecast';
@@ -7,6 +7,7 @@ import Highlights from '../Highlights/Highlights';
 import Switch from '../Common/Switch/Switch';
 import Alert from '../Alert/Alert';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
+import { ScaleLoader } from 'react-spinners';
 
 const App = (): JSX.Element => {
   const [mobileView, setMobileView] = useState(false);
@@ -18,6 +19,7 @@ const App = (): JSX.Element => {
   const [theme, setTheme] = useState<string>('light');
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);  
 
   useEffect(() => {
       setMobileView(mql.matches)
@@ -46,10 +48,18 @@ const App = (): JSX.Element => {
     const newTheme = theme === 'light' ? 'dark' : 'light';    
     setTheme(newTheme);
   }
-  const alertClick = () => {
-    console.log('clicked on alert')
+  const alertClick = () => {    
     setShowModal(!showModal)
   }
+
+  const locationClick = (on : boolean) => {    
+    setIsLoading(on);
+  }
+  const override: CSSProperties = {
+    display: "flex",
+    margin: "0 auto",
+    borderColor: "Grey",
+  };
 
   if (!fontLoaded) {
     return(
@@ -72,7 +82,19 @@ const App = (): JSX.Element => {
             <SearchBar 
                 returnWeather={handleGetWeather}
                 returnLocation={handleGetLocation}
-              />
+                showSpinner={locationClick}
+            />
+            { isLoading ? 
+                <div className={styles.sweetLoading}> 
+                  <ScaleLoader
+                    aria-label="Loading Spinner"
+                    aria-live="polite"
+                    aria-busy={isLoading}
+                    cssOverride={override}
+                    color='rgb(104, 117, 217'
+                  />
+                </div>
+              : null }
             <div className={styles.titleContainer}>
               <div className={styles.appTitle}>Rainy Day Weather</div>
             </div>
@@ -85,15 +107,15 @@ const App = (): JSX.Element => {
                     setShow={setShowModal}
                   /> 
                   <div className={styles.detailsContainer}>
-                    <DailyForecast 
-                      mobileView={mobileView}  
-                      weatherProp={weather}
-                      locationProp={location}     
-                    /> 
-                    <Highlights mobileView={mobileView} 
-                                weatherProp={weather}
-                    />
-                    <WeeklyForecast weatherProp={weather}/> 
+                      <DailyForecast 
+                        mobileView={mobileView}  
+                        weatherProp={weather}
+                        locationProp={location}     
+                      /> 
+                      <Highlights mobileView={mobileView} 
+                                  weatherProp={weather}
+                      />
+                      <WeeklyForecast weatherProp={weather}/>
                   </div></> : 
                   <div className={styles.logoContainer}>
                     <img className={styles.logo} alt="Umbrella logo of app" src='/images/umbrella_yellow.png'></img>
@@ -103,7 +125,6 @@ const App = (): JSX.Element => {
         </div>
       );
     }
-
 }
 
 export default App;

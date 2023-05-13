@@ -36,8 +36,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         unit: string,      
     }
 
-    useEffect(() => {       
-        console.log('weatherProps.daily is:', weatherProp.daily[0]);         
+    useEffect(() => {                   
         if (weatherProp.daily[0].wind_speed !== undefined) {
             setWind(Math.round(weatherProp.daily[0].wind_speed).toString());            
         }
@@ -50,8 +49,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         if (weatherProp.daily[0].pop !== undefined) {
             setRain(Math.round(weatherProp.daily[0].pop * 100).toString())
         }
-        if (weatherProp.daily[0].clouds !== undefined) {
-            console.log('clouds were:', weatherProp.daily[0].clouds);
+        if (weatherProp.daily[0].clouds !== undefined) {            
             setClouds(Math.round(weatherProp.daily[0].clouds).toString())
         }
         if (weatherProp.daily[0].temp.max !== undefined) {
