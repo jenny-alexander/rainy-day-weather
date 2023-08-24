@@ -35,8 +35,11 @@ const App = (): JSX.Element => {
 
   const handleGetWeather = (weather: IWeatherResponseDTO): void => {
     setWeather(weather);
+    console.log('weather is:', weather);
     if ( weather?.alerts && weather.alerts.length > 0) {
       setAlert(true);
+    } else {
+      setAlert(false);
     }
   }
   const handleGetLocation = (location: string): void => {
