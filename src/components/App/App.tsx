@@ -34,12 +34,10 @@ const App = (): JSX.Element => {
   mql.addEventListener('change', (e) => { setMobileView(mql.matches)  });
 
   const handleGetWeather = (weather: IWeatherResponseDTO): void => {
-    setWeather(weather);
-    console.log('weather is:', weather);
+    setAlert(false);
+    setWeather(weather);    
     if ( weather?.alerts && weather.alerts.length > 0) {
       setAlert(true);
-    } else {
-      setAlert(false);
     }
   }
   const handleGetLocation = (location: string): void => {

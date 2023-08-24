@@ -46,13 +46,6 @@ const Alert = ({weatherProp, show, themeProp, setShow} : AlertProps): JSX.Elemen
                                     )
                                     })
                                 )}
-                                { weather?.alerts && weather.alerts.length > 0 && (
-                                    weather.alerts.map((alert) => {
-                                    return(
-                                        <div className={styles.modalContent}>{alert.description}</div>
-                                    )
-                                    })
-                                )}
                             </div>
                             <div className={styles.modalActions}>
                                 <div className={styles.actionButtons}>
