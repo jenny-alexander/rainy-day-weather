@@ -2,7 +2,7 @@
 
 # ![image of Rainy Day Weather logo](./public/images/umbrella_yellow.png)
 
-## Run the app here: <https://rainy-day-weather.web.app//>
+## Run the app here: <https://rainy-day-weather.firebaseapp.com/>
 
 ## Description
 
