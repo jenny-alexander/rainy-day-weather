@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
 import { IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
 import { IReverseGeoLocationResponseDTO, fetchReverseGeoLocation } from '../../api/geolocation/reverseGeolocationApi';
@@ -11,14 +11,14 @@ interface SearchBarProps {
     showSpinner: (on: boolean) => void;
 }
 
-const SearchBar = ({returnWeather, returnLocation, showSpinner}: SearchBarProps): JSX.Element => {
-    const[searchTerm, setSearchTerm] = useState<string>('');
-    const[activeSearch, setActiveSearch] = useState<boolean>(false);
-    const[geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);    
-    const[userLocationSearch, setUserLocationSearch] = useState<boolean>(false);
-    const[error, setError] = useState<string>("");
-    const[disableSearchButton, setHideSearchButton] = useState<boolean>(false);
-    const[searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
+const SearchBar = ({ returnWeather, returnLocation, showSpinner }: SearchBarProps): JSX.Element => {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [activeSearch, setActiveSearch] = useState<boolean>(false);
+    const [geoLocation, setGeoLocation] = useState<IGeoLocationResponseDTO[]>([]);
+    const [userLocationSearch, setUserLocationSearch] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
+    const [disableSearchButton, setHideSearchButton] = useState<boolean>(false);
+    const [searchLocation, setSearchLocation] = useState<IGeoLocationResponseDTO>
         ({
             country: '',
             lat: 0,
@@ -28,77 +28,77 @@ const SearchBar = ({returnWeather, returnLocation, showSpinner}: SearchBarProps)
             key: '',
         });
     const inputRef = useRef<HTMLInputElement>(null);
-  
+
     //put the cursor in the search field
-    useEffect (() => {
-            inputRef.current?.focus();
-    },[]);
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     useEffect(() => {
         if (userLocationSearch) {
             getWeather(searchLocation);
             setUserLocationSearch(false);
         }
-    },[userLocationSearch]);
+    }, [userLocationSearch]);
 
     //Get location from user's browser:
     const locationClick = () => {
         showSpinner(true);
         setHideSearchButton(true);
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);        
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     }
     const successCallback = (position: any) => {
-        getReverseGeoLocation(position.coords.latitude,position.coords.longitude);        
-    };    
-    const errorCallback = (error: any) => {        
+        getReverseGeoLocation(position.coords.latitude, position.coords.longitude);
+    };
+    const errorCallback = (error: any) => {
         setError('Could not retrieve your location. Check your location permissions.');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);        
+        setSearchTerm(event.target.value);
         getGeoLocation(event.target.value);
     }
 
-    const getWeather = async(location: IGeoLocationResponseDTO) => {
-        if (searchLocation.key !== "") {            
+    const getWeather = async (location: IGeoLocationResponseDTO) => {
+        if (searchLocation.key !== "") {
             try {
-                const weather: IWeatherResponseDTO  = await fetchWeather(location.lat, location.lon);
-                if ( Object.entries(weather).length > 0 ) {                                     
-                    returnWeather(weather);                    
+                const weather: IWeatherResponseDTO = await fetchWeather(location.lat, location.lon);
+                if (Object.entries(weather).length > 0) {
+                    returnWeather(weather);
                     returnLocation(searchTerm);
                 }
-            }catch (e) {                
+            } catch (e) {
                 setError(`Error getting weather. Please try again.`);
             }
-        }else {
+        } else {
             setError('Choose a location from the list');
         }
         showSpinner(false);
         setHideSearchButton(false);
     }
 
-    const getGeoLocation = async(searchTerm: string) => {   
+    const getGeoLocation = async (searchTerm: string) => {
         setActiveSearch(true);
         try {
             const geoLocation: IGeoLocationResponseDTO[] = await fetchGeoLocation(searchTerm);
-            if ( geoLocation.length > 0 ) {
+            if (geoLocation.length > 0) {
                 const geoLocationWithKey = geoLocation.map(location => {
                     return {
                         ...location,
                         key: crypto.randomUUID(),
                     }
-                })                
+                })
                 setGeoLocation(geoLocationWithKey);
             }
-        }catch (e) {
+        } catch (e) {
             setError(`Error getting location. Please try again.`);
-        } 
+        }
     }
 
-    const getReverseGeoLocation = async(lat: number, lon: number) => {    
+    const getReverseGeoLocation = async (lat: number, lon: number) => {
         try {
             const reverseGeoLocation: IReverseGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
-            if ( reverseGeoLocation.length > 0 ) {
+            if (reverseGeoLocation.length > 0) {
                 const reverseGeoLocationWithKey = reverseGeoLocation.map(location => {
                     return {
                         ...location,
@@ -108,14 +108,14 @@ const SearchBar = ({returnWeather, returnLocation, showSpinner}: SearchBarProps)
                 selectPlace(reverseGeoLocationWithKey[0]);
                 setUserLocationSearch(true);
             }
-        }catch (e) {
+        } catch (e) {
             setError(`Error getting location. Please try again.`);
-        } 
+        }
     }
 
     const selectPlace = (location: IGeoLocationResponseDTO) => {
         const place: string = [location.name, location.state, location.country]
-            .filter(element => Boolean(element)).join(', ');       
+            .filter(element => Boolean(element)).join(', ');
         setSearchTerm(place);
         setError('');
         setSearchLocation(location);
@@ -150,57 +150,57 @@ const SearchBar = ({returnWeather, returnLocation, showSpinner}: SearchBarProps)
             </div>
             <div className={styles.searchbarInput}>
                 <div className={styles.test}>
-                    <div className={styles.inputWrapper}>            
-                        <input placeholder='Enter a location...' 
+                    <div className={styles.inputWrapper}>
+                        <input placeholder='Enter a location...'
                             className={styles.input}
                             ref={inputRef}
                             type="text"
                             value={searchTerm}
-                            onChange={handleChange}                        
-                        /> 
-                    </div>                                    
+                            onChange={handleChange}
+                        />
+                    </div>
                     <button title="Clear Search" className={`${searchTerm === '' ? cx(styles.clearInputButton, styles.hideInputButton) : styles.clearInputButton}`}
-                        onClick={()=>clearSearchTerm()}
+                        onClick={() => clearSearchTerm()}
                     >
-                        <i className="fa-solid fa-x"/>
+                        <i className="fa-solid fa-x" />
                     </button>
                 </div>
                 <button title="Search for Weather"
-                        disabled={disableSearchButton}                        
-                        className={`${disableSearchButton ? cx(styles.searchButton, styles.hide) : styles.searchButton}`}
-                        onClick={() => searchForWeather()}>
-                            <i className="fa-solid fa-magnifying-glass"></i>
+                    disabled={disableSearchButton}
+                    className={`${disableSearchButton ? cx(styles.searchButton, styles.hide) : styles.searchButton}`}
+                    onClick={() => searchForWeather()}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
             {
                 <div className={`${searchTerm === '' || (searchTerm !== '' && !activeSearch) ? styles.userLocation : cx(styles.userLocation, styles.hide)}`}>
                     <button className={styles.location} id='location' onClick={() => locationClick()}>
                         <div>Detect User Location</div>
-                    </button> 
-                </div> 
+                    </button>
+                </div>
             }
             {
-                searchTerm === '' || geoLocation.length === 0 ? null :             
+                searchTerm === '' || geoLocation.length === 0 ? null :
                     <div className={styles.listContainer}>
-                                    { geoLocation.length === 0 && activeSearch ?
-                <div className={styles.searchError}>Could not find location. Try again.</div> : null
+                        {geoLocation.length === 0 && activeSearch ?
+                            <div className={styles.searchError}>Could not find location. Try again.</div> : null
+                        }
+                        <li className={styles.locationList}>
+                            {
+                                geoLocation.length > 0 ?
+                                    geoLocation.map((item: IGeoLocationResponseDTO) => {
+                                        return (
+                                            <button key={item.key}
+                                                onClick={() => selectPlace(item)}>
+                                                {item.name}, {item.state}, {item.country}
+                                            </button>
+                                        )
+                                    }) : null
+                            }
+                        </li>
+                    </div>
             }
-                <li className={styles.locationList}>
-                    {
-                        geoLocation.length > 0 ? 
-                            geoLocation.map((item: IGeoLocationResponseDTO)=> {
-                                return (
-                                    <button key={item.key}
-                                        onClick={()=> selectPlace(item)}>
-                                            {item.name}, {item.state}, {item.country}
-                                    </button>
-                                )
-                            }) : null
-                    }
-                </li> 
-            </div>
-            }
-        </div> 
+        </div>
     )
 }
 

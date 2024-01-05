@@ -1,6 +1,5 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Highlights.module.scss';
-import { weatherIconImages } from '../../utils/constants/images';
 import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
 import { highlightsImage } from '../../utils/constants/images';
 
@@ -9,17 +8,7 @@ type DailyHighlightsProps = {
     weatherProp: IWeatherResponseDTO;
 }
 
-interface highlightsWeather {
-    minTemp: string,
-    maxTemp: string,
-    humidity: string,
-    wind: string,
-    rain: string,
-    uv: string,
-    airQuality: string,
-}
-
-const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Element => {
+const Highlights = ({ mobileView, weatherProp }: DailyHighlightsProps): JSX.Element => {
     const [wind, setWind] = useState<string>('');
     const [uv, setUv] = useState<string>('');
     const [maxTemp, setMaxTemp] = useState<string>('');
@@ -27,18 +16,17 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
     const [rain, setRain] = useState<string>('');
     const [humidity, setHumidity] = useState<string>('');
     const [clouds, setClouds] = useState<string>('');
-    const [airQuality, setAirQuality] = useState<string>('2');
 
     interface IHighlights {
         section: string;
         imageCode: number;
-        reading: string| undefined;
-        unit: string,      
+        reading: string | undefined;
+        unit: string,
     }
 
-    useEffect(() => {                   
+    useEffect(() => {
         if (weatherProp.daily[0].wind_speed !== undefined) {
-            setWind(Math.round(weatherProp.daily[0].wind_speed).toString());            
+            setWind(Math.round(weatherProp.daily[0].wind_speed).toString());
         }
         if (weatherProp.daily[0].uvi !== undefined) {
             setUv(Math.round(weatherProp.daily[0].uvi).toString())
@@ -49,7 +37,7 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         if (weatherProp.daily[0].pop !== undefined) {
             setRain(Math.round(weatherProp.daily[0].pop * 100).toString())
         }
-        if (weatherProp.daily[0].clouds !== undefined) {            
+        if (weatherProp.daily[0].clouds !== undefined) {
             setClouds(Math.round(weatherProp.daily[0].clouds).toString())
         }
         if (weatherProp.daily[0].temp.max !== undefined) {
@@ -57,30 +45,30 @@ const Highlights = ({mobileView, weatherProp}: DailyHighlightsProps): JSX.Elemen
         }
         if (weatherProp.daily[0].temp.min !== undefined) {
             setMinTemp(Math.round(weatherProp.daily[0].temp.min).toString())
-        }    
-    },[weatherProp])
+        }
+    }, [weatherProp])
 
-    const highlights: IHighlights[] = [    
-        {section: 'temperature', imageCode: 1, reading: maxTemp + ' / ' + minTemp, unit: 'F°'},
-        {section: 'wind', imageCode: 2, reading: wind, unit: 'mi/h'},
-        {section: 'PoP', imageCode: 3, reading: rain, unit: '%'},
-        {section: 'humidity', imageCode: 4, reading: humidity, unit: '%'},
-        {section: 'cloud cover', imageCode: 5, reading: clouds, unit: '%'},
-        {section: 'uv', imageCode: 6, reading: uv, unit: 'UV'},
+    const highlights: IHighlights[] = [
+        { section: 'temperature', imageCode: 1, reading: maxTemp + ' / ' + minTemp, unit: 'F°' },
+        { section: 'wind', imageCode: 2, reading: wind, unit: 'mi/h' },
+        { section: 'PoP', imageCode: 3, reading: rain, unit: '%' },
+        { section: 'humidity', imageCode: 4, reading: humidity, unit: '%' },
+        { section: 'cloud cover', imageCode: 5, reading: clouds, unit: '%' },
+        { section: 'uv', imageCode: 6, reading: uv, unit: 'UV' },
     ];
 
     return (
         <div className={`${mobileView ? styles.mobileHighlights : styles.highlights}`}>
             <div className={styles.highlightsTitle}>Today's Highlights</div>
-            <div className={styles.highlightsDetails}>            
-            {highlights.map((highlights, index: number) => {                
+            <div className={styles.highlightsDetails}>
+                {highlights.map((highlights, index: number) => {
                     return (
                         <div className={styles.sectionDetails} key={highlights.section + '-' + index}>
-                            { mobileView ? null :
+                            {mobileView ? null :
                                 <div className={styles.sectionTitle}>{highlights.section}</div>
                             }
                             <div className={styles.sectionInfo}>
-                                <img alt="weather highlight icon" className={styles.image} src={highlightsImage.get(highlights.imageCode)}/>                                
+                                <img alt="weather highlight icon" className={styles.image} src={highlightsImage.get(highlights.imageCode)} />
                                 <div className={styles.sectionReading}>
                                     {highlights.reading !== undefined ? highlights.reading : ''
                                     } {highlights.unit}

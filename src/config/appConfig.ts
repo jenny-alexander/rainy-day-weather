@@ -1,4 +1,4 @@
-import { ModalConfig, ModalPositionX, ModalPositionY } from "../ts/interfaces/modal.interface";
+import { ModalPositionX, ModalPositionY } from "../ts/interfaces/modal.interface";
 
 export const config = {
     appId: process.env.REACT_APP_WEATHER_KEY,
@@ -15,7 +15,7 @@ export const config = {
     weather: {
         api: {
             baseUrl: 'https://api.openweathermap.org/data/3.0/onecall',
-            
+
         }
     },
     alertModal: {

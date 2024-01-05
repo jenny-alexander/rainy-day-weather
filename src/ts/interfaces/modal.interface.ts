@@ -1,9 +1,3 @@
-// export interface ModalConfigDummy {
-// 	modal1: ModalConfig
-// 	modal2: ModalConfig
-// 	modal3: ModalConfig
-// 	modal4: ModalConfig
-// }
 export interface ModalConfig {
 	title: string
 	// showHeader: boolean

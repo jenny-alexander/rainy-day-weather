@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Alert.module.scss';
 import Modal from '../Common/Modal/Modal';
 import { config } from '../../config/appConfig';
@@ -11,51 +11,51 @@ type AlertProps = {
     setShow: (value: boolean) => void
 }
 
-const Alert = ({weatherProp, show, themeProp, setShow} : AlertProps): JSX.Element => {
+const Alert = ({ weatherProp, show, themeProp, setShow }: AlertProps): JSX.Element => {
     const [weather, setWeather] = useState<IWeatherResponseDTO>();
     const [showModal, setShowModal] = useState<boolean>(show);
     const [theme, setTheme] = useState<string>('');
 
     useEffect(() => {
         setShowModal(show);
-    },[show]);
+    }, [show]);
 
     useEffect(() => {
         setWeather(weatherProp);
-    },[weatherProp]);
+    }, [weatherProp]);
 
     useEffect(() => {
         setTheme(themeProp);
-    },[themeProp]);
+    }, [themeProp]);
 
     return (
-        <Modal show={showModal} 
-            setShow={setShowModal} 
-            config={config.alertModal}
+        <Modal show={showModal}
+            setShow={setShowModal}
+            // config={config.alertModal}
             wrapperId='modal-portal'
             theme={theme}>
-                <div className={styles.modalContainer}>
-                    <div className={styles.modal}>
-                        <div className={styles.modalTitle}>{config.alertModal.title}</div>                  
-                        <div className={styles.modalBody}>
-                            <div className={styles.modalContentContainer} tabIndex={0} >
-                                { weather?.alerts && weather.alerts.length > 0 && (
-                                    weather.alerts.map((alert) => {
-                                    return(
+            <div className={styles.modalContainer}>
+                <div className={styles.modal}>
+                    <div className={styles.modalTitle}>{config.alertModal.title}</div>
+                    <div className={styles.modalBody}>
+                        <div className={styles.modalContentContainer} tabIndex={0} >
+                            {weather?.alerts && weather.alerts.length > 0 && (
+                                weather.alerts.map((alert) => {
+                                    return (
                                         <div className={styles.modalContent}>{alert.description}</div>
                                     )
-                                    })
-                                )}
+                                })
+                            )}
+                        </div>
+                        <div className={styles.modalActions}>
+                            <div className={styles.actionButtons}>
+                                <button onClick={() => setShow(false)}>Close</button>
                             </div>
-                            <div className={styles.modalActions}>
-                                <div className={styles.actionButtons}>
-                                    <button onClick={()=> setShow(false)}>Close</button>
-                                </div>
-                            </div>                    
                         </div>
                     </div>
+                </div>
             </div>
-    </Modal>
+        </Modal>
     )
 }
 export default Alert;
