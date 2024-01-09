@@ -1,6 +1,5 @@
 export interface ModalConfig {
 	title: string
-	// showHeader: boolean
 	positionX: ModalPositionX
 	positionY: ModalPositionY
 	padding: string

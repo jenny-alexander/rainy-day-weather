@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Highlights.module.scss';
-import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
+import { IWeatherResponseDTO } from '../../ts/interfaces/weather.interface';
 import { highlightsImage } from '../../utils/constants/images';
 
 type DailyHighlightsProps = {

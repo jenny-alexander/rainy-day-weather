@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './WeeklyForecast.module.scss';
-import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
+import { IWeatherResponseDTO } from '../../../ts/interfaces/weather.interface';
 import { weatherIconImages } from '../../../utils/constants/images';
 
 const dayNames: string[] = [

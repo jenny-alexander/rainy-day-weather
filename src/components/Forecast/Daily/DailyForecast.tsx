@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import HourlyForecast from '../Hourly/HourlyForecast';
 import styles from './DailyForecast.module.scss';
 import { weatherIconImages, nightIconImages } from '../../../utils/constants/images';
-import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
+import { IWeatherResponseDTO } from '../../../ts/interfaces/weather.interface';
 import Formatter from '../../../utils/formatter/formatter';
 // import 
 type DailyForecastProps = {

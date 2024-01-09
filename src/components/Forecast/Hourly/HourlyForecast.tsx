@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { IWeatherResponseDTO } from '../../../api/weather/weatherApi';
+import { IWeatherResponseDTO } from '../../../ts/interfaces/weather.interface';
 import styles from './HourlyForecast.module.scss';
 import { weatherIconImages } from '../../../utils/constants/images';
 import cx from 'classnames';

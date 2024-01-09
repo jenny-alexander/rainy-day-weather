@@ -12,7 +12,6 @@ const Modal = ({ show, setShow, children, wrapperId, theme }: ModalProps): JSX.E
     const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
     useEffect(() => {
-        console.log('theme triggered useEffect')
         if (portalElement) {
             portalElement.setAttribute('data-theme', theme);
         }

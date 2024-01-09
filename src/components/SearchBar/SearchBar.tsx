@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { IGeoLocationResponseDTO, fetchGeoLocation } from '../../api/geolocation/geolocationApi';
-import { IWeatherResponseDTO, fetchWeather } from '../../api/weather/weatherApi';
-import { IReverseGeoLocationResponseDTO, fetchReverseGeoLocation } from '../../api/geolocation/reverseGeolocationApi';
+import { fetchGeoLocation } from '../../api/geolocation/geolocationApi';
+import { fetchWeather } from '../../api/weather/weatherApi';
+import { fetchReverseGeoLocation } from '../../api/geolocation/reverseGeolocationApi';
 import styles from './SearchBar.module.scss';
 import cx from 'classnames';
+import { IGeoLocationResponseDTO } from '../../ts/interfaces/geolocation.interface';
+import { IWeatherResponseDTO } from '../../ts/interfaces/weather.interface';
 
 interface SearchBarProps {
     returnWeather: (weather: IWeatherResponseDTO) => void;
@@ -97,7 +99,7 @@ const SearchBar = ({ returnWeather, returnLocation, showSpinner }: SearchBarProp
 
     const getReverseGeoLocation = async (lat: number, lon: number) => {
         try {
-            const reverseGeoLocation: IReverseGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
+            const reverseGeoLocation: IGeoLocationResponseDTO[] = await fetchReverseGeoLocation(lat, lon);
             if (reverseGeoLocation.length > 0) {
                 const reverseGeoLocationWithKey = reverseGeoLocation.map(location => {
                     return {

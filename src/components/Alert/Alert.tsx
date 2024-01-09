@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './Alert.module.scss';
 import Modal from '../Common/Modal/Modal';
 import { config } from '../../config/appConfig';
-import { IWeatherResponseDTO } from '../../api/weather/weatherApi';
+import { IWeatherResponseDTO } from '../../ts/interfaces/weather.interface';
 
 type AlertProps = {
     weatherProp: IWeatherResponseDTO
@@ -40,9 +40,9 @@ const Alert = ({ weatherProp, show, themeProp, setShow }: AlertProps): JSX.Eleme
                     <div className={styles.modalBody}>
                         <div className={styles.modalContentContainer} tabIndex={0} >
                             {weather?.alerts && weather.alerts.length > 0 && (
-                                weather.alerts.map((alert) => {
+                                weather.alerts.map((alert, index: number) => {
                                     return (
-                                        <div className={styles.modalContent}>{alert.description}</div>
+                                        <div className={styles.modalContent} key={alert + "-" + index}>{alert.description}</div>
                                     )
                                 })
                             )}
